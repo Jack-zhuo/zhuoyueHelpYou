@@ -1,0 +1,103 @@
+.login{
+  margin-top: 50%;
+}
+.login button{
+  background-color: #1296db;
+  color: white; 
+  border-radius: 100rpx;
+}
+.scroll-view{
+  background-color: white;
+}
+.scroll-view .tab{
+  display: flex;
+  /* justify-content: space-around; */
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.scroll-view .tab .tab_item{
+  flex: 1;
+  text-align: center;
+}
+.scroll-view .tab .select{
+  color: #1296db;
+  border-bottom: 5rpx solid #1296db;
+  background-color: #f8fdff;
+}
+.body .tips{
+  background-color: #3a3a3a;
+  color: white;
+  text-align: center;
+}
+.body .order{
+  background-color: white;
+  border-radius: 20rpx;
+  margin: 30rpx 40rpx;
+  padding: 20rpx;
+  display: flex;
+  /* align-items: center; */
+}
+.body .order .avatar{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  background-color: rgb(216, 216, 216);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body .order .avatar image{
+  height: 60rpx;
+  width: 60rpx;
+}
+.body .order .content{
+   margin-left: 30rpx;
+   flex: 1;
+}
+.body .order .content .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid rgb(245, 245, 245);
+}
+.body .order .content .top .left .service-name{
+  font-size:30rpx;
+
+}
+.body .order .content .top .left .time{
+  font-size: 25rpx;
+  color: gray;
+}
+.body .order .content .top .right{
+  font-size: 25rpx;
+  /* background-color: #1AAD19; */
+  color: #1296db;
+  padding: 10rpx;
+  border-radius: 50rpx;
+}
+.body .order .content .middle{
+  margin: 20rpx auto;
+  border: 1rpx solid rgb(243, 243, 243);
+  border-radius: 20rpx;
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.body .order .content .middle view:nth-child(2){
+  color: red;
+}
+.body .order .content .bottom{
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.body .order .content .bottom .pay{
+ 
+  font-size: 30rpx;
+  color: #1296db;
+  border: 1rpx solid #1296db;
+  padding: 10rpx 20rpx;
+  border-radius: 50rpx;
+  margin-left: 20rpx;
+}

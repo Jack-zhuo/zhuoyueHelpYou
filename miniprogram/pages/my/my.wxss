@@ -1,0 +1,81 @@
+.login{
+  margin-top: 50%;
+}
+.login button{
+  background-color: #1296db;
+  color: white; 
+  border-radius: 100rpx;
+}
+.info{
+  background-color: #1296db;
+  border-radius: 10rpx;
+  width: 80%;
+  margin: 0 auto;
+  padding: 50rpx 40rpx;
+  display: flex;
+  align-items: center;
+}
+
+.info .avator{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border:5rpx solid white
+}
+.info .name{
+  
+  color: white;
+  margin-left: 30rpx;
+}
+
+.arrow{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: auto;
+}
+ .cell{
+  background-color: white;
+  border-radius: 10rpx;
+  width: 80%;
+  margin: 20rpx auto;
+  padding: 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service{
+  margin: 5rpx auto;
+}
+.advice{
+  margin-bottom: 0;
+}
+.advice2{ 
+  margin: 5rpx auto;
+}
+.version{
+  text-align: center;
+  color: gray;
+ }
+ 
+
+.cell .cell-l{
+  display: flex;
+
+}
+.cell .cell-l image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.cell .cell-l text{
+  margin-left: 20rpx;
+}
+.cell .cell-r image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.logo_wrap{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

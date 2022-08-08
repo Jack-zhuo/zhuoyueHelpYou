@@ -1,0 +1,26 @@
+.panel {
+  background-color: white;
+  padding: 20rpx;
+  border-radius: 30rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+.panel .address_item{
+  display: flex;
+  padding: 20rpx 0;
+  align-items: center;
+}
+
+.panel .address_item input{
+  border: 1rpx solid gray;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+}
+.panel .address_item view{
+  margin-left: 100rpx;
+}
+.panel .address_item switch{
+  margin-left: 470rpx;
+}

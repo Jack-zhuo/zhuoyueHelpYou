@@ -1,0 +1,36 @@
+<!-- 暂无地址 -->
+<view wx:if="{{ !addresses }}" class="none_spot">
+  <image src="../../images/spot.png"></image>
+  <text>暂无收获地址</text>
+</view>
+<!-- 地址栏 -->
+<radio-group bindchange="radioChange">
+  <view wx:for="{{ addresses }}" wx:key="index" class="address common" bindtap="gotoAddress">
+  <view class="content">
+    <view class="name">
+      <text>{{item.name}}</text>
+      <text>{{item.phone}}</text>
+    </view>
+    <view class="detail_addr">
+      {{item.detail}}
+    </view>
+  </view>
+  <view class="tool"> 
+    <radio value="{{ item._id}}" checked="{{ item.default }}">
+      <view wx:if="{{ item.default }}" class="{{item.default? 'checked':'' }}">已设默认</view>
+      <view wx:else>默认</view>
+    </radio>
+    <view>
+      <text bindtap="delete" data-id="{{item._id}}">删除</text>
+      <text>修改</text>
+    </view>
+  </view>
+</view>
+
+</radio-group>
+
+
+<!-- 添加地址 -->
+<view class="submit">
+  <button type="primary" bindtap="addAddress">添加地址</button>
+</view>

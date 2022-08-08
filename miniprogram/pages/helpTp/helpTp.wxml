@@ -1,0 +1,59 @@
+<view class="logo_wrap">
+  <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
+</view>
+   
+
+
+<!-- 地址 -->
+<view wx:if="{{ !openid }}" class="common">
+  <button bindtap="getUserProfile">登录</button>
+</view>
+<view wx:elif="{{ !address.phone }}" class="common">
+  <button bindtap="addAddress" type="primary">添加地址</button>
+</view>
+<view wx:else class="address common" bindtap="gotoAddress">
+  <view class="content">
+    <view class="detail_addr">
+      {{address.detail}}
+    </view>
+    <view class="name">
+      <text>{{address.name}}</text>
+      <text>{{address.phone}}</text>
+    </view>
+  </view>
+  <view class="arrow">
+    <image src="../../images/arrow_gray.png"></image>
+  </view>
+
+</view>
+<!-- 快递商家 -->
+<view class="merchant common">
+
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      <view class="title">快递商家:</view>
+      <view>{{array[index]}}
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+  </picker>
+</view>
+<!-- 取件码 -->
+<view class="take_info common">
+  <view class="title">取件码：</view>
+  <input bindfocus="cleanHolder" bindblur="addHolder" placeholder="{{placeholderCon}}" class="info" model:value="{{code}}"></input>
+</view>
+<!-- 快递大小 -->
+<view class="size common">
+  <view class="title">快递大小：</view>
+  <view class="tab">
+    <view class="tabs {{ isName === item.name ? 'select':'' }}" bindtap="selectTab" data-tip="{{ item }}" wx:for="{{ size }}" wx:key="index">{{ item.name }}</view>
+
+  </view>
+</view>
+<!-- 确认发布 -->
+<view class="submit">
+  <button type="primary" bindtap="goPay">确认发布 (￥{{ price}} )</button>
+</view>
+
+<!-- logo区 -->

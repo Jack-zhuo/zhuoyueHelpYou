@@ -1,0 +1,20 @@
+<view class="panel">
+  <view class="address_item">
+    <view class="title">收件姓名：</view>
+    <input model:value="{{name}}" auto-focus="true" placeholder="请输入收件姓名..." class="info"></input>
+  </view>
+  <view class="address_item">
+    <view class="title">手机号码：</view>
+    <input model:value="{{phone}}" type="digit" placeholder="请输入手机号码..." class="info"></input>
+  </view>
+  <view class="address_item">
+    <view class="title">详细地址：</view>
+    <input model:value="{{detail}}" placeholder="精确到门牌号/宿舍号" class="info"></input>
+  </view>
+
+  <view class="address_item">
+    <switch type="checkbox" model:checked="{{isDefault}}">默认</switch>
+  </view>
+  
+  <button bindtap="save">保存</button>
+</view>
