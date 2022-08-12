@@ -1,0 +1,26 @@
+.my-help{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.my-balance {
+  text-align: center;
+  margin: 20rpx; 
+  background-color: rgb(255, 166, 0);
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  padding: 10rpx;
+  color: white;
+}
+.my-balance view:nth-child(1){
+  font-size: 50rpx;
+}
+.my-balance view:nth-child(2){
+  font-size: 25rpx;
+}
+.bottom-tip {
+  text-align: center;
+  color: gray;
+}

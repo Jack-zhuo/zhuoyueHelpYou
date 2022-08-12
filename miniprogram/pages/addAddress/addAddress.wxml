@@ -1,4 +1,5 @@
 <view class="panel">
+
   <view class="address_item">
     <view class="title">收件姓名：</view>
     <input model:value="{{name}}" auto-focus="true" placeholder="请输入收件姓名..." class="info"></input>
@@ -15,6 +16,9 @@
   <view class="address_item">
     <switch type="checkbox" model:checked="{{isDefault}}">默认</switch>
   </view>
-  
+
   <button bindtap="save">保存</button>
+  <view class="logo_wrap">
+    <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
+  </view>
 </view>

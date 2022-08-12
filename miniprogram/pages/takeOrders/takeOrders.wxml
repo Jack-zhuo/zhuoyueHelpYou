@@ -1,0 +1,24 @@
+<my-tab tabList="{{tabList}}" bindtabChange="tabChange" class="tab"></my-tab>
+<!-- 正在悬赏 -->
+<view wx:if="{{tabNow === 0}}">
+  <view wx:for="{{ orders_notake }}" wx:key="index">
+    <take-order bindtake="take" bindcall="call" wx:if="{{ item.status === 1 }}" item="{{ item }}"></take-order>
+  </view>
+</view>
+<!-- 正在帮助 -->
+<view wx:if="{{tabNow === 1}}">
+  <view wx:for="{{ orders_taked }}" wx:key="_id">
+    <take-order bindrefresh="refresh" bindcall="call" item="{{ item }}"></take-order>
+  </view>
+</view>
+<!-- 我帮助的 -->  
+<view wx:if="{{tabNow === 2}}" class="my-help">
+  <view class="my-balance">
+   <view>{{user.balance}}</view>
+   <view>收益</view>
+  </view>
+  <view wx:for="{{ orders_completed }}" wx:key="index">
+    <take-order bindcall="call" item="{{ item }}"></take-order>
+  </view>
+</view>
+<view class="bottom-tip">——— 已显示全部订单 ———</view>

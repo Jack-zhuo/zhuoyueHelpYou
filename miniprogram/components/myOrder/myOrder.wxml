@@ -1,0 +1,64 @@
+<view class="order">
+  <!-- <view class="avatar">
+        <image src="{{ avatar }}"></image>
+      </view> -->
+  <view class="content">
+    <view class="top">
+      <view class="left">
+        <view class="service-name">{{item.name}}</view>
+        <view class="time">{{ item.date }}</view>
+      </view>
+      <view class="right">
+        <view wx:if="{{item.status === 1}}">已付款</view>
+        <view wx:if="{{item.status === 2}}">已接单</view>
+        <view wx:if="{{item.status === 3}}">已完成</view>
+      </view>
+
+    </view>
+    <view class="middle">
+      <view class="middle-left">
+        <view class="item">
+          <text> 地址：</text>
+          <text>{{item.address.detail}}</text>
+        </view>
+        <view class="item">
+          <text>取件信息：</text>
+          <text>{{ item.takeMsg }}</text>
+        </view>
+        <view class="item">
+          <text>取件地址：</text>
+          <text>{{ item.merchant }}</text>
+        </view>
+        <view class="item">
+          <text>快递大小：</text>
+          <text>{{ item.size }}</text>
+        </view>
+        <view class="item">
+          <text>备注：</text>
+          <text>{{ item.note }}</text>
+        </view>
+        <view class="item"  style="color: red;">
+          <text>取件码：</text>
+          <text>{{ item.takeGoodsCode }}</text>
+        </view>
+        <view class="item" wx:if="{{item.status === 2}}">
+          <text>接单人：</text>
+          <view class="takeOrderer">
+            <view>{{item.takeOrderer.info.name}}</view>
+            <view class="call" bindtap="call">
+              <image src="../../images/phone.png"></image>
+              <text>手机号</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <view class="middle-right">￥{{item.price}}</view>
+    </view>
+    <view class="bottom">
+      <text>有疑问请加客服微信</text>
+      <image src="../../images/pointing.png"></image>
+      <view bindtap="getWeChat" class="contact">客服微信</view> 
+    </view>
+  </view>
+</view>

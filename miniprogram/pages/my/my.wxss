@@ -1,10 +1,8 @@
-.login{
-  margin-top: 50%;
+.container{
+  width: 100%;
 }
-.login button{
-  background-color: #1296db;
+.getAvatar{
   color: white; 
-  border-radius: 100rpx;
 }
 .info{
   background-color: #1296db;
@@ -17,10 +15,11 @@
 }
 
 .info .avator{
-  width: 100rpx;
-  height: 100rpx;
+  width: 90rpx;
+  height: 90rpx;
+  padding: 10rpx;
   border-radius: 50%;
-  border:5rpx solid white
+  border:1rpx solid white
 }
 .info .name{
   
@@ -47,7 +46,9 @@
   margin: 5rpx auto;
 }
 .advice{
-  margin-bottom: 0;
+  margin: 5rpx 0;
+  width: 680rpx !important;
+  font-weight: 300;
 }
 .advice2{ 
   margin: 5rpx auto;

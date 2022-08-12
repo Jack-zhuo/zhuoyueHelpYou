@@ -1,0 +1,3 @@
+<view class="submit">
+  <button type="primary" bindtap="goPay">{{ text }}</button>
+</view>

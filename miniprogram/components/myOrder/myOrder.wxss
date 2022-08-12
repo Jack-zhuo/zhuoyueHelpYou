@@ -1,0 +1,114 @@
+
+.order{
+  background-color: white;
+  border-radius: 20rpx;
+  margin: 30rpx 40rpx;
+  padding: 20rpx;
+  display: flex;
+  /* align-items: center; */
+}
+.order .avatar{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  background-color: rgb(216, 216, 216);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order .avatar image{
+  height: 60rpx;
+  width: 60rpx;
+}
+ .order .content{
+   margin-left: 30rpx;
+   flex: 1;
+}
+.order .content .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid rgb(245, 245, 245);
+}
+.order .content .top .left .service-name{
+  font-size:30rpx;
+}
+.order .content .top .left .time{
+  font-size: 25rpx;
+  color: gray;
+}
+.order .content .top .right{
+  font-size: 25rpx;
+  /* background-color: #1AAD19; */
+  color: #1296db;
+  padding: 10rpx;
+  border-radius: 50rpx;
+}
+.order .content .middle{
+  margin: 20rpx auto;
+  border-radius: 20rpx;
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.middle-left{
+  width: 500rpx;
+}
+.middle-left .item{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid rgb(228, 228, 228);
+  padding: 7rpx;
+}
+.middle-left .item .call{
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #1296db;
+  border-radius: 10rpx;
+  padding: 5rpx 10rpx;
+  margin-left: 10rpx;
+}
+.middle-left .item .call image{
+ height: 30rpx;
+ width: 30rpx;
+ margin-right: 5rpx;
+}
+.middle-left .item .takeOrderer{
+  display: flex;
+  align-items: center;
+  /* border: 1rpx solid gray; */
+}
+.middle-left .item text:nth-child(1){
+ width: 200rpx;
+ font-weight: 700;
+}
+ .order .content .middle .middle-right{
+  color: red;
+}
+ .order .content .bottom{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.order .content .bottom text{
+  font-size: 20rpx;
+  color: gray;
+}
+.order .content .bottom image{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+ .order .content .bottom .contact{
+  font-size: 30rpx;
+  color: #1296db;
+  border: 1rpx solid #1296db;
+  padding: 10rpx 20rpx;
+  border-radius: 50rpx;
+  margin-left: 20rpx;
+}
+.middle-left{
+  font-size: 25rpx;
+}

@@ -1,152 +1,36 @@
-<view wx:if="{{!openid}}" class="login">
-  <button bindtap="getUserProfile">登录</button>
-</view>
-<view wx:else>
-
-  <scroll-view scroll-x class="scroll-view">
-  <view class="tab">
-    <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{tabList}}" wx:key="index" bindtap="selectTab" data-index="{{ index }}">
-      {{ item }}
+<view class="container">
+  <view>
+    <scroll-view scroll-x class="scroll-view">
+      <view class="tab">
+        <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{tabList}}" wx:key="index" bindtap="selectTab" data-index="{{ index }}">
+          {{ item }}
+        </view>
+      </view>
+    </scroll-view>
+    <!-- 全部 -->
+    <view wx:if="{{ tabNow === 0 }}" class="body">
+      <view wx:for="{{ orders }}" wx:key="index">
+        <my-order item="{{ item }}"></my-order>
+      </view>
+    </view>
+    <!-- 已付款 -->
+    <view wx:if="{{ tabNow === 1 }}" class="body">
+      <view wx:for="{{ orders }}">
+        <my-order wx:if="{{item.status === 1}}" item="{{ item }}"></my-order>
+      </view>
+    </view>
+    <!-- 已接单 -->
+    <view wx:if="{{ tabNow === 2 }}" class="body">
+      <view wx:for="{{ orders }}">
+        <my-order wx:if="{{item.status === 2}}" bindgopay="gopay" data-order="{{ item }}" item="{{ item }}" avatar="{{info.avatar}}"></my-order>
+      </view>
+    </view>
+    <!-- 已完成 -->
+    <view wx:if="{{ tabNow === 3 }}" class="body">
+      <view wx:for="{{ orders }}">
+        <my-order wx:if="{{item.status === 3}}" bindgopay="gopay" data-order="{{ item }}" item="{{ item }}" avatar="{{info.avatar}}"></my-order>
+      </view>
     </view>
   </view>
-</scroll-view>
-
-<view wx:if="{{ tabNow === 0 }}" class="body">
-
-  <view class="order" wx:for="{{ orders_total }}" wx:key="index">
-      <view class="avatar">
-        <image src="{{ !!avatarUrl ? avatarUrl : '../../images/my.png' }}"></image>
-      </view>
-    <view class="content">
-      <view class="top">
-        <view class="left">
-          <view class="service-name">{{item.name}}</view>
-          <view class="time">{{ item.date }}</view>
-        </view>
-        <view class="right">
-          <text wx:if="{{item.status === 0}}">待付款</text>
-          <text wx:if="{{item.status === 1}}">已付款</text>
-          <text wx:if="{{item.status === 2}}">已完成</text>
-        </view>
-      </view>
-      <view class="middle">
-        <view>{{ item.address.detail }}</view>
-        <!-- <view>手机号：{{item.address.phone}}</view> -->
-        <view>￥{{item.price}}</view>
-      </view>
-      <view class="bottom">
-        <view bindtap="call" class="pay">手机号</view>
-        <!-- <view class="money">金额:￥{{item.price}}</view> -->
-        <!-- <view class="take_order">接单 </view> -->
-        <view bindtap="gopay" data-order="{{ item }}" class="pay" wx:if="{{item.status === 0}}" >付款</view>
-        
-
-      </view>
-
-    </view>
-  </view>
-
-</view>
-<view wx:if="{{ tabNow === 1 }}" class="body">
-  <view wx:if="{{item.status === 0}}" class="order" wx:for="{{ orders_total }}" wx:key="index">
-      <view class="avatar">
-        <image src="{{ !!avatarUrl ? avatarUrl : '../../images/my.png' }}"></image>
-      </view>
-    <view class="content">
-      <view class="top">
-        <view class="left">
-          <view class="service-name">{{item.name}}</view>
-          <view class="time">{{ item.date }}</view>
-        </view>
-        <view class="right">
-          <text wx:if="{{item.status === 0}}">待付款</text>
-          <text wx:if="{{item.status === 1}}">已付款</text>
-          <text wx:if="{{item.status === 2}}">已完成</text>
-        </view>
-      </view>
-      <view class="middle">
-        <view>{{ item.address.detail }}</view>
-        <!-- <view>手机号：{{item.address.phone}}</view> -->
-        <view>￥{{item.price}}</view>
-      </view>
-      <view class="bottom">
-        <view bindtap="call" class="pay">手机号</view>
-        <!-- <view class="money">金额:￥{{item.price}}</view> -->
-        <!-- <view class="take_order">接单 </view> -->
-        <view bindtap="gopay" data-order="{{ item }}" class="pay" wx:if="{{item.status === 0}}" >付款</view>
-        
-
-      </view>
-
-    </view>
-  </view>
-</view>
-<view wx:if="{{ tabNow === 2 }}" class="body">
-  <view wx:if="{{item.status === 1}}" class="order" wx:for="{{ orders_total }}" wx:key="index">
-      <view class="avatar">
-        <image src="{{ !!avatarUrl ? avatarUrl : '../../images/my.png' }}"></image>
-      </view>
-    <view class="content">
-      <view class="top">
-        <view class="left">
-          <view class="service-name">{{item.name}}</view>
-          <view class="time">{{ item.date }}</view>
-        </view>
-        <view class="right">
-          <text wx:if="{{item.status === 0}}">待付款</text>
-          <text wx:if="{{item.status === 1}}">已付款</text>
-          <text wx:if="{{item.status === 2}}">已完成</text>
-        </view>
-      </view>
-      <view class="middle">
-        <view>{{ item.address.detail }}</view>
-        <!-- <view>手机号：{{item.address.phone}}</view> -->
-        <view>￥{{item.price}}</view>
-      </view>
-      <view class="bottom">
-        <view bindtap="call" class="pay">手机号</view>
-        <!-- <view class="money">金额:￥{{item.price}}</view> -->
-        <!-- <view class="take_order">接单 </view> -->
-        <view bindtap="gopay" data-order="{{ item }}" class="pay" wx:if="{{item.status === 0}}" >付款</view>
-        
-
-      </view>
-
-    </view>
-  </view>
-</view>
-<view wx:if="{{ tabNow === 3 }}" class="body">
-  <view wx:if="{{item.status === 2}}" class="order" wx:for="{{ orders_total }}" wx:key="index">
-      <view class="avatar">
-        <image src="{{ !!avatarUrl ? avatarUrl : '../../images/my.png' }}"></image>
-      </view>
-    <view class="content">
-      <view class="top">
-        <view class="left">
-          <view class="service-name">{{item.name}}</view>
-          <view class="time">{{ item.date }}</view>
-        </view>
-        <view class="right">
-          <text wx:if="{{item.status === 0}}">待付款</text>
-          <text wx:if="{{item.status === 1}}">已付款</text>
-          <text wx:if="{{item.status === 2}}">已完成</text>
-        </view>
-      </view>
-      <view class="middle">
-        <view>{{ item.address.detail }}</view>
-        <!-- <view>手机号：{{item.address.phone}}</view> -->
-        <view>￥{{item.price}}</view>
-      </view>
-      <view class="bottom">
-        <view bindtap="call" class="pay">手机号</view>
-        <!-- <view class="money">金额:￥{{item.price}}</view> -->
-        <!-- <view class="take_order">接单 </view> -->
-        <view bindtap="gopay" data-order="{{ item }}" class="pay" wx:if="{{item.status === 0}}" >付款</view>
-        
-
-      </view>
-
-    </view>
-  </view>
-</view>
+  <view class="bottom-tip">——— 已显示全部订单 ———</view>
 </view>

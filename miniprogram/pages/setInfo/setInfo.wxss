@@ -1,0 +1,41 @@
+.container{
+  background-color: white;
+  padding: 20rpx;
+}
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid rgb(235, 235, 235);
+}
+.item .item-right{
+  display: flex;
+  align-items: center;
+}
+.item .item-right image:nth-child(1){
+  border: 1rpx solid #1296db;
+  border-radius: 50%;
+  padding: 10rpx;
+  height: 90rpx;
+  width: 90rpx;
+}
+.item .item-right image:nth-child(2){
+  margin-left: 20rpx;
+  height: 40rpx;
+  width: 40rpx;
+}
+.item input{
+  /* border: 1rpx solid rgb(233, 233, 233); */
+  text-align: right;
+}
+.phone .item-right button{
+  font-size: 30rpx;
+  background-color: #1296db;
+  color: white;
+  height: 60rpx;
+  width: 100rpx;
+  padding: 10rpx;
+  margin-left: 15rpx;
+  margin-top: 0;
+}

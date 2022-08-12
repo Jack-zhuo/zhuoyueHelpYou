@@ -28,63 +28,25 @@ Page({
       phone: '',
       detail: ''
     },
-    openid: '',
-    code: ''
+    takeMsg: '',
+    note: ''
   },
   onLoad() {
     this.getAddress();
-    this.getOpenid();
   },
   onShow() {
     this.onLoad();
   },
-  getOpenid() {
-    const openid = wx.getStorageSync('openid');
-    this.setData({
-      openid
-    })
-  },
-  addAddress(){
+  addAddress() {
     wx.navigateTo({
       url: '../addAddress/addAddress',
     })
-  },
-  getUserProfile(){
-    wx.showLoading({ title:'加载中' });
-    wx.getUserProfile({
-      desc: 'desc',
-      success: (result) => {
-        
-        this.setData({
-          info: result
-        })
-        wx.setStorageSync('info', result);
-        wx.cloud.callFunction({
-          name: 'login',
-          success: (res) => {
-            //  获取openid
-            console.log(res.result.openid);
-            const openid = res.result.openid;
-            wx.setStorageSync('openid', openid);
-            this.setData({
-              openid
-            })
-            this.getAddress();
-          }
-        })
-      },
-      complete:()=>{
-        wx.hideLoading();
-      }
-    })
-    
   },
   async getAddress() {
     const address = await db.collection('address').where({
       default: true,
       _openid: wx.getStorageSync('openid')
     }).get();
-    console.log(address.data[0]);
     this.setData({
       address: address.data[0]
     })
@@ -111,7 +73,6 @@ Page({
     })
   },
   selectTab(e) {
-    console.log(e);
     const size = e.currentTarget.dataset.tip
     wx.showToast({
       title: size.tips,
@@ -122,78 +83,85 @@ Page({
       price: size.price
     })
   },
- async goPay() {
-   wx.showLoading();
-    if ( !this.data.openid ){
-      wx.showToast({
-        title: '请先登录',
-        icon:'none'
-      })
-      return
-    }
-    if ( !this.data.address.phone ){
+  async goPay() {
+    if (!this.data.address.phone) {
       wx.showToast({
         title: '请先添加地址',
-        icon:'none'
+        icon: 'none'
       })
       return
     }
-    if ( !this.data.code ){
+    if (!this.data.takeMsg) {
       wx.showToast({
         title: '请输入取件码',
-        icon:'none'
+        icon: 'none'
       })
       return
     }
+    wx.showLoading({
+      title: '准备付款中',
+    })
+
     const order = {
-       name:'代取快递',
-       address:this.data.address,
-       merchant:this.data.array[this.data.index],
-       size:this.data.size.name,
-       price:this.data.price,
-       date:new Date(),
-       status:0
+      name: '代取快递',
+      userinfo: wx.getStorageSync('user').info,
+      address: this.data.address,
+      merchant: this.data.array[this.data.index],
+      size: this.data.isName,
+      price: this.data.price,
+      date: new Date(),
+      takeMsg: this.data.takeMsg,
+      note: this.data.note,
+      takeOrderer: {},
+      takeGoodsCode: Math.floor(Math.random()*(900))+100,
+      status: 1
     }
-    // 添加订单到数据库
-   const res = await db.collection('orders').add({
-      data:order
-    });
-    console.log("添加订单到数据库",res);
-    const id = res._id;
-    wx.cloud.callFunction({
+
+    const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
-        goodName: '代取快递',
-        totalFee: this.data.price
-      },
-      success: res => {
-        wx.hideLoading();
-        const payment = res.result.payment
-        wx.requestPayment({
-          ...payment,
-          success(res) {
-            console.log('pay success', res);
-            db.collection('orders').doc(id).update({
-              data:{
-                status:1
-              },
-              success:(res)=>{
-                 wx.navigateTo({
-                   url: '../order/order',
-                 })
-              }
-            });
-          },
-          fail(err) {
-            console.log(err);
-            wx.showToast({
-              title:'付款失败',
-              icon:'none'
+        goodName: `代取快递-${this.data.address.name}-${this.data.address.detail}`,
+        totalFee: this.data.price * 100
+      }
+    })
+    const payment = res.result.payment
+    wx.hideLoading()
+    wx.requestPayment({
+      ...payment,
+      success(res) {
+        // 添加订单到数据库
+        wx.showToast({
+          title: '付款成功',
+          icon: 'none'
+        })
+        db.collection('orders').add({
+          data: order,
+          success: (res) => {
+            wx.switchTab({
+              url: '../order/order'
             })
           }
-        })
+        });
       },
-      fail: console.error,
+      fail(err) {
+        wx.showToast({
+          title: '付款失败',
+          icon: 'none'
+        })
+      }
     })
-  }
+  },
+  onPullDownRefresh(){
+    this.onLoad()
+    this.setData({
+      takeMsg:'',
+      note:''
+    })
+     //隐藏loading 提示框
+     wx.hideLoading();
+     //隐藏导航条加载动画
+     wx.hideNavigationBarLoading();
+     //停止下拉刷新
+     wx.stopPullDownRefresh();
+  },
 })

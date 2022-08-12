@@ -1,0 +1,115 @@
+
+.order{
+  background-color: white;
+  border-radius: 20rpx;
+  margin: 30rpx 40rpx;
+  padding: 20rpx;
+  display: flex;
+  /* align-items: center; */
+}
+.order .avatar{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  background-color: rgb(216, 216, 216);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order .avatar image{
+  height: 60rpx;
+  width: 60rpx;
+}
+ .order .content{
+   margin-left: 30rpx;
+   flex: 1;
+}
+.order .content .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid rgb(245, 245, 245);
+}
+.order .content .top .left .service-name{
+  font-size:30rpx;
+}
+.order .content .top .left .time{
+  font-size: 25rpx;
+  color: gray;
+}
+.order .content .top .paid{
+  font-size: 25rpx;
+  background-color: rgb(5,193,96) ;
+  color: white;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+.order .content .top .taked{
+  font-size: 25rpx;
+  background-color: rgb(255, 0, 0) ;
+  color: white;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+.order .content .top .completed{
+  font-size: 25rpx;
+  background-color: rgb(255, 166, 0);
+  color: white;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+.order .content .middle{
+  margin: 20rpx auto;
+  border-radius: 20rpx;
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.takeMessage{
+  width: 500rpx;
+  font-size: 25rpx;
+}
+.takeMessage .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid rgb(245, 245, 245);
+  padding: 10rpx 10rpx;
+}
+.takeMessage .item text:nth-child(1){
+  font-weight: 900;
+  width: 300rpx;
+}
+.takeMessage .item input{
+  border: 1rpx solid gray;
+  border-radius: 20rpx;
+  padding: 2rpx 15rpx;
+  width: 150rpx;
+}
+
+ .order .content .bottom{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.price{
+  color: red;
+}
+.phone{
+  font-size: 30rpx;
+  color: #1296db;
+  border: 1rpx solid #77d0ff;
+  padding: 10rpx 20rpx;
+  border-radius: 50rpx;
+  margin-left: 20rpx;
+}
+.take{
+  font-size: 30rpx;
+  color: #1296db;
+  border: 1rpx solid #1296db;
+  padding: 10rpx 20rpx;
+  border-radius: 50rpx;
+  margin-left: 20rpx;
+}
+

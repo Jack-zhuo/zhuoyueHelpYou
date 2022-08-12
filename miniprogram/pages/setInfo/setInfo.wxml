@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="item" bindtap="changeAvatar">
+    <view class="item-left">头像</view>
+    <view class="item-right">
+      <image src="{{ user.info.avatar }}"></image>
+      <image src="../../images/arrow_gray.png"></image>
+    </view>
+  </view>
+  <view class="item">
+    <view class="item-left">昵称</view>
+    <view class="item-right">
+    <input bindinput="changeName" value="{{user.info.name}}" type="text"/>
+    </view>
+  </view>
+  <view class="phone item"> 
+    <view class="item-left">手机号</view>
+    <view class="item-right">
+      <text>{{user.info.phone}}</text>
+      <button bindgetphonenumber="getPhoneNumber" open-type="getPhoneNumber">{{user.info.phone === ''?'添加': '更换'}}</button>
+    </view>
+  </view>
+  <my-button text="确认更改" bindchangeInfo='submit'></my-button> 
+</view>

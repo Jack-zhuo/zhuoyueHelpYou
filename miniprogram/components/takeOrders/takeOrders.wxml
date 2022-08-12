@@ -1,0 +1,61 @@
+<view class="container">
+  <view class="order">
+    <view class="avatar">
+      <image src="{{ item.userinfo.avatar }}"></image>
+    </view>
+    <view class="content">
+      <view class="top">
+        <view class="left">
+          <view class="service-name">{{item.userinfo.name}}</view>
+          <view class="time">{{ item.date }}</view>
+        </view>
+        <view class="right">
+          <text class="paid" wx:if="{{item.status === 1}}">已付款</text>
+          <text class="taked" wx:if="{{item.status === 2}}">已接单</text>
+          <text class="completed" wx:if="{{item.status === 3}}">已完成</text>
+        </view> 
+      </view>
+      <view class="middle">
+        <view class="takeMessage">
+          <view class="item">
+            <text>服务：</text>
+            <text> {{ item.name }}</text>
+          </view>
+          <view class="item">
+            <text>快递商家：</text>
+            <text> {{ item.merchant }}</text>
+          </view>
+          <view class="item">
+            <text>取件人：</text>
+            <text>{{ item.address.name }}</text>
+          </view>
+          <view class="item">
+            <text>取件信息：</text>
+            <text>{{ item.takeMsg }}</text>
+          </view>
+          <view class="item">
+            <text>地址： </text>
+            <text> {{ item.address.detail }}</text>
+          </view>
+          <view class="item">
+            <text>备注： </text>
+            <text> {{ item.note }}</text>
+          </view>
+          <view wx:if="{{ isShowTakeCode }}" class="item" style="color: red;">
+            <text>请输入提货码： </text>
+            <input type="number" bindinput="input"/>
+          </view>
+        </view>
+
+        <!-- <view>手机号：{{item.address.phone}}</view> -->
+
+      </view>
+      <view class="bottom">
+        <view class="price">￥{{item.price}}</view>
+        <view bindtap="call" class="phone">手机号</view>
+        <view wx:if="{{item.status === 1}}" bindtap="take" class="take">接单 </view>
+        <view wx:if="{{item.status === 2}}" bindtap="completed" class="take">完成</view>
+      </view>
+    </view>
+  </view>
+</view>

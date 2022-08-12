@@ -43,13 +43,14 @@
 .take_info {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .take_info .info {
   border: 1rpx solid gray;
   border-radius: 30rpx;
-  width: 500rpx;
-  /* height: 100rpx; */
+  width: 450rpx;
+  height: 100rpx;
   padding: 10rpx 30rpx;
 }
 

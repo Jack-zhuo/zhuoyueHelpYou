@@ -1,0 +1,5 @@
+<view class="tab">
+  <view wx:for="{{tabList}}" class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:key="index" bindtap="selectTab" data-index="{{ index }}">
+    {{ item }}
+  </view>
+</view>

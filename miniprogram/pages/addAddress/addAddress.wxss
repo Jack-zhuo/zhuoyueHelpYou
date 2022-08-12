@@ -1,3 +1,8 @@
+.logo_wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .panel {
   background-color: white;
   padding: 20rpx;

@@ -1,14 +1,5 @@
-<view class="logo_wrap">
-  <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
-</view>
-   
-
-
 <!-- 地址 -->
-<view wx:if="{{ !openid }}" class="common">
-  <button bindtap="getUserProfile">登录</button>
-</view>
-<view wx:elif="{{ !address.phone }}" class="common">
+<view wx:if="{{ !address.phone }}" class="common">
   <button bindtap="addAddress" type="primary">添加地址</button>
 </view>
 <view wx:else class="address common" bindtap="gotoAddress">
@@ -38,11 +29,6 @@
     </view>
   </picker>
 </view>
-<!-- 取件码 -->
-<view class="take_info common">
-  <view class="title">取件码：</view>
-  <input bindfocus="cleanHolder" bindblur="addHolder" placeholder="{{placeholderCon}}" class="info" model:value="{{code}}"></input>
-</view>
 <!-- 快递大小 -->
 <view class="size common">
   <view class="title">快递大小：</view>
@@ -51,9 +37,22 @@
 
   </view>
 </view>
-<!-- 确认发布 -->
-<view class="submit">
-  <button type="primary" bindtap="goPay">确认发布 (￥{{ price}} )</button>
+<!-- 取件信息 -->
+<view class="take_info common">
+  <view class="title">取件信息：</view>
+  <textarea bindfocus="cleanHolder" bindblur="addHolder" placeholder="{{placeholderCon}}" class="info" model:value="{{takeMsg}}"></textarea>
+</view>
+<!-- 备注 -->
+<view class="take_info common">
+  <view class="title">备注:</view>
+  <textarea placeholder="请输入备注信息..." class="info" model:value="{{note}}"></textarea>
 </view>
 
-<!-- logo区 -->
+
+
+
+<view class="logo_wrap" class="common">
+  <my-button text="确认发布￥{{ price }}" bindpay="goPay"></my-button>
+  <!-- logo区 -->
+  <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
+</view>

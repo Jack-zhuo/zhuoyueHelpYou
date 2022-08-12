@@ -1,0 +1,14 @@
+Component({
+  properties:{
+    text:{
+      type:String,
+      value:'确认'
+    }
+  },
+  methods:{
+    goPay(){
+      this.triggerEvent('pay');
+      this.triggerEvent('changeInfo')
+    }
+  }
+})
