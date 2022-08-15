@@ -6,7 +6,7 @@ Component({
     },
   },
   data:{
-    tabNow:0
+    tabNow:Number(0)
   }, 
   methods:{
     selectTab(e){

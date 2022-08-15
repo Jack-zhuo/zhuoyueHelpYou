@@ -1,0 +1,27 @@
+<view class="container">
+<!-- 姓名 -->
+  <view class="item">
+    <view class="item-left">姓名</view>
+    <view class="item-right">
+      <input placeholder="请输入姓名..." bindinput="inputName" type="text" />
+    </view>
+  </view>
+  <!-- 班级 -->
+  <view class="item">
+    <view class="item-left">班级</view>
+    <view class="item-right">
+      <input placeholder="请输入班级..." bindinput="inputClass" type="text" />
+    </view>
+  </view>
+  <!-- 手机号 -->
+  <view class="phone item">
+    <view class="item-left">手机号</view>
+    <view class="item-right">
+      <text>{{phone}}</text>
+      <button bindgetphonenumber="getPhoneNumber" open-type="getPhoneNumber">获取手机号</button>
+    </view>
+  </view>
+  <!-- 获取手机号和提交申请按钮 -->
+  
+  <button bindtap="submit">提交申请</button>
+</view>

@@ -1,0 +1,24 @@
+<view style="margin-top:50px; font-size: large; font-weight: 1000; text-align:center;">审核接单员</view>
+
+<view class="container">
+  <view class="item" wx:for="{{applyTake}}" wx:key="_id">
+    <view class="row">
+      <view class="row-left">姓名</view>
+      <view class="row-right">{{item.name}}</view>
+    </view>
+    <view class="row">
+      <view class="row-left">班级</view>
+      <view class="row-right">{{item.class}}</view>
+    </view>
+    <view class="row">
+      <view class="row-left">手机号</view>
+      <view class="row-right">
+         <view bindtap="call" data-phone="{{item.phone}}" >拨打</view>
+      </view>
+    </view>
+    <view class="btn">
+      <view class="delete" bindtap="delete" data-openid="{{item._openid}}">NO</view>
+      <view class="approve" bindtap="approve" data-openid="{{item._openid}}">通过</view>
+    </view>
+  </view>
+</view>

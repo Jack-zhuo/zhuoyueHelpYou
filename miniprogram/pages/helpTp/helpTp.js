@@ -29,7 +29,7 @@ Page({
       detail: ''
     },
     takeMsg: '',
-    note: ''
+    note: '',
   },
   onLoad() {
     this.getAddress();
@@ -113,7 +113,7 @@ Page({
       takeMsg: this.data.takeMsg,
       note: this.data.note,
       takeOrderer: {},
-      takeGoodsCode: Math.floor(Math.random()*(900))+100,
+      takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
       status: 1
     }
 
@@ -151,17 +151,31 @@ Page({
       }
     })
   },
-  onPullDownRefresh(){
+  onPullDownRefresh() {
     this.onLoad()
     this.setData({
-      takeMsg:'',
-      note:''
+      takeMsg: '',
+      note: ''
     })
-     //隐藏loading 提示框
-     wx.hideLoading();
-     //隐藏导航条加载动画
-     wx.hideNavigationBarLoading();
-     //停止下拉刷新
-     wx.stopPullDownRefresh();
+    //隐藏loading 提示框
+    wx.hideLoading();
+    //隐藏导航条加载动画
+    wx.hideNavigationBarLoading();
+    //停止下拉刷新
+    wx.stopPullDownRefresh();
   },
+  onShareAppMessage: function (res) {
+    return {
+      title: '代取快递',
+      path: 'pages/helpTp/helpTp',
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/avatar/1660277626031.png'
+    }
+  },
+     /*分享朋友圈 */
+     onShareTimeline: function() {
+      return {
+        title: '三联学院代取快递',
+        imageUrl:'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/avatar/1660277626031.png'
+      }
+    },
 })

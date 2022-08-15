@@ -1,3 +1,4 @@
+<!-- <button open-type="share">分享转发</button> -->
 <!-- 地址 -->
 <view wx:if="{{ !address.phone }}" class="common">
   <button bindtap="addAddress" type="primary">添加地址</button>

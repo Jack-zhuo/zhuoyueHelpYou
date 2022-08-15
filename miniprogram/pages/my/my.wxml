@@ -19,6 +19,16 @@
       <image src="../../images/arrow_gray.png"></image>
     </view>
   </view>
+    <!-- 审核接单员 -->
+    <view class="cell service" bindtap="gotoCheckOrderer" wx:if="{{isAdmin}}">
+    <view class="cell-l">
+      <image src="../../images/help.jpg"></image>
+      <text>审核接单员</text>
+    </view>
+    <view class="cell-r">
+      <image src="../../images/arrow_gray.png"></image>
+    </view>
+  </view>
   <!-- 接单 -->
   <view class="cell service" bindtap="gotoTakeOrders">
     <view class="cell-l">

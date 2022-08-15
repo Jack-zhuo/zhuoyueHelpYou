@@ -11,11 +11,12 @@
     <take-order bindrefresh="refresh" bindcall="call" item="{{ item }}"></take-order>
   </view>
 </view>
-<!-- 我帮助的 -->  
+<!-- 我帮助的 -->
 <view wx:if="{{tabNow === 2}}" class="my-help">
+  <view class="tip">如要提现，请加客服微信 zyjava2020</view>
   <view class="my-balance">
-   <view>{{user.balance}}</view>
-   <view>收益</view>
+    <view>{{user.balance}}</view>
+    <view>收益</view>
   </view>
   <view wx:for="{{ orders_completed }}" wx:key="index">
     <take-order bindcall="call" item="{{ item }}"></take-order>

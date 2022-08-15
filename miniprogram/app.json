@@ -11,7 +11,9 @@
     "components/myOrder/myOrder",
     "pages/takeOrders/takeOrders",
     "components/takeOrders/takeOrders",
-    "components/myTab/myTab"
+    "components/myTab/myTab",
+    "pages/applyTakeOrderer/applyTakeOrderer",
+    "pages/checkOrderer/checkOrderer"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -19,7 +21,8 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "卓越帮你忙",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 100
   },
   "tabBar": {
     "selectedColor": "#1296db",

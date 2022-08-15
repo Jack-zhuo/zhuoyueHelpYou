@@ -4,6 +4,9 @@
   justify-content: center;
   align-items: center;
 }
+.my-help .tip{
+  padding-top: 20rpx;
+}
 .my-balance {
   text-align: center;
   margin: 20rpx; 

@@ -6,9 +6,9 @@ Page({
         avatar: '',
         phone: ''
       },
-      isTakeOrderer: false
+      isTakeOrderer: false,
     },
-
+    isAdmin:false
   },
   onLoad() {
     this.getInfo()
@@ -38,26 +38,24 @@ Page({
     })
   },
   async getInfo() {
-    //  查询本地缓存中有没有info
-    let user = wx.getStorageSync('user');
-    if (user) {
-      this.setData({
-        user
-      })
-      return
-    }
+    wx.showLoading({
+      title: '数据加载中',
+    })
+
     // 查询数据库中有没有user
     const res = await wx.cloud.database().collection('user').get();
     console.log('数据库中的值', res.data[0]);
-    user = res.data[0]
-    if(user){
+   const user = res.data[0]
+    if (user) {
       wx.setStorageSync('user', user)
       this.setData({
-        user
+        user,
+        isAdmin:user._openid === 'o1qHG4sFXxAuC_8V8m40Rq-F5JcQ'
       })
+      wx.hideLoading();
       return
     }
-    
+
     //初始化新用户头像，昵称和手机号
     user = {
       info: {
@@ -78,7 +76,7 @@ Page({
         ...user
       }
     })
-
+    wx.hideLoading();
   },
 
   gotoAboutUs() {
@@ -90,22 +88,19 @@ Page({
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
+  gotoCheckOrderer(){
+   wx.navigateTo({
+     url: '../checkOrderer/checkOrderer',
+   })
+  },
   gotoTakeOrders() {
     wx.clearStorageSync()
-    this.onLoad();
-    if (this.data.user.isTakeOrderer) {
-      wx.navigateTo({
-        url: '../takeOrders/takeOrders',
-      })
-    } else {
-      wx.showToast({
-        title: '没有授权，请联系客服微信，申请接单权限。',
-        icon: 'none'
-      })
-    }
-
+    this.getInfo()
+    wx.navigateTo({ 
+      url: '../takeOrders/takeOrders',
+    })
   },
-  onPullDownRefresh(){
+  onPullDownRefresh() {
     wx.clearStorage({
       success: (res) => {
         this.onLoad()
@@ -117,6 +112,6 @@ Page({
         wx.stopPullDownRefresh();
       },
     })
-    
+
   },
 })

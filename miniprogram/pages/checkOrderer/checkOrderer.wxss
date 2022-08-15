@@ -1,0 +1,31 @@
+.item{
+  background-color: white;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 30rpx;
+}
+.item .row{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid rgb(231, 231, 231);
+  padding: 10rpx 0;
+}
+.item .btn{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+}
+.item .btn .approve{
+  background-color: #1296db;
+  color: white;
+  padding: 10rpx;
+  border-radius: 20rpx;
+  margin-left: 30rpx;
+}
+.item .btn .delete{
+  background-color: red;
+  color: white;
+  padding: 10rpx;
+  border-radius: 20rpx;
+  margin-left: 30rpx;
+}

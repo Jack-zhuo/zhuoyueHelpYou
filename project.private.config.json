@@ -26,6 +26,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/applyTakeOrderer/applyTakeOrderer",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

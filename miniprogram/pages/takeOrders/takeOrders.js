@@ -1,7 +1,10 @@
 const db = wx.cloud.database()
 import {
-  formatDate
-} from '../../utils/formatDate'
+  getUser
+} from '../../utils/getUser'
+import {
+  getDateDiff
+} from '../../utils/getDateDiff'
 Page({
   data: {
     orders_notake: [],
@@ -11,7 +14,9 @@ Page({
     tabNow: 0,
     user: {}
   },
-  onLoad(options) {
+
+  onLoad() {
+
     this.getOrders_notake();
   },
   // 获取正在悬赏的数据
@@ -26,10 +31,10 @@ Page({
         status: 1
       }
     })
-    console.log(res.result.data);
     const orders_notake = res.result.data
+
     orders_notake.forEach(item => {
-      item.date = formatDate(item.date);
+      item.date = getDateDiff(item.date);
     });
     this.setData({
       orders_notake
@@ -42,46 +47,60 @@ Page({
       title: '数据加载中',
       mask: true
     })
+    const user = await getUser();
     const res = await wx.cloud.callFunction({
       name: 'getOrders_taked',
       data: {
         status: 2,
-        id: wx.getStorageSync('user')._id
+        id: user._id
       }
     })
     console.log(res.result.data);
     const orders_taked = res.result.data
     orders_taked.forEach(item => {
-      item.date = formatDate(item.date);
+      item.date = getDateDiff(item.date);
     });
     this.setData({
       orders_taked
     })
     wx.hideLoading();
   },
+
   // 获取已完成的数据
   async getOrders_completed(e) {
+
     wx.showLoading({
       title: '数据加载中',
       mask: true
     })
+
+    const user = await getUser();
     const res = await wx.cloud.callFunction({
-      name: 'getOrders_taked',
+      name: 'getOrders_completed',
       data: {
         status: 3,
-        id: wx.getStorageSync('user')._id
+        id: user._id,
+        len:this.data.orders_completed.length
       }
     })
-    console.log(res.result.data);
     const orders_completed = res.result.data
+    
+    // 判断是否加载完数据
+    if(orders_completed.length === 0){
+      wx.showToast({
+        title: '已加载完所有订单',
+        icon:'none'
+      })
+      return
+    }
+
+    // 格式化时间
     orders_completed.forEach(item => {
-      item.date = formatDate(item.date);
+      item.date = getDateDiff(item.date);
     });
-    const db_user = await db.collection('user').get();
-    console.log("查询user表：", db_user)
-    const user = db_user.data[0]
+
     this.setData({
-      orders_completed,
+      orders_completed:this.data.orders_completed.concat(orders_completed),
       user
     })
     wx.hideLoading();
@@ -97,48 +116,117 @@ Page({
     if (tabNow === 1) this.getOrders_taked();
     if (tabNow === 2) this.getOrders_completed();
   },
-  call(e) {
-    const phoneNumber = e.detail.phone;
-    wx.makePhoneCall({
-      phoneNumber
-    })
+  // 拨打手机号
+  async call(e) {
+    const user = await getUser();
+    if (user.isTakeOrderer) {
+      const phoneNumber = e.detail.phone;
+      wx.makePhoneCall({
+        phoneNumber
+      })
+    } else {
+      const res = await wx.showModal({
+        title: '你不是接单员，无法查看手机号。',
+        content: '你要申请成为 接单员 吗？',
+      })
+      if (res.confirm) {
+        console.log('点击了确定')
+        wx.navigateTo({
+          url: '../applyTakeOrderer/applyTakeOrderer',
+        })
+      } else if (res.cancel) {
+        console.log('点击了取消')
+      }
+    }
+
   },
   // 点击接单后执行的函数
   async take(e) {
-    const id = e.detail.id
-    // 调用云函数更新此订单的状态为2，并添加接单人
-    const res = await wx.cloud.callFunction({
-      name: 'updateOrderbyId',
-      data: {
-        id,
-        status: 2,
-        takeOrderer: wx.getStorageSync('user')
+    //获取user
+    const user = await getUser();
+
+    if (user.isTakeOrderer) {
+      const id = e.detail.id
+      // 调用云函数更新此订单的状态为2，并添加接单人
+      const res = await wx.cloud.callFunction({
+        name: 'updateOrderbyId',
+        data: {
+          id,
+          status: 2,
+          takeOrderer: user
+        }
+      });
+      console.log(res)
+      //    判断订单是否被抢
+      try {
+        if (res.result.stats.updated === 1) {
+          wx.showToast({
+            title: '接单成功',
+            icon: 'success'
+          })
+          this.getOrders_notake();
+        }
+      } catch (error) {
+        wx.showToast({
+          title: '订单被抢了',
+          icon: 'none'
+        })
       }
-    });
-    if (res.result.stats.updated === 1) {
-      wx.showToast({
-        title: '接单成功',
-        icon: 'success'
-      })
-      this.getOrders_notake();
+
+
+
     } else {
-      wx.showToast({
-        title: '出错了，请重试！',
-        icon: 'error'
+      wx.showModal({
+        title: '你不是接单员，无法接单。',
+        content: '你要申请成为 接单员 吗？',
+        success: (res) => {
+          if (res.confirm) {
+            console.log('点击了确定')
+            wx.navigateTo({
+              url: '../applyTakeOrderer/applyTakeOrderer',
+            })
+          } else if (res.cancel) {
+            console.log('点击了取消')
+          }
+        },
       })
     }
+
   },
   refresh(e) {
     console.log("eeeeeeeeee", e)
     this.getOrders_taked();
   },
   onPullDownRefresh() {
-    this.onLoad()
+    const tabNow = this.data.tabNow
+    if (tabNow === 0){
+     this.getOrders_notake();
+    }
+    if (tabNow === 1){
+      console.log('刷新了‘正在帮助’tab')
+    }
+    if (tabNow === 2){
+      console.log('刷新了‘我帮助的’tab')
+    }
+   
     //隐藏loading 提示框
-    wx.hideLoading();
-    //隐藏导航条加载动画
+    wx.hideLoading(); 
+    //隐藏导航条加载动画 
     wx.hideNavigationBarLoading();
     //停止下拉刷新
     wx.stopPullDownRefresh();
+  },
+  onReachBottom() {
+    const tabNow = this.data.tabNow
+    if (tabNow === 0){
+      console.log('我触底了0')
+    }
+    if (tabNow === 1){
+      console.log('我触底了1')
+    }
+    if (tabNow === 2){
+      this.getOrders_completed();
+    }
+    
   }
 })

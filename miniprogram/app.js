@@ -17,20 +17,19 @@
      })
    },
    async getInfo() {
-     //  查询本地缓存中有没有info
+      // 查询本地缓存中有没有info
      let user = wx.getStorageSync('user');
      if (user) {
        return
      }
-     // 查询数据库中有没有user
+    //  查询数据库中有没有user
      const res = await wx.cloud.database().collection('user').get();
-     console.log('数据库中的值', res.data[0]);
+     console.log('app.js初始化', res.data[0]);
      user = res.data[0]
      if (user) {
        wx.setStorageSync('user', user)
        return
      }
-
      //初始化新用户头像，昵称和手机号
      user = {
        info: {
@@ -38,10 +37,11 @@
          avatar: `cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/defaultAvatar/${Math.floor(Math.random()*10)}.png`,
          phone: ''
        },
-       isTakeOrderer: false
+       isTakeOrderer: false,
+       balance:0
      }
 
-     // 将info分别存在data，本地缓存，和数据库中
+     // 将info分别存在，本地缓存，和数据库中
      wx.setStorageSync('user', user)
      wx.cloud.database().collection('user').add({
        data: {
