@@ -11,9 +11,9 @@
   text-align: center;
   margin: 20rpx; 
   background-color: rgb(255, 166, 0);
-  width: 100rpx;
+  width: 200rpx;
   height: 100rpx;
-  border-radius: 50%;
+  border-radius: 20rpx;
   padding: 10rpx;
   color: white;
 }

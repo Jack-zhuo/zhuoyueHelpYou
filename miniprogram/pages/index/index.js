@@ -1,9 +1,14 @@
 const db = wx.cloud.database();
 Page({
+
   data: {
-    // tab栏
+    swiperItem:[
+      'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/pic/1.jpg',
+      'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/pic/2.jpg',
+      'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/pic/3.jpg'
+    ],
     tabList: ['代取快递', '万能跑腿', '打印服务'],
-    tabNow:0,
+    tabNow: 0,
     // 快递商家
     array: ['菜鸟驿站', '自提柜', '顺丰'],
     index: 0,
@@ -41,16 +46,31 @@ Page({
     // 备注
     note: '',
   },
-  onLoad() {
+  onLoad(e) {
     this.getAddress();
   },
   onShow() {
-    this.onLoad();
+    const address = wx.getStorageSync('address')
+    if (address) {
+      this.setData({
+        address,
+      })
+    }
+
   },
-  addAddress() {
-    wx.navigateTo({
-      url: '../addAddress/addAddress',
-    })
+  tabChange(e) {
+    console.log(e.currentTarget.dataset.index)
+    const tabNow = e.currentTarget.dataset.index;
+    if (tabNow === 1) {
+      wx.navigateTo({
+        url: '../errand/errand',
+      })
+    }
+    if (tabNow === 2) {
+      wx.navigateTo({
+        url: '../print/print',
+      })
+    }
   },
   async getAddress() {
     const address = await db.collection('address').where({
@@ -61,17 +81,8 @@ Page({
       address: address.data[0]
     })
   },
-  cleanHolder() {
-    this.setData({
-      placeholderCon: ''
-    })
-  },
-  addHolder() {
-    this.setData({
-      placeholderCon: '请输入取件码...'
-    })
-  },
   gotoAddress() {
+    wx.setStorageSync('urlNow', 'index')
     wx.navigateTo({
       url: '../address/address',
     })
@@ -114,21 +125,17 @@ Page({
 
     const order = {
       name: '代取快递',
-      merchant: this.data.array[this.data.index],
-      size: this.data.isName,
-      takeMsg: this.data.takeMsg,
-      note: this.data.note,
-      
-      // 订单公共部分
       userinfo: wx.getStorageSync('user').info,
       address: this.data.address,
+      merchant: this.data.array[this.data.index],
+      size: this.data.isName,
       price: this.data.price,
       date: new Date(),
+      takeMsg: this.data.takeMsg,
+      note: this.data.note,
       takeOrderer: {},
       takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
-      status: 1,
-     
-      
+      status: 1
     }
 
     const res = await wx.cloud.callFunction({
@@ -152,7 +159,7 @@ Page({
           data: order,
           success: (res) => {
             wx.switchTab({
-              url: '../order/order'
+              url: '../../pages/order/order'
             })
           }
         });
@@ -166,16 +173,11 @@ Page({
     })
   },
   onPullDownRefresh() {
-    this.onLoad()
+    this.getAddress();
     this.setData({
       takeMsg: '',
       note: ''
     })
-    //隐藏loading 提示框
-    wx.hideLoading();
-    //隐藏导航条加载动画
-    wx.hideNavigationBarLoading();
-    //停止下拉刷新
     wx.stopPullDownRefresh();
   },
   onShareAppMessage: function (res) {
@@ -192,10 +194,10 @@ Page({
       imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/avatar/1660277626031.png'
     }
   },
-  tabChange(e){
-    console.log(e.detail)
-    this.setData({
-      
-    })
+ 
+  btn(){
+    console.log(this.data.note)
   }
+
+
 })

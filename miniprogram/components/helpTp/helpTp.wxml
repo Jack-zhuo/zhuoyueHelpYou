@@ -1,7 +1,6 @@
 <!-- <button open-type="share">分享转发</button> -->
-
-<my-tab tabList='{{ tabList }}' bindtabChange="tabChange"></my-tab>
 <!-- 地址 -->
+<my-tab tabList='{{ tabList }}' bindtabChange="tabChange"></my-tab>
 <view wx:if="{{ !address.phone }}" class="common">
   <button bindtap="addAddress" type="primary">添加地址</button>
 </view>
@@ -50,9 +49,6 @@
   <view class="title">备注:</view>
   <textarea placeholder="请输入备注信息..." class="info" model:value="{{note}}"></textarea>
 </view>
-
-
-
 
 <view class="logo_wrap" class="common">
   <button bindtap="goPay">确认发布 ￥{{price}}</button>

@@ -200,6 +200,10 @@ Page({
   onPullDownRefresh() {
     const tabNow = this.data.tabNow
     if (tabNow === 0){
+      console.log('刷新了‘正在悬赏’tab')
+      this.setData({
+        orders_notake:[]
+      })
      this.getOrders_notake();
     }
     if (tabNow === 1){
@@ -207,6 +211,10 @@ Page({
     }
     if (tabNow === 2){
       console.log('刷新了‘我帮助的’tab')
+      this.setData({
+        orders_completed:[]
+      })
+      this.getOrders_completed();
     }
    
     //隐藏loading 提示框

@@ -2,9 +2,9 @@
 .order{
   background-color: white;
   border-radius: 20rpx;
-  margin: 30rpx 40rpx;
+  margin: 5rpx 40rpx;
   padding: 20rpx;
-  display: flex;
+  display: flex; 
   /* align-items: center; */
 }
 .order .avatar{

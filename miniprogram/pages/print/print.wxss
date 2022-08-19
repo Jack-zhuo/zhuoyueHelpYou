@@ -1,0 +1,74 @@
+.common {
+  background-color: white;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.take_info .info {
+  border: 1rpx solid gray;
+  border-radius: 10rpx;
+  width: 450rpx;
+  height: 100rpx;
+  padding: 5rpx;
+}
+
+input {
+  border: 1rpx solid gray;
+  padding: 5rpx;
+  border-radius: 10rpx;
+  width: 450rpx;
+}
+
+.count input {
+  width: 200rpx;
+}
+.picker{
+  display: flex;
+  align-items: center;
+}
+.picker image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+textarea {
+  border: 1rpx solid gray;
+  padding: 5rpx;
+  border-radius: 10rpx;
+  width: 450rpx;
+  height: 100rpx;
+}
+.address .address_detail{
+  display: flex;
+  align-items: center;
+}
+.address .address_detail image{
+   width: 40rpx;
+   height: 40rpx;
+}
+button{
+  background-color: #1296db;
+  color: white;
+  margin-top: 20rpx; 
+}
+.title{
+  font-weight: 600;
+}
+.note{
+  background-color: white;
+  margin-top: 5rpx;
+  display: flex;
+  font-size: 22rpx;
+  padding: 15rpx;
+}
+.copy{
+  border: 1rpx solid rgb(0, 0, 0);
+  margin:0 5rpx;
+  padding: 5rpx;
+  border-radius: 15rpx;
+  font-weight: 500;
+}

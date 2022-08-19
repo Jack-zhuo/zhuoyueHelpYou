@@ -1,0 +1,42 @@
+.common {
+  background-color: white;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.address .address_detail{
+  display: flex;
+  align-items: center;
+}
+.address .address_detail image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.take_info .info {
+  border: 1rpx solid gray;
+  border-radius: 10rpx;
+  width: 450rpx;
+  height: 100rpx;
+  padding: 5rpx;
+}
+
+input{
+  border: 1rpx solid gray;
+  padding: 5rpx;
+  border-radius: 10rpx;
+  width: 450rpx;
+}
+.title{
+  font-weight: 600;
+}
+button{
+  background-color: #1296db;
+  color: white;
+  margin-top: 20rpx; 
+}
+.note{
+  font-size: 20rpx;
+}

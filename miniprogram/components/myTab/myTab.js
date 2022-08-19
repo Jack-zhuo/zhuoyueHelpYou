@@ -14,7 +14,7 @@ Component({
        this.setData({
          tabNow
        })
-       this.triggerEvent('tabChange')
+       this.triggerEvent('tabChange',tabNow)
     }
   }
 })

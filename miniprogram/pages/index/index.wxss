@@ -1,3 +1,26 @@
+.swiper{
+  height: 353rpx; 
+} 
+.swiper image{
+  width: 750rpx;
+  height: 350rpx;
+}
+.tab1{
+  display: flex;
+  height: 90rpx;
+ line-height: 90rpx;
+ background-color: white;
+}
+.tab1 .tab_item{ 
+ flex: 1;
+ text-align: center;
+}
+.tab1 .select{
+ color: #1296db;
+ border-bottom: 5rpx solid #1296db;
+ background-color: #f8fdff;
+} 
+
 .logo_wrap{
 
   display: flex;
@@ -7,8 +30,8 @@
 .common {
   background-color: white;
   padding: 20rpx;
-  border-radius: 30rpx;
-  margin-top: 30rpx;
+  border-radius: 10rpx;
+  margin-top: 5rpx;
 }
 button{
   margin: 20rpx 0;
@@ -19,6 +42,14 @@ button{
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.address .arrow{
+  display: flex;
+  align-items: center;
+}
+.picker .merchantName{
+  display: flex;
+  align-items: center;
 }
 
 .address .arrow image {
@@ -77,7 +108,7 @@ button{
   border-radius: 10%;
   background-color: rgb(241, 241, 241);
 }
-.select{
+.size .tab .select{
   background-color: #1296db !important;
   color: white;
 }
@@ -85,4 +116,7 @@ button{
   background-color: #1296db;
   color: white;
   margin-top: 20rpx;
+}
+.title{
+  font-weight: 600; 
 }

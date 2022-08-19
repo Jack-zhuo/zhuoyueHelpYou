@@ -12,7 +12,7 @@ Component({
           success: () => {
             wx.showToast({
               title: '复制客服微信成功！',
-              icon: 'none'
+              icon: 'none'  
             })
           }
         })

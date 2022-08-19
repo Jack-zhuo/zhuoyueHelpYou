@@ -44,7 +44,6 @@ Page({
 
     // 查询数据库中有没有user
     const res = await wx.cloud.database().collection('user').get();
-    console.log('数据库中的值', res.data[0]);
    const user = res.data[0]
     if (user) {
       wx.setStorageSync('user', user)
@@ -87,6 +86,11 @@ Page({
   gotoComplain(e) {
     console.log(e.detail.path)
     console.log(e.detail.query)
+  },
+  gotoWithdraw(){
+    wx.navigateTo({
+      url: '../withdraw/withdraw',
+    })
   },
   gotoCheckOrderer(){
    wx.navigateTo({

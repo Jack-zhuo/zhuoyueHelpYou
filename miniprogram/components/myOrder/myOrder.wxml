@@ -1,7 +1,4 @@
 <view class="order">
-  <!-- <view class="avatar">
-        <image src="{{ avatar }}"></image>
-      </view> -->
   <view class="content">
     <view class="top">
       <view class="left">
@@ -17,18 +14,30 @@
     </view>
     <view class="middle">
       <view class="middle-left">
-        <view class="item">
+        <!-- 代取快递 -->
+        <view class="item" wx:if="{{item.name === '代取快递'}}">
           <text>取件信息：</text>
           <text>{{ item.takeMsg }}</text>
         </view>
-        <view class="item">
+        <view class="item" wx:if="{{item.name === '代取快递'}}">
           <text>取件地址：</text>
           <text>{{ item.merchant }}</text>
         </view>
-        <view class="item">
+        <view class="item" wx:if="{{item.name === '代取快递'}}">
           <text>备注：</text>
           <text>{{ item.note }}</text>
         </view>
+        <!-- 万能跑腿 -->
+        <view class="item" wx:if="{{item.name === '万能跑腿'}}">
+          <text>帮助内容：</text>
+          <text>{{ item.helpMsg }}</text>
+        </view>
+        <!-- 打印服务 -->
+        <view class="item" wx:if="{{item.name === '打印服务'}}">
+          <text>文件：</text>
+          <text>{{ item.fileName }}</text>
+        </view>
+        <!-- 公共部分 -->
         <view class="item"  style="color: red;">
           <text>取件码：</text>
           <text>{{ item.takeGoodsCode }}</text>

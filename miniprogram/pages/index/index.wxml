@@ -1,0 +1,72 @@
+<view>
+  <swiper
+  autoplay  
+  circular="true"
+  class="swiper">
+   <swiper-item wx:for="{{swiperItem}}" wx:key="index" class="swiper-item">
+      <image mode="aspectFit" src="{{ item }}"></image>
+   </swiper-item>
+  </swiper>
+</view>
+<view class="container">
+  <!-- tab栏 -->
+  <view class="tab1">
+    <view wx:for="{{tabList}}" class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:key="index" bindtap="tabChange" data-index="{{ index }}">
+      {{ item }}
+    </view>
+  </view>
+  <!-- 代取快递 -->
+  <!-- <button open-type="share">分享转发</button> -->
+  <!-- 地址 -->
+  <view wx:if="{{ !address.phone }}" class="common">
+    <button bindtap="addAddress" type="primary">添加地址</button>
+  </view>
+  <view wx:else class="address common" bindtap="gotoAddress">
+    <view class="title">
+      地址：
+    </view>
+    <view class="arrow">
+      <text> {{address.name}} {{address.phone}} {{address.detail}}</text>
+      <image src="../../images/arrow_gray.png"></image>
+    </view>
+
+  </view>
+  <!-- 快递商家 -->
+  <view class="merchant common">
+
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        <view class="title">快递商家:</view>
+        <view class="merchantName">
+          <text>{{array[index]}}</text>
+          <image src="../../images/arrow_gray.png"></image>
+        </view>
+      </view>
+    </picker>
+  </view>
+  <!-- 快递大小 -->
+  <view class="size common">
+    <view class="title">快递大小：</view>
+    <view class="tab">
+      <view class="tabs {{ isName === item.name ? 'select':'' }}" bindtap="selectTab" data-tip="{{ item }}" wx:for="{{ size }}" wx:key="index">{{ item.name }}</view>
+
+    </view>
+  </view>
+  <!-- 取件信息 -->
+  <view class="take_info common">
+    <view class="title">取件信息：</view>
+    <textarea bindfocus="cleanHolder" bindblur="addHolder" placeholder="{{placeholderCon}}" class="info" model:value="{{takeMsg}}"></textarea>
+  </view>
+  <!-- 备注 -->
+  <view class="take_info common">
+    <view class="title">备注:</view>
+    <textarea placeholder="请输入备注信息..." class="info" model:value="{{note}}"></textarea>
+  </view>
+
+  <view class="logo_wrap" class="common">
+    <button bindtap="goPay">确认发布 ￥{{price}}</button>
+    <!-- logo区 -->
+    <!-- <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image> -->
+  </view>
+
+</view>

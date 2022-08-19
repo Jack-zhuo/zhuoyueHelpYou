@@ -1,0 +1,27 @@
+<!-- 取件信息 -->
+<view class="take_info common">
+  <view class="title">帮助内容：</view>
+  <textarea placeholder="请输入帮助内容..." class="info" model:value="{{helpMsg}}"></textarea>
+</view>
+<!-- 地址信息 -->
+<view class="address common" bindtap="gotoAddress">
+  <view class="title">地址：</view>
+  <view class="address_detail">
+   <text>{{address.name}} {{address.phone}} {{address.detail}}</text>
+   <image src="../../images/arrow_gray.png"></image>
+  </view>
+  
+</view>
+
+<!-- 金额 --> 
+<view class="money common">
+  <view class="title">金额：</view>
+  <view class="inputMoney">
+    <input type="number" placeholder="请输入金额..." model:value="{{price}}" />
+  </view>
+</view>
+<view class="note common">
+  <text>注：小于两元无法下单，金额越高接单越快哦~~</text>
+</view>
+<!-- 提交 -->
+<button bindtap="submit">提交</button>

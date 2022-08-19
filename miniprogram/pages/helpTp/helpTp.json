@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "my-button":"../../components/myButton/myButton"
+     "my-tab":"../../components/myTab/myTab"
   },
   "navigationBarTitleText": "代取快递"
 }

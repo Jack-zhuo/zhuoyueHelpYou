@@ -21,39 +21,61 @@
             <text>服务：</text>
             <text> {{ item.name }}</text>
           </view>
-          <view class="item">
+          <!-- 代取快递 -->
+          <view class="item" wx:if="{{ item.name === '代取快递' }}">
             <text>快递商家：</text>
             <text> {{ item.merchant }}</text>
           </view>
-          <view class="item">
+          <view class="item" wx:if="{{ item.name === '代取快递' }}">
             <text>取件人：</text>
             <text>{{ item.address.name }}</text>
           </view>
-          <view class="item">
+          <view class="item" wx:if="{{ item.name === '代取快递' }}">
             <text>取件信息：</text>
             <text>{{ item.takeMsg }}</text>
           </view>
-          <view class="item">
-            <text>地址： </text>
-            <text> {{ item.address.detail }}</text>
-          </view>
-          <view class="item">
+          <view class="item" wx:if="{{ item.name === '代取快递' }}">
             <text>备注： </text>
             <text> {{ item.note }}</text>
+          </view>
+          <!-- 打印服务 -->
+          <view class="item" wx:if="{{ item.name === '打印服务' }}">
+            <text>文件名： </text>
+            <text> {{ item.fileName }}</text>
+          </view>
+          <view class="item" wx:if="{{ item.name === '打印服务' }}">
+            <text>份数： </text>
+            <text> {{ item.count }}</text>
+          </view>
+          <view class="item" wx:if="{{ item.name === '打印服务' }}">
+            <text>页数： </text>
+            <text> {{ item.pageNum }}</text>
+          </view>
+          <view class="item" wx:if="{{ item.name === '打印服务' }}">
+            <text>备注： </text>
+            <text> {{ item.note }}</text>
+          </view>
+          <!-- 万能跑腿 -->
+          <view class="item" wx:if="{{ item.name === '万能跑腿' }}">
+            <text>帮助内容： </text>
+            <text> {{ item.helpMsg }}</text>
+          </view>
+          <!-- 公共的 -->
+          <view class="item">
+            <text>地址： </text>
+            <text>{{item.address.name}}-{{ item.address.detail }}</text>
           </view>
           <view wx:if="{{ isShowTakeCode }}" class="item" style="color: red;">
             <text>请输入提货码： </text>
             <input type="number" bindinput="input"/>
           </view>
         </view>
-
-        <!-- <view>手机号：{{item.address.phone}}</view> -->
-
       </view>
       <view class="bottom">
         <view class="price">￥{{item.price}}</view>
         <view bindtap="call" class="phone">手机号</view>
         <view wx:if="{{item.status === 1}}" bindtap="take" class="take">接单 </view>
+        <view wx:if="{{item.status === 2 && item.name === '打印服务'}}" bindtap="downloadFile" class="take">下载</view>
         <view wx:if="{{item.status === 2}}" bindtap="completed" class="take">完成</view>
       </view>
     </view>

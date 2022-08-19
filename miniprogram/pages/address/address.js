@@ -1,7 +1,7 @@
 const db = wx.cloud.database();
 Page({
   data: {
-    addresses: {}
+    addresses: {} 
   },
   onLoad() {
     this.getAddress();
@@ -52,8 +52,24 @@ Page({
        })
      }
   },
+  selectAddress(e){
+      const address = e.currentTarget.dataset.address;
+      console.log(address);
+      wx.setStorageSync('address', address)
+      const urlNow = wx.getStorageSync('urlNow')
+      if(urlNow === 'index'){
+        wx.switchTab({
+          url: `../index/index`,
+        })
+        return
+      }
+      wx.redirectTo({
+        url: `../${urlNow}/${urlNow}`,
+      })
+      
+  },
   onPullDownRefresh(){
-    this.onLoad();  
+    this.getAddress();
      //隐藏loading 提示框
      wx.hideLoading();
      //隐藏导航条加载动画

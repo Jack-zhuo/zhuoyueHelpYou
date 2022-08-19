@@ -1,0 +1,63 @@
+<!-- 取件信息 -->
+<view class="take_info common">
+  <button bindtap="upFile">选择文件</button>
+</view>
+
+<!-- 已选文件 -->
+<view>
+  <view class="take_info common">
+    <view class="title">已选文件</view>
+    <text>{{fileName}}</text>
+  </view>
+</view>
+<!-- 页数 -->
+<view class="count common">
+  <view class="title">页数：</view>
+  <input bindinput="setPageNum" placeholder="请输入页数..." type="number" />
+</view>
+<!-- 份数 -->
+<view class="count common">
+  <view class="title">份数：</view>
+  <input bindinput="setCount" placeholder="请输入份数..." type="number" />
+</view>
+<!-- 单？双？ -->
+<view class="count common">
+  <view class="title">单双面:</view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      <text>{{array[index]}}</text>
+      <image src="../../images/arrow_gray.png"></image>
+
+    </view>
+  </picker>
+</view>
+<!-- 备注 -->
+<view class="count common">
+  <view class="title">备注：</view>
+  <textarea model:value="{{note}}" placeholder="请输入备注信心..." type="number" />
+</view>
+<!-- 地址信息 -->
+<view class="address common" bindtap="gotoAddress">
+  <view class="title">地址：</view>
+  <view class="address_detail">
+    <view wx:if="{{address.phone === ''}}">选择地址</view>
+    <view wx:else>
+      {{address.name}} {{address.phone}} {{address.detail}}
+    </view>
+    <image src="../../images/arrow_gray.png"></image>
+  </view>
+</view>
+
+<view class="note">
+  <view class="note-left">
+    注：
+  </view>
+  <view class="note-right">
+    <view>1.跑腿费2块钱</view>
+    <view>2.按张收费，一张3毛 (双面打印，一面1.5毛)</view>
+    <view>3.不会上传文件的同学们，可以加微信：<text style="font-weight: 600;" >zyjava2020</text><text class="copy" bindtap="copyWeChat">复制</text>发送文件</view>
+  </view>
+  
+</view>
+<!-- 提交 -->
+<button bindtap="submit">提交 (￥{{totalPrice}})</button>

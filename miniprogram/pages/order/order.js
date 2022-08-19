@@ -6,7 +6,7 @@ Page({
   data: {
     tabList: ['已付款', '已接单', '已完成'],
     tabNow: 0,
-    orders: [],
+    orders: [], 
     orders_paid: [],
     orders_taked: [],
     orders_completed: []
@@ -14,19 +14,6 @@ Page({
   onLoad() {
     this.getorders_paid();
   },
-  onShow() {
-    this.onLoad();
-  },
-  onPullDownRefresh() {
-    this.onLoad()
-    //隐藏loading 提示框
-    wx.hideLoading();
-    //隐藏导航条加载动画
-    wx.hideNavigationBarLoading();
-    //停止下拉刷新
-    wx.stopPullDownRefresh();
-  },
-
   // 已付款
   async getorders_paid() {
 
@@ -35,20 +22,9 @@ Page({
       mask: true
     })
 
-    const res = await db.collection('orders').orderBy('date', 'desc').skip(this.data.orders_paid.length).limit(5).where({
+    const res = await db.collection('orders').orderBy('date', 'desc').where({
       status: 1
     }).get();
-
-    console.log(res);
-    if (res.data.length === 0) {
-      wx.hideLoading()
-      wx.showToast({
-        title: '已加载完全部数据',
-        icon: 'none'
-      })
-      return
-    }
-
 
     // 格式化时间
     res.data.forEach(item => {
@@ -57,12 +33,10 @@ Page({
     })
 
     this.setData({
-      // tailCount_paid:res.data.length,
-      orders_paid: this.data.orders_paid.concat(res.data)
+      orders_paid: res.data
     })
     wx.hideLoading()
   },
-
   // 已接单
   async getorders_taked() {
     
@@ -71,18 +45,10 @@ Page({
       mask: true
     })
 
-    const res = await db.collection('orders').orderBy('date', 'desc').skip(this.data.orders_taked.length).limit(5).where({
+    const res = await db.collection('orders').orderBy('date', 'desc').where({
       status: 2
     }).get();
-    
-     if(res.data.length === 0){
-        wx.hideLoading()
-        wx.showToast({
-          title: '已加载完全部数据',
-          icon: 'none'
-        })
-        return
-     }
+  
 
     // 格式化时间
     res.data.forEach(item => {
@@ -91,11 +57,10 @@ Page({
     })
 
     this.setData({
-      orders_taked: this.data.orders_taked.concat(res.data)
+      orders_taked: res.data
     })
     wx.hideLoading()
   },
-
   // 已完成
   async getorders_completed() {
 
@@ -144,14 +109,31 @@ Page({
   onReachBottom() {
     const tabNow = this.data.tabNow
     if (tabNow === 0) {
+     console.log('tab0触底了');
+    }
+    if (tabNow === 1) {
+      console.log('tab1触底了');
+    }
+    if (tabNow === 2) {
+      this.getorders_completed()
+    }
+
+  },
+  onPullDownRefresh() {
+    const tabNow = this.data.tabNow
+    if (tabNow === 0) {
+      console.log('走到这里了吗')
       this.getorders_paid();
     }
     if (tabNow === 1) {
       this.getorders_taked();
     }
     if (tabNow === 2) {
+      this.setData({
+        orders_completed:[]
+      })
       this.getorders_completed()
     }
-
-  }
+    wx.stopPullDownRefresh()
+  },
 })
