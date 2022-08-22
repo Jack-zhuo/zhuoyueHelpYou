@@ -17,11 +17,13 @@
 <view class="money common">
   <view class="title">金额：</view>
   <view class="inputMoney">
-    <input type="number" placeholder="请输入金额..." model:value="{{price}}" />
+    <input type="number" placeholder="请输入金额..." bindinput="getInputValue" value="{{ price }}" />
   </view>
 </view>
-<view class="note common">
-  <text>注：小于两元无法下单，金额越高接单越快哦~~</text>
+<view class="note">
+  <view>1. 小于两元无法下单，金额越高接单越快哦~~</view>
+  <view>2. 直接向接单员支付代买费用~~</view>
+
 </view>
 <!-- 提交 -->
-<button bindtap="submit">提交</button>
+<button bindtap="submit">提交（￥{{ price }}）</button>

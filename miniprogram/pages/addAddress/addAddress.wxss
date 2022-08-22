@@ -29,3 +29,6 @@
 .panel .address_item switch{
   margin-left: 470rpx;
 }
+button{
+  margin-top: 40rpx;
+}

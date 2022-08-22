@@ -18,14 +18,19 @@ Page({
     })
   },
   addAddress() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../addAddress/addAddress',
     })
   },
   async delete(e) {
-    console.log(e)
+
+    // 删除前的友好提示 
+    const resTip = await wx.showModal({
+      'title':'确定删除吗？'
+    })
+    if(resTip.cancel) return
+
     const id = e.currentTarget.dataset.id;
-    console.log(id);
 
     const res = await db.collection('address').doc(id).remove();
     console.log(res);
@@ -54,7 +59,7 @@ Page({
   },
   selectAddress(e){
       const address = e.currentTarget.dataset.address;
-      console.log(address);
+
       wx.setStorageSync('address', address)
       const urlNow = wx.getStorageSync('urlNow')
       if(urlNow === 'index'){
@@ -63,8 +68,14 @@ Page({
         })
         return
       }
-      wx.redirectTo({
-        url: `../${urlNow}/${urlNow}`,
+      // 获取前面的页面
+      let pages = getCurrentPages();
+      let prePage = pages[pages.length-2]
+      prePage.setData({
+        address
+      })
+      wx.navigateBack({
+        delta: 1,
       })
       
   },

@@ -6,8 +6,8 @@ cloud.init({
 
 exports.main = async (event, context) => {
   const res = await cloud.cloudPay.unifiedOrder({
-    "body" : event.goodName,
-    "outTradeNo" : "15922476232"+new Date().getTime(),
+    "body" : event.goodName, 
+    "outTradeNo" : event._id,
     "spbillCreateIp" : "127.0.0.1",
     "subMchId" : "1629655829",
     "totalFee" : event.totalFee,

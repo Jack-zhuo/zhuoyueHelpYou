@@ -16,7 +16,7 @@ Component({
     },
     take() {
       this.triggerEvent('take', {
-        id: this.properties.item._id
+        item: this.properties.item
       })
     },
     completed() {
@@ -38,11 +38,13 @@ Component({
             id: this.properties.item._id
           },
           success: (res) => {
+            const {price} = this.properties.item
+            console.log(price)
             wx.cloud.database().collection('user').where({
               _openid: "这是bug吗？"
             }).update({
               data: {
-                balance: wx.cloud.database().command.inc(Number(this.properties.item.price))
+                balance: wx.cloud.database().command.inc(Number(price.toFixed(2)))
               }
             })
             this.triggerEvent('refresh');

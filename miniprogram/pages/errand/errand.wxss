@@ -38,5 +38,8 @@ button{
   margin-top: 20rpx; 
 }
 .note{
+  background-color: white;
+  margin: 10rpx 0;
+  padding: 20rpx;
   font-size: 20rpx;
 }

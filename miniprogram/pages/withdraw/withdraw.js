@@ -2,7 +2,7 @@
 Page({
 
   data: {
-    users: []
+    users: [],
   },
   onLoad(options) {
     this.getUser();
@@ -12,6 +12,10 @@ Page({
       name: 'getUser'
     })
     const users = res.result.data
+    users.forEach(item => {
+      item.realWithdraw =  Math.round(item.balance * 80)/100
+      item.profit = Math.round(item.balance * 20)/100
+    });
     this.setData({
       users
     })

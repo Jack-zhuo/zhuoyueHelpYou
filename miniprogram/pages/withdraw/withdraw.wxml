@@ -1,8 +1,10 @@
 <view class="container">
    <view class="user" wx:for="{{users}}" wx:key="index">
-      <view>{{item.info.name}}</view>
-      <view bindtap="call" data-phone="{{item.info.phone}}">拨打电话</view>
+      <view bindtap="call" data-phone="{{item.info.phone}}">{{item.info.name}}</view>
+
       <view>{{item.balance}}</view>
+      <view>{{item.realWithdraw }}</view>
+      <view>{{item.profit }}</view>
       <view class="withdraw-btn" bindtap="gotoWithdraw" data-openid="{{item._openid}}">提现</view>
    </view>
 </view> 

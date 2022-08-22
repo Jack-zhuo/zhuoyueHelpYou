@@ -9,10 +9,10 @@ Page({
   data: {
     orders_notake: [],
     orders_taked: [],
-    orders_completed: [],
-    tabList: ['正在悬赏', '正在帮助', '我帮助的'],
+    orderById: [],
+    tabList: ['正在悬赏', '已接单', '查询byorderId'],
     tabNow: 0,
-    user: {}
+    orderId:'',
   },
 
   onLoad() {
@@ -47,12 +47,10 @@ Page({
       title: '数据加载中',
       mask: true
     })
-    const user = await getUser();
     const res = await wx.cloud.callFunction({
-      name: 'getOrders_taked',
+      name: 'getOrders',
       data: {
         status: 2,
-        id: user._id
       }
     })
     console.log(res.result.data);
@@ -65,45 +63,30 @@ Page({
     })
     wx.hideLoading();
   },
-
-  // 获取已完成的数据
-  async getOrders_completed(e) {
-
-    wx.showLoading({
-      title: '数据加载中',
-      mask: true
+  getOrderId(e) {
+    console.log(e.detail.value)
+    this.setData({
+      orderId:e.detail.value
     })
 
-    const user = await getUser();
-    const res = await wx.cloud.callFunction({
-      name: 'getOrders_completed',
-      data: {
-        status: 3,
-        id: user._id,
-        len:this.data.orders_completed.length
+  },
+ async query(){
+    wx.showLoading({
+      title: '查询中',
+    })
+   const res = await wx.cloud.callFunction({
+      name:'getOrderById',
+      data:{
+        _id:this.data.orderId
       }
     })
-    const orders_completed = res.result.data
-    
-    // 判断是否加载完数据
-    if(orders_completed.length === 0){
-      wx.showToast({
-        title: '已加载完所有订单',
-        icon:'none'
-      })
-      return
-    }
-
-    // 格式化时间
-    orders_completed.forEach(item => {
-      item.date = getDateDiff(item.date);
-    });
-
+    console.log(res)
     this.setData({
-      orders_completed:this.data.orders_completed.concat(orders_completed),
-      user
+      orderById:res.result.data[0]
     })
-    wx.hideLoading();
+    wx.hideLoading({
+      success: (res) => {},
+    })
   },
   // 切换tab栏
   tabChange(e) {
@@ -114,7 +97,7 @@ Page({
     })
     if (tabNow === 0) this.getOrders_notake();
     if (tabNow === 1) this.getOrders_taked();
-    if (tabNow === 2) this.getOrders_completed();
+
   },
   // 拨打手机号
   async call(e) {
@@ -143,10 +126,10 @@ Page({
   // 点击接单后执行的函数
   async take(e) {
     console.log(e);
-   const resTip = await wx.showModal({
-      'title':'确认接单吗？'
+    const resTip = await wx.showModal({
+      'title': '确认接单吗？'
     })
-    if(resTip.cancel) return
+    if (resTip.cancel) return
 
     wx.showLoading({
       title: '接单中...',
@@ -171,7 +154,7 @@ Page({
       try {
         if (res.result.stats.updated === 1) {
           this.getOrders_notake();
-         await wx.showToast({
+          await wx.showToast({
             title: '接单成功',
             icon: 'success'
           })
@@ -211,26 +194,26 @@ Page({
   },
   onPullDownRefresh() {
     const tabNow = this.data.tabNow
-    if (tabNow === 0){
+    if (tabNow === 0) {
       console.log('刷新了‘正在悬赏’tab')
       this.setData({
-        orders_notake:[]
+        orders_notake: []
       })
-     this.getOrders_notake();
+      this.getOrders_notake();
     }
-    if (tabNow === 1){
+    if (tabNow === 1) {
       console.log('刷新了‘正在帮助’tab')
     }
-    if (tabNow === 2){
+    if (tabNow === 2) {
       console.log('刷新了‘我帮助的’tab')
       this.setData({
-        orders_completed:[]
+        orders_completed: []
       })
       this.getOrders_completed();
     }
-   
+
     //隐藏loading 提示框
-    wx.hideLoading(); 
+    wx.hideLoading();
     //隐藏导航条加载动画 
     wx.hideNavigationBarLoading();
     //停止下拉刷新
@@ -238,15 +221,15 @@ Page({
   },
   onReachBottom() {
     const tabNow = this.data.tabNow
-    if (tabNow === 0){
+    if (tabNow === 0) {
       console.log('我触底了0')
     }
-    if (tabNow === 1){
+    if (tabNow === 1) {
       console.log('我触底了1')
     }
-    if (tabNow === 2){
+    if (tabNow === 2) {
       this.getOrders_completed();
     }
-    
+
   }
 })

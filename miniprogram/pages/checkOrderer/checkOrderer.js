@@ -19,12 +19,16 @@ Page({
 
   // 通过
   async approve(e) {
-    const openid = e.currentTarget.dataset.openid;
+    console.log(e.currentTarget.dataset.applicant)
+    const {_openid,name,phone} = e.currentTarget.dataset.applicant;
+  
     // 更新用户表
     const res = await wx.cloud.callFunction({
       name: 'updateUserById',
       data: {
-        openid
+        _openid,
+        name,
+        phone
       }
     })
 
@@ -32,11 +36,11 @@ Page({
       const res2 = await wx.cloud.callFunction({
         name: 'updateApplyTake',
         data: {
-          openid
+          _openid
         }
       })
       console.log(res2)
-      
+      this.getApplyTake();
       wx.showToast({
         title: '操作成功',
         icon: 'none'
@@ -63,5 +67,12 @@ Page({
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phone,
     })
-  }
+  },
+  onPullDownRefresh() {
+    this.getApplyTake();
+    this.setData({
+      applyTake: []
+    })
+    wx.stopPullDownRefresh();
+  },
 })

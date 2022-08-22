@@ -2,7 +2,7 @@ const db = wx.cloud.database();
 Page({
 
   data: {
-    swiperItem:[
+    swiperItem: [
       'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/pic/1.jpg',
       'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/pic/2.jpg',
       'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/pic/3.jpg'
@@ -15,26 +15,22 @@ Page({
     // 尺寸大小
     size: [{
       name: '小件',
-      tips: '小于书本，3元',
-      price: 3
+      tips: '书本大小的快递，1.98元',
+      price: 1.98
     }, {
       name: '中件',
-      tips: '小于鞋盒，6元',
-      price: 6
+      tips: '鞋盒大小的快递，3.98元',
+      price: 3.98
     }, {
       name: '大件',
-      tips: '小于泡面箱，9元',
-      price: 9
-    }, {
-      name: '超大件',
-      tips: '大于泡面箱，18元',
-      price: 18
-    }, ],
+      tips: '台式电脑主机大小，6.98元',
+      price: 6.98
+    } ],
     isName: '小件',
     // 取件码
     placeholderCon: '请输入取件码...',
     // 价格
-    price: 3,
+    price: 1.98,
     // 地址
     address: {
       name: '',
@@ -123,8 +119,12 @@ Page({
       title: '准备付款中',
     })
 
+    //生成订单号,生成规则 时间戳 加 随机四位数字
+    const _id = new Date().getTime() + '' + Math.floor(Math.random() * 10000)
+
     const order = {
       name: '代取快递',
+      _id,
       userinfo: wx.getStorageSync('user').info,
       address: this.data.address,
       merchant: this.data.array[this.data.index],
@@ -135,14 +135,19 @@ Page({
       note: this.data.note,
       takeOrderer: {},
       takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
-      status: 1
+      status: 0
     }
+    // 添加订单到数据库
+    db.collection('orders').add({
+      data: order
+    });
 
     const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
         goodName: `代取快递-${this.data.address.name}-${this.data.address.detail}`,
-        totalFee: this.data.price * 100
+        totalFee: this.data.price * 100,
+        _id
       }
     })
     const payment = res.result.payment
@@ -150,19 +155,13 @@ Page({
     wx.requestPayment({
       ...payment,
       success(res) {
-        // 添加订单到数据库
         wx.showToast({
           title: '付款成功',
           icon: 'none'
         })
-        db.collection('orders').add({
-          data: order,
-          success: (res) => {
-            wx.switchTab({
-              url: '../../pages/order/order'
-            })
-          }
-        });
+        wx.switchTab({
+          url: '../../pages/order/order'
+        })
       },
       fail(err) {
         wx.showToast({
@@ -172,7 +171,7 @@ Page({
       }
     })
   },
-  onPullDownRefresh() {
+  onPullDownRefresh() { 
     this.getAddress();
     this.setData({
       takeMsg: '',
@@ -183,19 +182,19 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '代取快递',
-      path: 'pages/helpTp/helpTp',
-      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/avatar/1660277626031.png'
+      path: 'pages/index/index',
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
     }
   },
   /*分享朋友圈 */
   onShareTimeline: function () {
     return {
       title: '三联学院代取快递',
-      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/avatar/1660277626031.png'
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
     }
   },
- 
-  btn(){
+
+  btn() {
     console.log(this.data.note)
   }
 

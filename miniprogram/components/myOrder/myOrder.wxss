@@ -61,6 +61,15 @@
   border-bottom: 1rpx solid rgb(228, 228, 228);
   padding: 7rpx;
 }
+.middle-left .item .copy button{
+  border:1rpx solid #1296db;
+  color: #1296db;
+  font-size: 20rpx;
+  padding: 5rpx;
+  width: 170rpx;
+  margin-left: 30rpx;
+  background-color: white;
+}
 .middle-left .item .call{
   display: flex;
   align-items: center;

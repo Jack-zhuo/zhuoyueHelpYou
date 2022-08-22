@@ -26,11 +26,11 @@
             <text>快递商家：</text>
             <text> {{ item.merchant }}</text>
           </view>
-          <view class="item" wx:if="{{ item.name === '代取快递' }}">
+          <view class="item" wx:if="{{ item.name === '代取快递' && item.status === 2 }}">
             <text>取件人：</text>
             <text>{{ item.address.name }}</text>
           </view>
-          <view class="item" wx:if="{{ item.name === '代取快递' }}">
+          <view class="item" wx:if="{{ item.name === '代取快递' && item.status === 2 }}">
             <text>取件信息：</text>
             <text>{{ item.takeMsg }}</text>
           </view>

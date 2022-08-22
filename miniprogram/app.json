@@ -18,7 +18,8 @@
     "components/helpTp/helpTp",
     "pages/errand/errand",
     "pages/print/print",
-    "pages/withdraw/withdraw"
+    "pages/withdraw/withdraw",
+    "pages/orderManagement/orderManagement"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

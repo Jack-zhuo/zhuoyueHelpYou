@@ -13,6 +13,7 @@
   width: 200rpx;
   text-align: center;
 }
+
 .container .user .withdraw-btn{
   border: 1rpx solid gray;
   padding: 5rpx;

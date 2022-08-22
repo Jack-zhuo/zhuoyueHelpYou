@@ -18,7 +18,7 @@
     </view>
     <view class="btn">
       <view class="delete" bindtap="delete" data-openid="{{item._openid}}">NO</view>
-      <view class="approve" bindtap="approve" data-openid="{{item._openid}}">通过</view>
+      <view class="approve" bindtap="approve" data-applicant="{{item}}">通过</view>
     </view>
   </view>
 </view>

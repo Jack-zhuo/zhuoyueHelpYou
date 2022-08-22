@@ -13,13 +13,11 @@
 </view>
 <!-- 我帮助的 -->
 <view wx:if="{{tabNow === 2}}" class="my-help">
-  <view class="tip">如要提现，请加客服微信 zyjava2020</view>
-  <view class="my-balance">
-    <view>{{user.balance}}</view>
-    <view>收益</view>
-  </view>
-  <view wx:for="{{ orders_completed }}" wx:key="index">
-    <take-order bindcall="call" item="{{ item }}"></take-order>
-  </view>
+    <view class="query">
+       <input bindinput="getOrderId" placeholder="请输入订单号~" />
+       <button bindtap="query" type="primary">查询</button>
+    </view>
+    <take-order wx:if="{{ orderById._id }}" bindcall="call" item="{{ orderById }}"></take-order>
+  
 </view>
 <view class="bottom-tip">——— 已显示全部订单 ———</view>

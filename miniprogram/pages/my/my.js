@@ -87,6 +87,11 @@ Page({
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
+  gotoOrderManagement(){
+    wx.navigateTo({
+      url: '../orderManagement/orderManagement',
+    })
+  },
   gotoWithdraw(){
     wx.navigateTo({
       url: '../withdraw/withdraw',

@@ -65,7 +65,9 @@ Page({
       wx.showToast({
         title: '添加成功',
       });
-      wx.navigateBack();
+      wx.redirectTo({
+        url: '../address/address',
+      });
     }
   },
 })

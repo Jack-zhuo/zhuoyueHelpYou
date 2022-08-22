@@ -7,10 +7,12 @@ const db_user = cloud.database().collection("user")
 // 云函数入口函数
 exports.main = async (event, context) => {
    const res = await db_user.where({
-     _openid:event.openid
+     _openid:event._openid
    }).update({
      data:{
-      isTakeOrderer:true
+      isTakeOrderer:true,
+      'info.name':event.name,
+      'info.phone':event.phone
      }
    })
    return res

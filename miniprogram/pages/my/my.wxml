@@ -19,6 +19,16 @@
       <image src="../../images/arrow_gray.png"></image>
     </view>
   </view>
+     <!-- 订单管理 -->
+     <view class="cell service" bindtap="gotoOrderManagement" wx:if="{{isAdmin}}">
+    <view class="cell-l">
+      <image src="../../images/help.jpg"></image>
+      <text>订单管理</text>
+    </view>
+    <view class="cell-r">
+      <image src="../../images/arrow_gray.png"></image>
+    </view>
+  </view>
    <!-- 提现管理 -->
    <view class="cell service" bindtap="gotoWithdraw" wx:if="{{isAdmin}}">
     <view class="cell-l">
@@ -81,7 +91,7 @@
   </button>
 
   <view class="version">
-    当前版本：3.0.0
+    当前版本：3.0.1
   </view>
   <!-- logo区 -->
   <view class="logo_wrap">

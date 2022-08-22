@@ -16,25 +16,29 @@ Page({
     index: 0,
     totalPrice: 2
   },
-  onLoad() {
-
+  async onLoad() {
+    if (!this.data.address.phone) await this.getAddress();
   },
+
   setCount(e) {
+    const count = Number(e.detail.value)
     this.setData({
-      count: Number(e.detail.value),
-      totalPrice: (Number(2) + (Number(this.data.pageNum) * 0.3 * Number(e.detail.value)) / (Number(this.data.index) + 1)).toFixed(2)
+      count,
+      totalPrice: (2 + (this.data.pageNum * 0.3 * count) / (this.data.index + 1)).toFixed(2)*1
     })
   },
   setPageNum(e) {
+    const pageNum = Number(e.detail.value)
     this.setData({
-      pageNum: Number(e.detail.value),
-      totalPrice: (Number(2) + (Number(e.detail.value) * 0.3 * Number(this.data.count)) / (Number(this.data.index) + 1)).toFixed(2)
+      pageNum,
+      totalPrice: (Number(2) + (pageNum * 0.3 * Number(this.data.count)) / (Number(this.data.index) + 1)).toFixed(2)*1
     })
   },
   bindPickerChange(e) {
+    const index = Number(e.detail.value)
     this.setData({
-      index: e.detail.value,
-      totalPrice: (Number(2) + (Number(this.data.pageNum) * 0.3 * Number(this.data.count)) / (Number(e.detail.value) + 1)).toFixed(2)
+      index,
+      totalPrice: (Number(2) + (Number(this.data.pageNum) * 0.3 * Number(this.data.count)) / (index + 1)).toFixed(2)*1
     })
   },
   async upFile() {
@@ -68,17 +72,15 @@ Page({
     }
 
   },
-  async onLoad(e) {
-    if (!this.data.address.phone) await this.getAddress();
-    const address = wx.getStorageSync('address');
-    if (address.phone) {
-      this.setData({
-        address
-      })
-    }
-
-  },
+  
   async submit() {
+    if (this.data.address.phone === '') {
+      wx.showToast({
+        title: '必须选择地址',
+        icon: 'none'
+      })
+      return
+    }
     if (this.data.fileName === '') {
       wx.showToast({
         title: '必须上传文件',
@@ -106,57 +108,59 @@ Page({
       title: '准备付款中',
     })
 
+    //生成订单号,生成规则 时间戳 加 随机四位数字
+    const _id = new Date().getTime() + '' + Math.floor(Math.random() * 10000)
+
+
     const order = {
       name: '打印服务',
+      _id,
       fileID: this.data.fileID,
       note: this.data.note,
       pageNum: this.data.pageNum,
       count: this.data.count,
       bothPrint: this.data.array[this.data.index],
-      fileName:this.data.fileName,
+      fileName: this.data.fileName,
 
       // 订单公共部分
       userinfo: wx.getStorageSync('user').info,
       address: this.data.address,
-      price: this.data.totalPrice,
+      price:Number(this.data.totalPrice),
       date: new Date(),
       takeOrderer: {},
       takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
-      status: 1,
+      status: 0,
     }
+    // 添加订单到数据库
+    const addRes = await db.collection('orders').add({
+      data: order
+    });
 
-    const price = Math.round(this.data.totalPrice * 100)
-    console.log(price)
+   
 
     // 付款
     const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
         goodName: `打印服务-${this.data.address.name}`,
-        totalFee: price
+        totalFee: Math.round(this.data.totalPrice * 100),
+        _id
       }
     })
-    console.log(res)
     const payment = res.result.payment;
-    console.log(payment)
     wx.hideLoading()
     try {
-      const res2 = await wx.requestPayment({
+      await wx.requestPayment({
         ...payment
       })
       wx.showToast({
         title: '付款成功',
         icon: 'none'
       })
-      // 添加订单到数据库
-      db.collection('orders').add({
-        data: order,
-        success: (res) => {
-          wx.switchTab({
-            url: '../order/order'
-          })
-        }
-      });
+      // 跳转到订单页面
+      wx.switchTab({
+        url: '../order/order'
+      })
     } catch (err) {
       console.log(err);
       wx.showToast({
@@ -181,9 +185,23 @@ Page({
       url: '../address/address',
     })
   },
-  copyWeChat(){
+  copyWeChat() {
     wx.setClipboardData({
       data: 'zyjava2020',
     })
-  }
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '三联学院云打印，0配送费，秒送寝室',
+      path: 'pages/print/print',
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
+    }
+  },
+  /*分享朋友圈 */
+  onShareTimeline: function () {
+    return {
+      title: '三联学院云打印，0配送费，秒送寝室',
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
+    }
+  },
 })

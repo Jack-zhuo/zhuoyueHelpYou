@@ -2,21 +2,15 @@ const db = wx.cloud.database();
 Page({
   data: {
     helpMsg: '',
-    price: '',
+    price: 2.00,
     address: {
       name: '',
       phone: '',
       detail: ''
     }
   },
-  async onLoad(e) {
+  async onLoad() {
     if (!this.data.address.phone) await this.getAddress();
-    const address = wx.getStorageSync('address');
-    if (address.phone) {
-      this.setData({
-        address
-      })
-    }
   },
   async submit() {
     if (this.data.helpMsg === '') {
@@ -44,11 +38,13 @@ Page({
     wx.showLoading({
       title: '准备付款中',
     })
+    //生成订单号,生成规则 时间戳 加 随机四位数字
+    const _id = new Date().getTime() + '' + Math.floor(Math.random() * 10000)
 
     const order = {
       name: '万能跑腿',
       helpMsg: this.data.helpMsg,
-
+      _id,
       // 订单公共部分
       userinfo: wx.getStorageSync('user').info,
       address: this.data.address,
@@ -56,19 +52,24 @@ Page({
       date: new Date(),
       takeOrderer: {},
       takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
-      status: 1,
+      status: 0,
     }
+    // 添加订单到数据库
+    const addRes = await db.collection('orders').add({
+      data: order,
+    });
 
     // 付款
     const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
         goodName: `万能跑腿-${this.data.address.name}`,
-        totalFee: this.data.price * 100
+        totalFee: this.data.price * 100,
+        _id
       }
     })
-    const payment = res.result.payment;
     wx.hideLoading()
+    const payment = res.result.payment;
     try {
       const res2 = await wx.requestPayment({
         ...payment
@@ -77,15 +78,9 @@ Page({
         title: '付款成功',
         icon: 'none'
       })
-      // 添加订单到数据库
-      db.collection('orders').add({
-        data: order,
-        success: (res) => {
-          wx.switchTab({
-            url: '../order/order'
-          })
-        }
-      });
+      wx.switchTab({
+        url: '../order/order'
+      })
     } catch (err) {
       wx.showToast({
         title: '付款失败',
@@ -104,9 +99,28 @@ Page({
     })
   },
   gotoAddress() {
-    wx.setStorageSync('urlNow', 'errand')
     wx.navigateTo({
       url: '../address/address',
     })
-  }
+  },
+  getInputValue(e){
+       let price = e.detail.value * 1
+       this.setData({
+         price
+       })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '三联学院万能跑腿，帮买，帮送，帮取，啥都可以帮的小程序~',
+      path: 'pages/errand/errand',
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
+    }
+  },
+  /*分享朋友圈 */
+  onShareTimeline: function () {
+    return {
+      title: '三联学院万能跑腿，帮买，帮送，帮取，啥都可以帮的小程序~',
+      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
+    }
+  },
 })

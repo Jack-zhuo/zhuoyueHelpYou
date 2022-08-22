@@ -15,7 +15,13 @@
   height: 100rpx;
   padding: 5rpx;
 }
-
+.take_info button{
+  font-size: 25rpx;
+  width: 150rpx;
+  height: 50rpx;
+  padding: 0;
+  line-height: 50rpx;
+}
 input {
   border: 1rpx solid gray;
   padding: 5rpx;

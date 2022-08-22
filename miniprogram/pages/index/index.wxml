@@ -6,7 +6,7 @@
    <swiper-item wx:for="{{swiperItem}}" wx:key="index" class="swiper-item">
       <image mode="aspectFit" src="{{ item }}"></image>
    </swiper-item>
-  </swiper>
+  </swiper> 
 </view>
 <view class="container">
   <!-- tab栏 -->
@@ -19,7 +19,7 @@
   <!-- <button open-type="share">分享转发</button> -->
   <!-- 地址 -->
   <view wx:if="{{ !address.phone }}" class="common">
-    <button bindtap="addAddress" type="primary">添加地址</button>
+    <button bindtap="gotoAddress" type="primary">添加地址</button>
   </view>
   <view wx:else class="address common" bindtap="gotoAddress">
     <view class="title">
