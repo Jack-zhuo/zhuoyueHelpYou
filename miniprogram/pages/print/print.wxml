@@ -24,7 +24,7 @@
 <!-- 页数 -->
 <view class="count common">
   <view class="title">页数：</view>
-  <input bindinput="setPageNum" placeholder="请输入页数..." type="number" />
+  <input bindinput="setPageNum" placeholder="请输入页数..." type="number"/>
 </view>
 <!-- 份数 -->
 <view class="count common">
@@ -54,7 +54,7 @@
     注：
   </view>
   <view class="note-right">
-    <view>1.跑腿费2块钱</view>
+    <view>1. <text style="color: red;"> 0跑腿费</text></view>
     <view>2.按张收费，一张3毛 (双面打印，一面1.5毛)</view>
     <view>3.不会上传文件的同学们，可以加微信：<text style="font-weight: 600;">zyjava2020</text><text class="copy" bindtap="copyWeChat">复制</text>发送文件</view>
   </view>

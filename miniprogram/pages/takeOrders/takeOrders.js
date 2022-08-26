@@ -142,7 +142,18 @@ Page({
   },
   // 点击接单后执行的函数
   async take(e) {
-    console.log(e);
+    console.log(e.detail.item._openid)
+    const {_openid} = e.detail.item
+    const user = await getUser();
+    if (_openid === user._openid){
+      wx.showToast({
+        title: '你不能接自己下的单',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
+    
    const resTip = await wx.showModal({
       'title':'确认接单吗？'
     })
@@ -151,9 +162,6 @@ Page({
     wx.showLoading({
       title: '接单中...',
     })
-    //获取user
-    const user = await getUser();
-
     if (user.isTakeOrderer) {
       const id = e.detail.item._id
       // 调用云函数更新此订单的状态为2，并添加接单人

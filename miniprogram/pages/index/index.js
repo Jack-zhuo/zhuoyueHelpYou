@@ -54,6 +54,35 @@ Page({
     }
 
   },
+  // 轮播图跳转
+  gotoAnother(e){
+      console.log(e.currentTarget.dataset)
+      const {index} = e.currentTarget.dataset
+      if (index === 0) {
+        wx.navigateTo({
+          url: '../applyTakeOrderer/applyTakeOrderer',
+        })
+        return
+      }
+      if (index === 1) {
+        wx.setClipboardData({
+          data: 'zyjava2020',
+          success:()=>{
+            wx.showToast({
+              title: '微信复制成功',
+              icon:'success'
+            })
+          }
+        })
+        return
+      }
+      if (index === 2) {
+        wx.navigateTo({
+          url: '../aboutus/aboutus',
+        })
+        return
+      }
+  },
   tabChange(e) {
     console.log(e.currentTarget.dataset.index)
     const tabNow = e.currentTarget.dataset.index;
@@ -69,12 +98,14 @@ Page({
     }
   },
   async getAddress() {
-    const address = await db.collection('address').where({
+    const res = await db.collection('address').where({
       default: true,
       _openid: wx.getStorageSync('openid')
     }).get();
+   const address = res.data[0]
+    if(!address) return
     this.setData({
-      address: address.data[0]
+      address,
     })
   },
   gotoAddress() {
@@ -158,6 +189,16 @@ Page({
         wx.showToast({
           title: '付款成功',
           icon: 'none'
+        })
+        wx.cloud.callFunction({
+          name:'sendSms',
+          data:{
+            content:'有新订单（代取快递），赶快去接单啦~~',
+            phone:'15922476232'
+          },
+          success:(res)=>{
+              console.log(res)
+          }
         })
         wx.switchTab({
           url: '../../pages/order/order'

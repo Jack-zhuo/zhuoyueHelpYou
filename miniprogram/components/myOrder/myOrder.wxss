@@ -7,19 +7,6 @@
   display: flex; 
   /* align-items: center; */
 }
-.order .avatar{
-  width: 70rpx;
-  height: 70rpx;
-  border-radius: 50%;
-  background-color: rgb(216, 216, 216);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.order .avatar image{
-  height: 60rpx;
-  width: 60rpx;
-}
  .order .content{
    margin-left: 30rpx;
    flex: 1;
@@ -60,16 +47,16 @@
   justify-content: space-between;
   border-bottom: 1rpx solid rgb(228, 228, 228);
   padding: 7rpx;
+  width: 100%;
 }
-.middle-left .item .copy button{
-  border:1rpx solid #1296db;
+.middle-left .item .copy {
+  display: flex;
+
+}
+.middle-left .item .copy .copyId{
   color: #1296db;
-  font-size: 20rpx;
-  padding: 5rpx;
-  width: 170rpx;
-  margin-left: 30rpx;
-  background-color: white;
-}
+  margin-left: 5rpx;
+} 
 .middle-left .item .call{
   display: flex;
   align-items: center;
@@ -89,12 +76,15 @@
   align-items: center;
   /* border: 1rpx solid gray; */
 }
-.middle-left .item text:nth-child(1){
- width: 200rpx;
+.middle-left .item .item-left{
+  flex: 150rpx;
+  flex-shrink:0;
+ /* border: 1rpx solid red; */
  font-weight: 700;
 }
- .order .content .middle .middle-right{
-  color: red;
+.middle-left .item .item-right{
+  display: flex;
+  flex-wrap: wrap;
 }
  .order .content .bottom{
   display: flex;

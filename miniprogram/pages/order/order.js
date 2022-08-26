@@ -25,7 +25,7 @@ Page({
     const res = await db.collection('orders').orderBy('date', 'desc').where({
       status: 1
     }).get();
-
+     console.log('测试，已付款的数据：',res);
     // 格式化时间
     res.data.forEach(item => {
       const date = getDateDiff(item.date)

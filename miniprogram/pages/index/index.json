@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "my-tab":"../../components/myTab/myTab",
-    "help-tp":"../../components/helpTp/helpTp"
+    "my-tab":"../../components/myTab/myTab"
+
   }
 }

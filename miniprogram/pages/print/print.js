@@ -12,9 +12,9 @@ Page({
     pageNum: 0,
     count: 0,
     note: '',
-    array: ['单面', '双面'],
+    array: ['单面', '双面'], 
     index: 0,
-    totalPrice: 2
+    totalPrice: 0
   },
   async onLoad() {
     if (!this.data.address.phone) await this.getAddress();
@@ -23,22 +23,22 @@ Page({
   setCount(e) {
     const count = Number(e.detail.value)
     this.setData({
-      count,
-      totalPrice: (2 + (this.data.pageNum * 0.3 * count) / (this.data.index + 1)).toFixed(2)*1
+      count:count*1,
+      totalPrice: ((this.data.pageNum * 0.3 * count) / (this.data.index + 1)).toFixed(2)*1
     })
   },
   setPageNum(e) {
     const pageNum = Number(e.detail.value)
     this.setData({
-      pageNum,
-      totalPrice: (Number(2) + (pageNum * 0.3 * Number(this.data.count)) / (Number(this.data.index) + 1)).toFixed(2)*1
+      pageNum:pageNum*1,
+      totalPrice:((pageNum * 0.3 * Number(this.data.count)) / (Number(this.data.index)) + 1).toFixed(2)*1
     })
   },
   bindPickerChange(e) {
     const index = Number(e.detail.value)
     this.setData({
       index,
-      totalPrice: (Number(2) + (Number(this.data.pageNum) * 0.3 * Number(this.data.count)) / (index + 1)).toFixed(2)*1
+      totalPrice: ((Number(this.data.pageNum) * 0.3 * Number(this.data.count)) / (index + 1)).toFixed(2)*1
     })
   },
   async upFile() {
@@ -157,6 +157,16 @@ Page({
         title: '付款成功',
         icon: 'none'
       })
+      wx.cloud.callFunction({
+        name:'sendSms',
+        data:{
+          content:'有新订单（打印），赶快去接单啦~~',
+          phone:'15922476232'
+        },
+        success:(res)=>{
+            console.log(res)
+        }
+      })
       // 跳转到订单页面
       wx.switchTab({
         url: '../order/order'
@@ -171,12 +181,15 @@ Page({
 
   },
   async getAddress() {
-    const address = await db.collection('address').where({
+    const res = await db.collection('address').where({
       default: true,
       _openid: wx.getStorageSync('openid')
     }).get();
+     
+    if (!res.data[0]) return
+
     this.setData({
-      address: address.data[0]
+      address: res.data[0]
     })
   },
   gotoAddress() {

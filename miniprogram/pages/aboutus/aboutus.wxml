@@ -4,7 +4,7 @@
   </view>
  <!-- 简介 -->
   <view class="textaboutus common">
-    <text>卓越帮你忙</text>是安徽三联学院专属跑腿平台。在这里，我们可以帮你取快递，送东西，买东西，打印文件等服务。总之，懒得动不想动，就找卓越帮你忙~~
+    <text class="name">卓越帮你忙</text>是安徽三联学院专属跑腿平台。在这里，我们可以帮你取快递，送东西，买东西，打印文件等服务。总之，懒得动不想动，就找卓越帮你忙~~
   </view>
 
   <view class="callus">
@@ -12,9 +12,9 @@
   </view>
 
   <view class="textaboutus common">
-    对本程序中的疏漏之处和错误，望不吝赐教
+    有兴趣学习编程的同学们，加下方我的个人微信，可以一起学习进步！
   </view>
   <view class="textaboutus common">
-    开发者个人微信：zyjava2020
+    开发者个人微信：zyjava2020 <text class="copy" bindtap="goCopy">复制</text>
   </view>
 

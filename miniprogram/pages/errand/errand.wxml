@@ -1,14 +1,15 @@
 <!-- 取件信息 -->
 <view class="take_info common">
   <view class="title">帮助内容：</view>
-  <textarea placeholder="请输入帮助内容..." class="info" model:value="{{helpMsg}}"></textarea>
+  <textarea placeholder="请输入帮助内容..." class="info" bindinput="setHelpMsg"></textarea>
 </view>
 <!-- 地址信息 -->
 <view class="address common" bindtap="gotoAddress">
   <view class="title">地址：</view>
   <view class="address_detail">
-   <text>{{address.name}} {{address.phone}} {{address.detail}}</text>
-   <image src="../../images/arrow_gray.png"></image>
+  <text wx:if="{{!address.phone}}">选择地址</text>
+   <text wx:else>{{address.name}} {{address.phone}} {{address.detail}}</text>
+   <image src="../../images/arrow_gray.png"></image> 
   </view>
   
 </view>

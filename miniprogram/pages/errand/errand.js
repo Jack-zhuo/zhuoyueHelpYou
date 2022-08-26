@@ -12,6 +12,13 @@ Page({
   async onLoad() {
     if (!this.data.address.phone) await this.getAddress();
   },
+  setHelpMsg(e){
+     console.log(e)
+     const helpMsg = e.detail.value
+     this.setData({
+       helpMsg
+     })
+  },
   async submit() {
     if (this.data.helpMsg === '') {
       wx.showToast({
@@ -77,6 +84,16 @@ Page({
       wx.showToast({
         title: '付款成功',
         icon: 'none'
+      }) 
+      wx.cloud.callFunction({
+        name:'sendSms',
+        data:{
+          content:'有新订单（跑腿），赶快去接单啦~~',
+          phone:'15922476232'
+        },
+        success:(res)=>{
+            console.log(res)
+        }
       })
       wx.switchTab({
         url: '../order/order'
@@ -90,12 +107,14 @@ Page({
 
   },
   async getAddress() {
-    const address = await db.collection('address').where({
+    const res = await db.collection('address').where({
       default: true,
       _openid: wx.getStorageSync('openid')
     }).get();
+    const address = res.data[0]
+    if (!address) return
     this.setData({
-      address: address.data[0]
+      address
     })
   },
   gotoAddress() {

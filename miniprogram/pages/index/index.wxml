@@ -1,9 +1,9 @@
 <view>
   <swiper
   autoplay  
-  circular="true"
+  circular="true" 
   class="swiper">
-   <swiper-item wx:for="{{swiperItem}}" wx:key="index" class="swiper-item">
+   <swiper-item bindtap="gotoAnother" data-index="{{index}}" wx:for="{{swiperItem}}" wx:key="index" class="swiper-item">
       <image mode="aspectFit" src="{{ item }}"></image>
    </swiper-item>
   </swiper> 
@@ -52,15 +52,15 @@
 
     </view>
   </view>
-  <!-- 取件信息 -->
+  <!-- 取件码 -->
   <view class="take_info common">
-    <view class="title">取件信息：</view>
-    <textarea bindfocus="cleanHolder" bindblur="addHolder" placeholder="{{placeholderCon}}" class="info" model:value="{{takeMsg}}"></textarea>
+    <view class="title">取件码：</view>
+    <textarea placeholder="{{placeholderCon}}" class="info" model:value="{{takeMsg}}"></textarea>
   </view>
   <!-- 备注 -->
   <view class="take_info common">
     <view class="title">备注:</view>
-    <textarea placeholder="请输入备注信息..." class="info" model:value="{{note}}"></textarea>
+    <textarea placeholder="请输入备注信息...." class="info" model:value="{{note}}"></textarea>
   </view>
 
   <view class="logo_wrap" class="common">

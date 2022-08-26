@@ -123,4 +123,10 @@ Page({
     })
 
   },
+  // async openSubscribe(){
+  //  const res = await wx.requestSubscribeMessage({
+  //     tmplIds: ['O7k6yTWkhS5SMCWTMz4Vx3wziOCDY__JWUuNLF7HPbc'],
+  //   })
+  //   console.log(res)
+  // }
 })
