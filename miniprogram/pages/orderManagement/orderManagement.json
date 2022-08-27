@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "take-order":"../../components/takeOrders/takeOrders",
+    "orderManager":"../../components/orderManager/orderManager",
     "my-tab":"../../components/myTab/myTab"
   }
 }

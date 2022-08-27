@@ -4,9 +4,9 @@ Component({
       type: Object,
       value: {}
     }
-  }, 
+  },
   data: {
-    inputCode:''
+    inputCode: ''
   },
   methods: {
     call() {
@@ -14,18 +14,38 @@ Component({
         phone: this.properties.item.address.phone
       });
     },
-     // 复制订单号
-     copyId(e){
+    async deleteOrder() {
+     const res2 = await wx.showModal({
+        title:'确定删除吗？',
+      })
+      if (res2.cancel) return
+      const _id = this.properties.item._id
+      const res = await wx.cloud.callFunction({
+        name: 'deleteOrderById',
+        data: {
+          _id
+        }
+      })
+      console.log(res)
+      if (res.errMsg === 'cloud.callFunction:ok') {
+        wx.showToast({
+          title: '删除成功',
+        })
+        this.triggerEvent('orders_notake')
+      }
+    },
+    // 复制订单号
+    copyId(e) {
       wx.setClipboardData({
         data: e.currentTarget.dataset.id,
-        success:()=>{
+        success: () => {
           wx.showToast({
             title: '订单号已复制',
-            icon:'success'
+            icon: 'success'
           })
         }
       })
-     },
+    },
     take() {
       this.triggerEvent('take', {
         item: this.properties.item
@@ -45,7 +65,9 @@ Component({
             id: this.properties.item._id
           },
           success: (res) => {
-            const {price} = this.properties.item
+            const {
+              price
+            } = this.properties.item
             console.log(price)
             wx.cloud.database().collection('user').where({
               _openid: "这是bug吗？"
@@ -65,7 +87,7 @@ Component({
       this.setData({
         inputCode
       })
-      
+
 
     },
     async downloadFile() {
@@ -83,7 +105,7 @@ Component({
       const fileManager = wx.getFileSystemManager();
       fileManager.saveFile({
         tempFilePath: res.tempFilePath,
-        success:(res2)=>{
+        success: (res2) => {
           console.log(res2)
           wx.hideLoading()
           wx.showToast({
@@ -91,17 +113,17 @@ Component({
           })
           wx.openDocument({
             filePath: res2.savedFilePath,
-            showMenu:true
+            showMenu: true
           })
         },
-        fail:()=>{
+        fail: () => {
           wx.hideLoading()
           wx.showToast({
             title: '下载失败',
           })
         }
       })
-   
+
     }
   }
 })

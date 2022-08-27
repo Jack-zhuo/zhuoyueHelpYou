@@ -82,11 +82,9 @@ Page({
     })
     console.log(res)
     this.setData({
-      orderById:res.result.data[0]
+      orderById:res.result.data
     })
-    wx.hideLoading({
-      success: (res) => {},
-    })
+    wx.hideLoading()
   },
   // 切换tab栏
   tabChange(e) {

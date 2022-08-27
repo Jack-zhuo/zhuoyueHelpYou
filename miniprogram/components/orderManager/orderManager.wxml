@@ -1,0 +1,75 @@
+<view class="container">
+  <view class="order">
+    <view class="avatar">
+      <image src="{{ item.userinfo.avatar }}"></image>
+    </view>
+    <view class="content">
+      <view class="top">
+        <view class="left">
+          <view class="service-name">{{item.userinfo.name}}</view>
+          <view class="time">{{ item.date }}</view>
+        </view>
+        <view class="right">
+          <text class="paid" wx:if="{{item.status === 1}}">已付款</text>
+          <text class="taked" wx:if="{{item.status === 2}}">已接单</text>
+          <text class="completed" wx:if="{{item.status === 3}}">已完成</text>
+        </view>
+      </view>
+      <view class="middle">
+        <view class="takeMessage">
+          <!-- 订单号 -->
+          <view class="item">
+            <view class="item-left">订单号：</view>
+            <view class="copy">
+              <view>{{item._id}}</view>
+              <view class="copyId" bindtap="copyId" data-id="{{item._id}}">复制</view>
+            </view>
+          </view>
+          <!-- 地址 -->
+          <view class="item">
+            <text>地址：</text>
+            <text> {{ item.address.name }}</text>
+          </view>
+          <!-- 核销码 -->
+          <view class="item">
+            <text>核销码：</text>
+            <text> {{ item.takeGoodsCode }}</text>
+          </view>
+           <!-- 接单人 -->
+           <view class="item">
+            <text>接单人：</text>
+            <text> {{ item.takeOrderer.name }}</text>
+          </view>
+          <!-- 下单人 -->
+          <view class="item">
+            <text>下单人：</text>
+            <text> {{ item.userinfo.name }}</text>
+          </view>
+          <!-- 快递商家 -->
+          <view class="item">
+            <text>快递商家：</text>
+            <text> {{ item.merchant }}</text>
+          </view>
+          <!-- 取件码 -->
+          <view class="item">
+            <text>取件码：</text>
+            <text> {{ item.takeMsg }}</text>
+          </view>
+          
+          <!-- 取货码 -->
+         
+          <!-- 公共的 -->
+          <view class="item">
+            <text>地址： </text>
+            <text>{{item.address.name}}-{{ item.address.detail }}</text>
+          </view>
+        </view>
+      </view>
+      <view class="bottom">
+        <view class="price">￥{{item.price}}</view>
+        <view wx:if="{{item.status === 2 && item.name === '打印服务'}}" bindtap="downloadFile" class="take">下载</view>
+        <view bindtap="deleteOrder" class="take">删除订单</view>
+      </view>
+    </view>
+  </view>
+</view>

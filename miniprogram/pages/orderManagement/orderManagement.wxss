@@ -29,6 +29,12 @@
 .my-balance view:nth-child(2){
   font-size: 25rpx;
 }
+.query input{
+  border: 1rpx solid #1296db;
+  border-radius: 100rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+}
 .bottom-tip {
   text-align: center;
   color: gray;

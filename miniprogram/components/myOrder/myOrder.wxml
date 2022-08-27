@@ -46,7 +46,7 @@
         </view>
         <!-- 公共部分 -->
         <view class="item" style="color: red;">
-          <view class="item-left">取件码：</view>
+          <view class="item-left">核销码：</view>
           <view>{{ item.takeGoodsCode }}</view>
         </view>
         <view class="item" wx:if="{{item.status === 2}}">

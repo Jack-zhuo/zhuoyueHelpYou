@@ -18,6 +18,13 @@
       <view class="middle">
         <view class="takeMessage">
           <view class="item">
+          <view class="item-left">订单号：</view>
+          <view class="copy">
+            <view>{{item._id}}</view>
+            <view class="copyId" bindtap="copyId" data-id="{{item._id}}">复制</view>
+          </view>
+        </view>
+          <view class="item">
             <text>服务：</text>
             <text> {{ item.name }}</text>
           </view>
@@ -65,8 +72,8 @@
             <text>地址： </text>
             <text>{{item.address.name}}-{{ item.address.detail }}</text>
           </view>
-          <view wx:if="{{ isShowTakeCode }}" class="item" style="color: red;">
-            <text>请输入提货码： </text>
+          <view class="item" style="color: red;">
+            <text>请输入核销码： </text>
             <input type="number" bindinput="input"/>
           </view>
         </view>

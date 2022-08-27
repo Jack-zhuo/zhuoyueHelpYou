@@ -1,23 +1,15 @@
 <my-tab tabList="{{tabList}}" bindtabChange="tabChange" class="tab"></my-tab>
-<!-- 正在悬赏 -->
-<view wx:if="{{tabNow === 0}}">
-  <view wx:for="{{ orders_notake }}" wx:key="index">
-    <take-order bindtake="take" bindcall="call" wx:if="{{ item.status === 1 }}" item="{{ item }}"></take-order> 
-  </view>
+<view wx:if="{{ tabNow === 0 }}" >
+  <orderManager wx:for="{{ orders_notake }}" item="{{ item }}" wx:key="index"></orderManager>
 </view>
-<!-- 正在帮助 -->
-<view wx:if="{{tabNow === 1}}">
-  <view wx:for="{{ orders_taked }}" wx:key="_id">
-    <take-order bindrefresh="refresh" bindcall="call" item="{{ item }}"></take-order>
-  </view>
+<view wx:if="{{ tabNow === 1 }}" >
+  <orderManager wx:for="{{ orders_taked }}" item="{{ item }}" wx:key="index"></orderManager>
 </view>
-<!-- 我帮助的 -->
-<view wx:if="{{tabNow === 2}}" class="my-help">
-    <view class="query">
-       <input bindinput="getOrderId" placeholder="请输入订单号~" />
-       <button bindtap="query" type="primary">查询</button>
-    </view>
-    <take-order wx:if="{{ orderById._id }}" bindcall="call" item="{{ orderById }}"></take-order>
-  
+<view class="query" wx:if="{{ tabNow === 2 }}" >
+    <input bindinput="getOrderId" placeholder="请输入订单号"/>
+    <button bindtap="query" type="primary">查询</button>
 </view>
-<view class="bottom-tip">——— 已显示全部订单 ———</view>
+
+<orderManager wx:for="{{ orderById }}" item="{{ item }}" wx:key="index"></orderManager>
+
+<view class="bottom-tip">——— 已显示全部订单 ———</view> 

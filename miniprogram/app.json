@@ -19,7 +19,8 @@
     "pages/errand/errand",
     "pages/print/print",
     "pages/withdraw/withdraw",
-    "pages/orderManagement/orderManagement"
+    "pages/orderManagement/orderManagement",
+    "components/orderManager/orderManager"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
