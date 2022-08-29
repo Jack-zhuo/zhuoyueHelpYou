@@ -1,3 +1,4 @@
+ import { ml_showToast } from '../../utils/showTips.js'
 Page({
   data: {
     name: '',
@@ -56,12 +57,16 @@ Page({
     console.log();
     if(res1.data.length !== 0){
        wx.hideLoading();
-       wx.showToast({
-         title: '你已申请卓越帮你忙接单员，请耐心等待审核。不要重复申请',
-         icon:'none',
-         mask:true,
-         duration:2000
-       })
+     const res3 = await ml_showToast('你已申请卓越帮你忙接单员，请耐心等待审核。不要重复申请.')
+      console.log(res3)
+
+      setTimeout(()=>
+      {
+        wx.navigateTo({
+          url: '../takeOrders/takeOrders',
+        })
+      }, 2000)
+     
        return 
     }
 
@@ -75,10 +80,12 @@ Page({
     })
     if (res2.errMsg === "collection.add:ok") {
       wx.hideLoading()
-      wx.showToast({
-        title: '申请成功，请耐心等待管理员审核',
-        icon: 'none'
-      })
+      await ml_showToast('申请成功，请耐心等待管理员审核')
+      setTimeout(()=>{
+        wx.navigateTo({
+          url: '../takeOrders/takeOrders',
+        })
+      }, 2000)
     }
   }
 })

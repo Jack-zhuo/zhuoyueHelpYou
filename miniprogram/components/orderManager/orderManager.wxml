@@ -66,7 +66,7 @@
         </view>
       </view>
       <view class="bottom">
-        <view class="price">￥{{item.price}}</view>
+        <view class="price">￥{{item.price/100}}</view>
         <view wx:if="{{item.status === 2 && item.name === '打印服务'}}" bindtap="downloadFile" class="take">下载</view>
         <view bindtap="deleteOrder" class="take">删除订单</view>
       </view>

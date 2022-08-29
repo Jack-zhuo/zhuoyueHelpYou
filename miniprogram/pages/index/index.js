@@ -16,21 +16,21 @@ Page({
     size: [{
       name: '小件',
       tips: '书本大小的快递，1.98元',
-      price: 1.98
+      price: 198
     }, {
       name: '中件',
       tips: '鞋盒大小的快递，3.98元',
-      price: 3.98
+      price: 398
     }, {
       name: '大件',
       tips: '台式电脑主机大小，6.98元',
-      price: 6.98
+      price: 698
     } ],
     isName: '小件',
     // 取件码
     placeholderCon: '请输入取件码...',
     // 价格
-    price: 1.98,
+    price: 198,
     // 地址
     address: {
       name: '',
@@ -177,7 +177,7 @@ Page({
       name: 'toPay',
       data: {
         goodName: `代取快递-${this.data.address.name}-${this.data.address.detail}`,
-        totalFee: this.data.price * 100,
+        totalFee: this.data.price,
         _id
       }
     })
@@ -221,8 +221,9 @@ Page({
     wx.stopPullDownRefresh();
   },
   onShareAppMessage: function (res) {
+    console.log(res)
     return {
-      title: '代取快递',
+      title: '三联学院跑腿小程序上线啦，帮买，帮送，帮取，啥哈都能帮的小程序',
       path: 'pages/index/index',
       imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
     }
@@ -230,7 +231,7 @@ Page({
   /*分享朋友圈 */
   onShareTimeline: function () {
     return {
-      title: '三联学院代取快递',
+      title: '三联学院跑腿小程序上线啦，帮买，帮送，帮取，啥哈都能帮的小程序',
       imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
     }
   },

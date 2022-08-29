@@ -12,33 +12,37 @@ Page({
     pageNum: 0,
     count: 0,
     note: '',
-    array: ['单面', '双面'], 
+    array: ['单面', '双面'],
     index: 0,
+    array2: ['从微信聊天中选择文件', '从手机中选择文件'],
+    index2: 0,
     totalPrice: 0
   },
   async onLoad() {
     if (!this.data.address.phone) await this.getAddress();
   },
-
+  bindPickerChange2(e) {
+    console.log(e);
+  },
   setCount(e) {
     const count = Number(e.detail.value)
     this.setData({
-      count:count*1,
-      totalPrice: ((this.data.pageNum * 0.3 * count) / (this.data.index + 1)).toFixed(2)*1
+      count,
+      totalPrice: (this.data.pageNum * 30 * count) / (this.data.index + 1)
     })
   },
   setPageNum(e) {
     const pageNum = Number(e.detail.value)
     this.setData({
-      pageNum:pageNum*1,
-      totalPrice:((pageNum * 0.3 * Number(this.data.count)) / (Number(this.data.index)) + 1).toFixed(2)*1
+      pageNum,
+      totalPrice: (pageNum * 30 * this.data.count) / (this.data.index + 1)
     })
   },
   bindPickerChange(e) {
     const index = Number(e.detail.value)
     this.setData({
       index,
-      totalPrice: ((Number(this.data.pageNum) * 0.3 * Number(this.data.count)) / (index + 1)).toFixed(2)*1
+      totalPrice: (this.data.pageNum * 30 * this.data.count) / (index + 1)
     })
   },
   async upFile() {
@@ -50,12 +54,12 @@ Page({
         count: 1,
         type: 'file',
       })
-      const filepath = res.tempFiles[0].path
+      const filePath = res.tempFiles[0].path
       const fileName = res.tempFiles[0].name
-
+      const cloudPath = `print/${new Date().getTime()}_${fileName}`
       const res2 = await wx.cloud.uploadFile({
-        cloudPath: `print/${fileName}`,
-        filePath: filepath
+        cloudPath,
+        filePath
       })
       const fileID = res2.fileID;
       this.setData({
@@ -63,16 +67,17 @@ Page({
         fileName
       })
       wx.hideLoading();
+
     } catch (error) {
       wx.hideLoading();
       wx.showToast({
-        title: '你取消了上传',
+        title: 'error',
         icon: 'none'
       })
     }
 
   },
-  
+
   async submit() {
     if (this.data.address.phone === '') {
       wx.showToast({
@@ -125,7 +130,7 @@ Page({
       // 订单公共部分
       userinfo: wx.getStorageSync('user').info,
       address: this.data.address,
-      price:Number(this.data.totalPrice),
+      price: this.data.totalPrice,
       date: new Date(),
       takeOrderer: {},
       takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
@@ -136,14 +141,14 @@ Page({
       data: order
     });
 
-   
+
 
     // 付款
     const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
         goodName: `打印服务-${this.data.address.name}`,
-        totalFee: Math.round(this.data.totalPrice * 100),
+        totalFee: this.data.totalPrice,
         _id
       }
     })
@@ -158,13 +163,13 @@ Page({
         icon: 'none'
       })
       wx.cloud.callFunction({
-        name:'sendSms',
-        data:{
-          content:'有新订单（打印），赶快去接单啦~~',
-          phone:'15922476232'
+        name: 'sendSms',
+        data: {
+          content: '有新订单（打印），赶快去接单啦~~',
+          phone: '15922476232'
         },
-        success:(res)=>{
-            console.log(res)
+        success: (res) => {
+          console.log(res)
         }
       })
       // 跳转到订单页面
@@ -185,7 +190,7 @@ Page({
       default: true,
       _openid: wx.getStorageSync('openid')
     }).get();
-     
+
     if (!res.data[0]) return
 
     this.setData({

@@ -8,8 +8,9 @@
 <view class="query" wx:if="{{ tabNow === 2 }}" >
     <input bindinput="getOrderId" placeholder="请输入订单号"/>
     <button bindtap="query" type="primary">查询</button>
+    <orderManager item="{{ orderById }}"></orderManager>
 </view>
 
-<orderManager wx:for="{{ orderById }}" item="{{ item }}" wx:key="index"></orderManager>
+
 
 <view class="bottom-tip">——— 已显示全部订单 ———</view> 

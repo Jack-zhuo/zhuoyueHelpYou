@@ -2,54 +2,46 @@
 Page({
 
   data: {
-    users: [],
+    withdraws: [],
   },
   onLoad(options) {
-    this.getUser();
+    this.getWithdraws();
   },
-  async getUser() {
+  async getWithdraws() {
     const res = await wx.cloud.callFunction({
-      name: 'getUser'
+      name: 'getWithdraws',
     })
-    const users = res.result.data
-    users.forEach(item => {
-      item.realWithdraw =  Math.round(item.balance * 80)/100
-      item.profit = Math.round(item.balance * 20)/100
-    });
+    console.log(res);
+    const withdraws = res.result.data
     this.setData({
-      users
+      withdraws
     })
   },
-  call(e) {
-    console.log(e)
-    wx.makePhoneCall({
-      phoneNumber: e.currentTarget.dataset.phone,
+
+  // 复制微信号
+  copyWechat(e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.wechat,
     })
   },
-  async gotoWithdraw(e) {
-    console.log(e.currentTarget.dataset.openid)
-    const openid = e.currentTarget.dataset.openid
-    const res = await wx.showModal({
-      content: '确定要提现吗？'
-    })
-    if (res.confirm) {
-    
-     const res2 = await wx.cloud.callFunction({
+  // 确认提现
+  async gotowithdraw(e) {
+    const withdraw_user = e.currentTarget.dataset.user
+    const resBalance = await wx.cloud.callFunction({
         name:'updateBalance',
         data:{
-          openid,
+          user_id:withdraw_user.user_id,
+          balance:withdraw_user.balance * (-1)
         }
-      })
-      this.getUser();
-
-    }
-  },
-  onPullDownRefresh(){
-    this.setData({
-      users:[]
     })
-    this.getUser();
-    wx.stopPullDownRefresh() 
-  }
+     console.log(resBalance)
 
+    const res = await wx.cloud.callFunction({
+      name: 'updateWithdraw',
+      data: {
+        _id: withdraw_user._id,
+      }
+    })
+    console.log(res)
+  }
 })

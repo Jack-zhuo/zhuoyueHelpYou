@@ -12,11 +12,16 @@ Page({
     orders_completed: [],
     tabList: ['正在悬赏', '正在帮助', '我帮助的'],
     tabNow: 0,
-    user: {}
+    user: {},
+    name:'',
+    wechat:''
   },
 
-  onLoad() {
-
+ async onLoad() {
+    const user = await getUser()
+    this.setData({
+      user
+    })
     this.getOrders_notake();
   },
   // 获取正在悬赏的数据
@@ -61,6 +66,7 @@ Page({
       item.date = getDateDiff(item.date);
     });
     this.setData({
+      user,
       orders_taked
     })
     wx.hideLoading();
@@ -216,6 +222,76 @@ Page({
   refresh(e) {
     console.log("eeeeeeeeee", e)
     this.getOrders_taked();
+  },
+  getName(e){
+    const {value:name} = e.detail
+    this.setData({
+      name
+    })
+  },
+  getWechat(e){
+    const {value:wechat} = e.detail
+    this.setData({
+      wechat
+    })
+  },
+ async withdraw(){
+     const {balance} = this.data.user
+     const {name} = this.data
+     const {wechat} = this.data
+
+     if (!balance || balance === 0){
+       wx.showToast({
+         title: '收益为零，不可提现',
+         icon:'none'
+       })
+       return
+     }
+     if(!name){
+      wx.showToast({
+        title: '名字不可以为空',
+        icon:'none'
+      })
+      return
+     }
+     if(!wechat){
+      wx.showToast({
+        title: '微信号不可以为空',
+        icon:'none'
+      })
+      return
+     }
+     const queryRes = await db.collection('withdraw').where({
+      isWithdraw:false
+     }).get();
+
+    //  判断是否申请过提现
+     if (queryRes.data.length !== 0){
+        wx.showToast({
+          title: '你已经申请提现，后台处理中。加急提现请联系客服微信',
+          icon:'none'
+        })
+        return
+     } 
+
+    //  把提现信息提交到数据库
+     const res = await db.collection('withdraw').add({
+       data:{
+         user_id:this.data.user._id,
+         name,
+         wechat,
+         balance,
+         isWithdraw:false
+       }
+     })
+     console.log(res)
+     if (res.errMsg ==="collection.add:ok"){
+       wx.showToast({
+         title: '申请成功，请耐心等待',
+         icon:'none',
+         duration:3000
+       })
+     }
   },
   onPullDownRefresh() {
     const tabNow = this.data.tabNow

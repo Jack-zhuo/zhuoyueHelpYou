@@ -1,10 +1,12 @@
 <view class="container">
-   <view class="user" wx:for="{{users}}" wx:key="index">
-      <view bindtap="call" data-phone="{{item.info.phone}}">{{item.info.name}}</view>
+   <view class="withdraw" wx:for="{{withdraws}}" wx:key="index">
+      <view>{{item.name}}</view>
+      <view bindtap="copyWechat" data-wechat="{{item.wechat}}">{{item.wechat}}</view>
 
-      <view>{{item.balance}}</view>
-      <view>{{item.realWithdraw }}</view>
-      <view>{{item.profit }}</view>
-      <view class="withdraw-btn" bindtap="gotoWithdraw" data-openid="{{item._openid}}">提现</view>
+      <view>{{item.balance/100}}</view>
+      
+      <view>
+        <button bindtap="gotowithdraw" type="primary" data-user="{{item}}">提现</button>
+      </view>
    </view>
 </view> 

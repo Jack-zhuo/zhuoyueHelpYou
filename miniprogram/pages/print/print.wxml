@@ -1,3 +1,19 @@
+<!-- 已选文件 -->
+<view>
+  <view class="fileSelected common">
+    <view class="title">打印原件：</view>
+
+    <view >
+      <view class="item-right" wx:if="{{!fileName}}">
+        <view>点击添加文件</view>
+        <image src="../../images/pointing.png "></image>
+        <view class="select" bindtap="upFile">+</view>
+      </view>
+      <text wx:else>{{fileName}}</text>
+    </view>
+
+  </view>
+</view>
 <!-- 地址信息 -->
 <view class="address common" bindtap="gotoAddress">
   <view class="title">地址：</view>
@@ -10,21 +26,11 @@
   </view>
 </view>
 
-<!-- 已选文件 -->
-<view>
-  <view class="take_info common">
-    <view class="title">已选文件：</view>
-    <view>
-      <button wx:if="{{!fileName}}" bindtap="upFile">选择文件</button>
-      <text wx:else>{{fileName}}</text>
-    </view>
 
-  </view>
-</view>
 <!-- 页数 -->
 <view class="count common">
   <view class="title">页数：</view>
-  <input bindinput="setPageNum" placeholder="请输入页数..." type="number"/>
+  <input bindinput="setPageNum" placeholder="请输入页数..." type="number" />
 </view>
 <!-- 份数 -->
 <view class="count common">
@@ -54,11 +60,12 @@
     注：
   </view>
   <view class="note-right">
-    <view>1. <text style="color: red;"> 0跑腿费</text></view>
+    <view>1. <text style="color: red; font-size: 30rpx;"> 0跑腿费</text></view>
     <view>2.按张收费，一张3毛 (双面打印，一面1.5毛)</view>
     <view>3.不会上传文件的同学们，可以加微信：<text style="font-weight: 600;">zyjava2020</text><text class="copy" bindtap="copyWeChat">复制</text>发送文件</view>
+    <view>4.打印图片的同学们，请加我微信</view>
   </view>
 
 </view>
 <!-- 提交 -->
-<button bindtap="submit">提交 (￥{{totalPrice}})</button>
+<button bindtap="submit">提交 (￥{{totalPrice/100}})</button>

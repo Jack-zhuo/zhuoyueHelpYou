@@ -64,7 +64,7 @@
   </view>
 
   <view class="logo_wrap" class="common">
-    <button bindtap="goPay">确认发布 ￥{{price}}</button>
+    <button bindtap="goPay">确认发布 ￥{{price/100}}</button>
     <!-- logo区 -->
     <!-- <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image> -->
   </view>

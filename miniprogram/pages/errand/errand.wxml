@@ -18,7 +18,7 @@
 <view class="money common">
   <view class="title">金额：</view>
   <view class="inputMoney">
-    <input type="number" placeholder="请输入金额..." bindinput="getInputValue" value="{{ price }}" />
+    <input type="number" placeholder="请输入金额..." bindinput="getInputValue" />
   </view>
 </view>
 <view class="note">
@@ -27,4 +27,4 @@
 
 </view>
 <!-- 提交 -->
-<button bindtap="submit">提交（￥{{ price }}）</button>
+<button bindtap="submit">提交（￥{{ price/100 }}）</button>

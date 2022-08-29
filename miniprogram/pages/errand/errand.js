@@ -2,7 +2,7 @@ const db = wx.cloud.database();
 Page({
   data: {
     helpMsg: '',
-    price: 2.00,
+    price: 200,
     address: {
       name: '',
       phone: '',
@@ -71,7 +71,7 @@ Page({
       name: 'toPay',
       data: {
         goodName: `万能跑腿-${this.data.address.name}`,
-        totalFee: this.data.price * 100,
+        totalFee: this.data.price,
         _id
       }
     })
@@ -123,7 +123,7 @@ Page({
     })
   },
   getInputValue(e){
-       let price = e.detail.value * 1
+       let price = e.detail.value * 100
        this.setData({
          price
        })

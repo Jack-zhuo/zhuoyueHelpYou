@@ -64,7 +64,7 @@
      
     </view>
     <view class="bottom">
-      <view style="color: red;">￥{{item.price}}</view>
+      <view style="color: red;">￥{{item.price/100}}</view>
       <view bindtap="refund" class="contact" wx:if="{{ item.status === 1}}">申请退款</view>
       <view bindtap="getWeChat" class="contact">客服微信</view>
     </view>

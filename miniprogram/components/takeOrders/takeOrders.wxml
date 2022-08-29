@@ -72,14 +72,14 @@
             <text>地址： </text>
             <text>{{item.address.name}}-{{ item.address.detail }}</text>
           </view>
-          <view class="item" style="color: red;">
+          <view wx:if="{{item.status === 2}}" class="item" style="color: red;">
             <text>请输入核销码： </text>
             <input type="number" bindinput="input"/>
           </view>
         </view>
       </view>
       <view class="bottom">
-        <view class="price">￥{{item.price}}</view>
+        <view class="price">￥{{item.price/100}}</view>
         <view bindtap="call" class="phone">手机号</view>
         <view wx:if="{{item.status === 1}}" bindtap="take" class="take">接单 </view>
         <view wx:if="{{item.status === 2 && item.name === '打印服务'}}" bindtap="downloadFile" class="take">下载</view>

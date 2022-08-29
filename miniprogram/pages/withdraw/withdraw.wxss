@@ -1,20 +1,17 @@
 .container{
-  margin: 20rpx;
-}
-
-.container .user{
+  margin: 50rpx;
   display: flex;
-  justify-content: space-between;
+  background-color: white;
+  justify-content: center;
+}
+.container .withdraw{
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  /* background-color: pink; */
+  margin: 20rpx;
   padding: 20rpx;
-  border-bottom: 1rpx solid #1296db;
-}
-.container .user view{
-  width: 200rpx;
-  text-align: center;
-}
-
-.container .user .withdraw-btn{
-  border: 1rpx solid gray;
-  padding: 5rpx;
+} 
+.container .withdraw view{
+  padding: 20rpx;
 }

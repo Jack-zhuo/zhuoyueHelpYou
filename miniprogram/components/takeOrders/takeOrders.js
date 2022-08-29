@@ -51,11 +51,18 @@ Component({
               _openid: "这是bug吗？"
             }).update({
               data: {
-                balance: wx.cloud.database().command.inc(Number(price.toFixed(2)))
+                balance: wx.cloud.database().command.inc(price)
               }
             })
             this.triggerEvent('refresh');
           }
+        })
+      }else{
+        wx.showToast({
+          title: '核销码错误',
+          icon:'error',
+          duration:2000,
+          mask:true
         })
       }
     },
@@ -84,7 +91,7 @@ Component({
       fileManager.saveFile({
         tempFilePath: res.tempFilePath,
         success:(res2)=>{
-          console.log(res2)
+          console.log('文件路径：',res2)
           wx.hideLoading()
           wx.showToast({
             title: '下载成功',

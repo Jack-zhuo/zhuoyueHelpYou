@@ -18,7 +18,7 @@
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
+    "compileHotReLoad": true,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
@@ -35,26 +35,14 @@
     "packNpmRelationList": [],
     "minifyWXSS": true,
     "disableUseStrict": false,
-    "showES6CompileOption": false,
-    "useCompilerPlugins": false,
     "minifyWXML": true,
-    "useStaticServer": true
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false
   },
   "appid": "wx6e8d87287334ae26",
   "projectname": "quickstart-wx-cloud",
   "libVersion": "2.14.1",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
-        }
-      ]
-    }
-  },
   "srcMiniprogramRoot": "miniprogram/",
   "compileType": "miniprogram",
   "packOptions": {
@@ -65,5 +53,16 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
+  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        }
+      ]
+    }
+  }
 }

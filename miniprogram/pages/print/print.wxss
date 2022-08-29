@@ -8,19 +8,23 @@
   justify-content: space-between;
 }
 
-.take_info .info {
-  border: 1rpx solid gray;
-  border-radius: 10rpx;
-  width: 450rpx;
-  height: 100rpx;
-  padding: 5rpx;
+.fileSelected .select{
+   border: 1rpx dashed gray; 
+   height: 100rpx;
+   width: 100rpx;
+   font-size: 50rpx;
+   text-align: center;
+   line-height: 100rpx;
+   margin-right: 20rpx;
 }
-.take_info button{
-  font-size: 25rpx;
-  width: 150rpx;
-  height: 50rpx;
-  padding: 0;
-  line-height: 50rpx;
+.fileSelected .item-right{
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+}
+.fileSelected .item-right image{
+  width: 70rpx;
+  height: 70rpx;
 }
 input {
   border: 1rpx solid gray;
@@ -72,7 +76,8 @@ button{
   padding: 15rpx;
 }
 .copy{
-  border: 1rpx solid rgb(0, 0, 0);
+  border: 1rpx solid #1296db;
+  color: #1296db;
   margin:0 5rpx;
   padding: 5rpx;
   border-radius: 15rpx;

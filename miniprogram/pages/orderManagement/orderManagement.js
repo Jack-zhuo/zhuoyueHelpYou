@@ -9,10 +9,10 @@ Page({
   data: {
     orders_notake: [],
     orders_taked: [],
-    orderById: [],
+    orderById: {},
     tabList: ['正在悬赏', '已接单', '查询byorderId'],
     tabNow: 0,
-    orderId:'',
+    orderId: '',
   },
 
   onLoad() {
@@ -66,23 +66,26 @@ Page({
   getOrderId(e) {
     console.log(e.detail.value)
     this.setData({
-      orderId:e.detail.value
+      orderId: e.detail.value
     })
 
   },
- async query(){
+  async query() {
     wx.showLoading({
       title: '查询中',
     })
-   const res = await wx.cloud.callFunction({
-      name:'getOrderById',
-      data:{
-        _id:this.data.orderId
+    const res = await wx.cloud.callFunction({
+      name: 'getOrderById',
+      data: {
+        _id: this.data.orderId
       }
     })
-    console.log(res)
+
+
+    const orderById = res.result.data[0]
+    orderById.date = getDateDiff(orderById.date)
     this.setData({
-      orderById:res.result.data
+      orderById
     })
     wx.hideLoading()
   },
@@ -224,9 +227,6 @@ Page({
     }
     if (tabNow === 1) {
       console.log('我触底了1')
-    }
-    if (tabNow === 2) {
-      this.getOrders_completed();
     }
 
   }

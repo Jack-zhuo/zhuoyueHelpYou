@@ -4,26 +4,47 @@
   justify-content: center;
   align-items: center;
 }
-.my-help .tip{
-  padding-top: 20rpx;
-}
-.my-balance {
-  text-align: center;
-  margin: 20rpx; 
+.my-balance{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(255, 166, 0);
-  width: 200rpx;
-  height: 100rpx;
-  border-radius: 20rpx;
-  padding: 10rpx;
   color: white;
+  width: 700rpx;
+  margin-top: 20rpx;
+  padding: 20rpx;
 }
-.my-balance view:nth-child(1){
-  font-size: 50rpx;
+.my-balance .input{
+  
+  display: flex;
+  align-items: center;
+  margin: 20rpx;
 }
-.my-balance view:nth-child(2){
+.my-balance .input input{
+  background-color: white;
+  color: black;
+  padding: 10rpx;
   font-size: 25rpx;
+  width: 400rpx;
+  border-radius: 30rpx;
 }
-.bottom-tip {
+.my-balance .balance{
+  display: flex;
+  
+} 
+.my-balance .balance view:nth-child(1){
+  margin-right: 10rpx;
+}
+.my-balance .withdraw{
+  width: 180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  margin: 0;
+  padding: 0;
+  
+}
+.bottom-tip{
   text-align: center;
-  color: gray;
 }

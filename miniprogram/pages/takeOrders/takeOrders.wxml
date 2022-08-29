@@ -13,11 +13,25 @@
 </view>
 <!-- 我帮助的 -->
 <view wx:if="{{tabNow === 2}}" class="my-help">
-  <view class="tip">如要提现，请加客服微信 zyjava2020</view>
+
   <view class="my-balance">
-    <view>{{user.balance}}</view>
-    <view>收益</view>
+   <view class="balance">
+    <view>收益:</view>
+    <view>{{user.balance/100}}</view>
+   </view>
+   <view class="input">
+     <view>姓名：</view>
+     <input bindinput="getName" placeholder="一定要真实姓名，不然会影响提现..." />
+   </view>
+   <view class="input">
+     <view>微信号：</view>
+     <input bindinput="getWechat" placeholder="请输入微信号..." />
+   </view>
+   <view>
+    <button type="primary" class="withdraw" bindtap="withdraw">提现</button>
+   </view>
   </view>
+
   <view wx:for="{{ orders_completed }}" wx:key="index">
     <take-order bindcall="call" item="{{ item }}"></take-order>
   </view>
