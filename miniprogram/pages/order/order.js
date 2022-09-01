@@ -2,9 +2,9 @@ const db = wx.cloud.database();
 import {
   getDateDiff
 } from '../../utils/getDateDiff';
-Page({
+Page({ 
   data: {
-    tabList: ['已付款', '已接单', '已完成'],
+    tabList: ['待接单', '已接单', '已完成'],
     tabNow: 0,
     orders: [], 
     orders_paid: [],

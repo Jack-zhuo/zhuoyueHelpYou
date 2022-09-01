@@ -16,12 +16,14 @@
   border-bottom: 5rpx solid #1296db;
   background-color: #f8fdff;
 }
-.body{
+/* 内容 */
+/* .item{ 
+  margin:10rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
  .bottom-tip{
  text-align: center;   
  color: gray;

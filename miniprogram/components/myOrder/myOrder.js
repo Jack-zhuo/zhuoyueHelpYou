@@ -17,6 +17,46 @@ Component({
           }
         })
     },
+   async complete(){
+    const res0 = await wx.showModal({
+       title:'确定送达了吗？'
+     })
+     if(res0.cancel) return
+     
+      wx.showLoading({
+        title: '处理中...',
+      })
+
+      const order = this.properties.item
+      const price = order.price
+      const user_id = order.takeOrderer._id
+      const id = order._id
+     
+     const res1 = await wx.cloud.callFunction({
+        name:'updateBalance',
+        data:{
+         user_id,
+         balance:price
+        }
+      })
+      if (res1.result.stats.updated === 1){
+        const res2 = await wx.cloud.callFunction({
+          name:'updateOrderbyIdToCompleted',
+          data:{
+            id,
+          }
+        })
+       wx.hideLoading();
+       wx.showToast({
+         title: '完成',
+         duration:2000,
+         mask:true
+       })
+       setTimeout(()=>{
+        this.triggerEvent('refresh')
+       },2000)
+      }
+    },
     call(){
       wx.makePhoneCall({
         phoneNumber: this.properties.item.takeOrderer.info.phone,
@@ -64,7 +104,7 @@ Component({
       title: '退款中',
     })
     const refundOrder = "tk" + new Date().getTime()
-   const price = Math.round(this.properties.item.price*100)  
+   const price = Math.round(this.properties.item.price)  
 
    const res = await wx.cloud.callFunction({
       name: 'refund',
@@ -75,7 +115,7 @@ Component({
       }
     })
     console.log(res);
-    if(res.result.returnCode === "SUCCESS"){
+    if(res.result.resultCode === "SUCCESS"){
      const resDel = await wx.cloud.callFunction({
         name:'deleteOrderById',
         data:{
@@ -87,6 +127,11 @@ Component({
       wx.showToast({
         title: '退款成功',
         icon:'success'
+      })
+    }else{
+      wx.showToast({
+        title: '出错了，请联系管理员处理',
+        icon:'none'
       })
     }
   },

@@ -268,8 +268,10 @@ Page({
     //  判断是否申请过提现
      if (queryRes.data.length !== 0){
         wx.showToast({
-          title: '你已经申请提现，后台处理中。加急提现请联系客服微信',
-          icon:'none'
+          title: '你已经申请提现，后台处理中...',
+          icon:'none',
+          mask:true,
+          duration:3000
         })
         return
      } 
@@ -286,10 +288,15 @@ Page({
      })
      console.log(res)
      if (res.errMsg ==="collection.add:ok"){
-       wx.showToast({
-         title: '申请成功，请耐心等待',
-         icon:'none',
-         duration:3000
+       wx.showModal({
+         title:'你的提现申请已受理，预计2小时内到账',
+         showCancel:false,
+         success:(res)=>{
+              this.setData({
+                name:'',
+                wechat:''
+              })
+         }
        })
      }
   },

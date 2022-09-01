@@ -1,72 +1,89 @@
-<view class="order">
-  <view class="content">
-    <view class="top">
-      <view class="left">
-        <view class="service-name">{{item.name}}</view>
-        <view class="time">{{ item.date }}</view>
-      </view>
-      <view class="right">
-        <view wx:if="{{item.status === 1}}">已付款</view>
-        <view wx:if="{{item.status === 2}}">已接单</view>
-        <view wx:if="{{item.status === 3}}">已完成</view>
-      </view>
-
+<view class="content">
+  <!-- 上 -->
+  <view class="top">
+    <view class="left">
+      <view class="service-name">{{item.name}}</view>
+      <view class="time">{{ item.date }}</view>
     </view>
-    <view class="middle">
-      <view class="middle-left">
-        <view class="item">
-          <view class="item-left">订单号：</view>
-          <view class="copy">
-            <view>{{item._id}}</view>
-            <view class="copyId" bindtap="copyId" data-id="{{item._id}}">复制</view>
-          </view>
-        </view>
-        <!-- 代取快递 -->
-        <view class="item" wx:if="{{item.name === '代取快递'}}">
-          <view class="item-left">取件信息：</view>
-          <view class="item-right">{{ item.takeMsg }}</view>
-        </view>
-        <view class="item" wx:if="{{item.name === '代取快递'}}">
-          <view class="item-left">取件地址：</view>
-          <view>{{ item.merchant }}</view>
-        </view>
-        <view class="item" wx:if="{{item.name === '代取快递'}}">
-          <view class="item-left">备注：</view>
-          <view>{{ item.note }}</view>
-        </view>
-        <!-- 万能跑腿 -->
-        <view class="item" wx:if="{{item.name === '万能跑腿'}}">
-          <view class="item-left">帮助内容：</view>
-          <view>{{ item.helpMsg }}</view>
-        </view>
-        <!-- 打印服务 -->
-        <view class="item" wx:if="{{item.name === '打印服务'}}">
-          <view class="item-left">文件：</view>
-          <text>{{ item.fileName }}</text>
-        </view>
-        <!-- 公共部分 -->
-        <view class="item" style="color: red;">
-          <view class="item-left">核销码：</view>
-          <view>{{ item.takeGoodsCode }}</view>
-        </view>
-        <view class="item" wx:if="{{item.status === 2}}">
-          <view class="item-left">接单人：</view>
-          <view class="takeOrderer">
-            <view>{{item.takeOrderer.info.name}}</view>
-            <view class="call" bindtap="call">
-              <image src="../../images/phone.png"></image>
-              <text>手机号</text>
-            </view>
-          </view>
-        </view>
-
-      </view>
-     
-    </view>
-    <view class="bottom">
-      <view style="color: red;">￥{{item.price/100}}</view>
-      <view bindtap="refund" class="contact" wx:if="{{ item.status === 1}}">申请退款</view>
-      <view bindtap="getWeChat" class="contact">客服微信</view>
+    <view class="right">
+      <view class="paid" wx:if="{{item.status === 1}}">待帮助</view>
+      <view class="taked" wx:if="{{item.status === 2}}">已接单</view>
+      <view class="completed" wx:if="{{item.status === 3}}">已完成</view>
     </view>
   </view>
+  <!-- 中 -->
+  <view class="middle">
+    <!-- 订单号 -->
+    <view class="item order-number">
+      <view class="left">订单编号：</view>
+      <view class="right">
+        <view>{{item._id}}</view>
+        <view class="copy-id" bindtap="copyId" data-id="{{item._id}}">复制</view>
+      </view>
+    </view>
+    <!-- 代取快递 -->
+    <block wx:if="{{item.name === '代取快递'}}">
+      <view class="item">
+        <view class="left">取件信息：</view>
+        <view class="right">
+          <view>{{item.takeMsg}}</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="left">快递商家：</view>
+        <view class="right">
+          <view>{{item.merchant}}</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="left">备注信息：</view>
+        <view class="right">
+          <view>{{item.note}}</view>
+        </view>
+      </view>
+    </block>
+    <!-- 万能跑腿 -->
+    <block wx:if="{{ item.name === '万能跑腿' }}">
+      <view class="item">
+        <view class="left">帮助内容：</view>
+        <view class="right">
+          <view>{{item.helpMsg}}</view>
+        </view>
+      </view>
+    </block>
+    <!-- 打印服务 -->
+    <block wx:if="{{ item.name === '打印服务' }}">
+      <view class="item">
+        <view class="left">打印原件：</view>
+        <view class="right">
+          <view>{{item.fileName}}</view>
+        </view>
+      </view>
+    </block>
+    <!-- 公共部分 -->
+    <!-- <view class="item">
+      <view class="left">核销码</view>
+      <view class="right">
+        <view>{{item.takeGoodsCode}}</view>
+      </view>
+    </view> -->
+
+    <view class="item takeorderer" wx:if="{{ item.status === 2 }}">
+      <view class="left">—接单人：</view>
+      <view class="right">
+        <view>{{item.takeOrderer.info.name}}</view>
+        <view class="call" bindtap="call">
+          <text>拨打手机</text>
+        </view>
+      </view>
+    </view>
+    <!-- 下 -->
+  </view>
+  <view class="bottom">
+    <view class="price">{{item.price/100}}元</view>
+    <view class="refund" wx:if="{{ item.status === 1}}" bindtap="refund">退款</view>
+    <view class="complete" wx:if="{{ item.status === 2}}" bindtap="complete">已送达</view>
+    <view class="getWeChat" bindtap="getWeChat">客服微信</view>
+  </view>
+
 </view>

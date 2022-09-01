@@ -1,61 +1,95 @@
-<!-- <button open-type="share">分享转发</button> -->
+<view class="container">
 
-<my-tab tabList='{{ tabList }}' bindtabChange="tabChange"></my-tab>
-<!-- 地址 -->
-<view wx:if="{{ !address.phone }}" class="common">
-  <button bindtap="addAddress" type="primary">添加地址</button>
-</view>
-<view wx:else class="address common" bindtap="gotoAddress">
-  <view class="content">
-    <view class="detail_addr">
-      {{address.detail}}
-    </view>
-    <view class="name">
-      <text>{{address.name}}</text>
-      <text>{{address.phone}}</text>
-    </view>
-  </view>
-  <view class="arrow">
-    <image src="../../images/arrow_gray.png"></image>
+  <!-- 地址 -->
+  <view class="address-wrap common">
+    <block wx:if="{{!address.phone}}">
+      <button bindtap="addAddress">添加地址</button>
+    </block>
+    <block wx:else>
+      <view class="address" bindtap="gotoAddress">
+        <image class="icon" src="../../images/spot.png"></image>
+        <view class="address-detail">
+          {{address.name}}-{{address.phone}}-{{address.detail}}
+        </view>
+        <image class="icon" src="../../images/arrow_gray.png"></image>
+      </view>
+    </block>
   </view>
 
-</view>
-<!-- 快递商家 -->
-<view class="merchant common">
+  <!-- 快递商家 -->
+  <view class='merchant common'>
+    <!-- 左 -->
+    <view class="merchant-left">
+      <image class="icon" src="../../images/merchant.png"></image>
+      <text>快递商家</text>
+    </view>
+    <!-- 右 -->
+    <view class="merchant-right">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          <view>{{array[index]}}</view>
+          <view>
+            <image class="icon" src="../../images/arrow_gray.png"></image>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
 
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-    <view class="picker">
-      <view class="title">快递商家:</view>
-      <view>{{array[index]}}
-        <image src="../../images/arrow_gray.png"></image>
+  <!-- 快递大小 -->
+  <view class="size common">
+    <!-- 左 -->
+    <view class="size-left">
+      <image class="icon" src="../../images/size.png"></image>
+      <text>快递大小</text>
+    </view>
+    <!-- 右 -->
+    <view class="size-right">
+      <view class="size-item {{isName === item.name ? 'select' : ''}}" wx:for="{{ size }}" wx:key="index" bindtap="selectTab" data-size="{{item}}">
+        {{item.name}}
       </view>
     </view>
-  </picker>
-</view>
-<!-- 快递大小 -->
-<view class="size common">
-  <view class="title">快递大小：</view>
-  <view class="tab">
-    <view class="tabs {{ isName === item.name ? 'select':'' }}" bindtap="selectTab" data-tip="{{ item }}" wx:for="{{ size }}" wx:key="index">{{ item.name }}</view>
-
   </view>
-</view>
-<!-- 取件信息 -->
-<view class="take_info common">
-  <view class="title">取件信息：</view>
-  <textarea bindfocus="cleanHolder" bindblur="addHolder" placeholder="{{placeholderCon}}" class="info" model:value="{{takeMsg}}"></textarea>
-</view>
-<!-- 备注 -->
-<view class="take_info common">
-  <view class="title">备注:</view>
-  <textarea placeholder="请输入备注信息..." class="info" model:value="{{note}}"></textarea>
+
+  <!-- 取件信息 -->
+  <view class="take-info common">
+    <!-- 左 -->
+    <view class="take-info-left">
+      <image class="icon" src="../../images/info.png"></image>
+      <text>取件信息</text>
+    </view>
+    <!-- 右 -->
+    <view class="take-info-right">
+
+      <textarea class="input-info" placeholder="请输入取件码或上传截图" model:value="{{takeMsg}}"></textarea>
+
+      <image class="icon img-1" wx:if="{{ takeImg }}" src='{{takeImg}}' bindtap="preview"></image>
+
+      <image class="img-2" src="{{takeImg ? '../../images/img_active.png' : '../../images/img.png'}}" bindtap="selectImg"></image>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="note common">
+    <!-- 左 -->
+    <view class="note-left">
+      <image class="icon" src="../../images/info.png"></image>
+      <text>备注</text>
+    </view>
+    <!-- 右 -->
+    <view class="note-right">
+      <textarea class="input-note" placeholder="请输入备注信息"></textarea>
+    </view>
+  </view>
+
 </view>
 
 
+  <!-- 确认发布 --> 
+  <view class="submit">
+    <view class="text">需支付</view>
+    <view class="price">{{price/100}}元</view>
+    <button bindtap="goPay">确认发布</button>
+  </view>
 
-
-<view class="logo_wrap" class="common">
-  <button bindtap="goPay">确认发布 ￥{{price}}</button>
-  <!-- logo区 -->
-  <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
-</view>
+  <wechat></wechat>

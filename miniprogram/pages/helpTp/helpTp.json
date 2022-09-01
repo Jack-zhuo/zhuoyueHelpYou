@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-     "my-tab":"../../components/myTab/myTab"
+     "my-tab":"../../components/myTab/myTab",
+     "wechat":"../../components/wechat/wechat"
   },
   "navigationBarTitleText": "代取快递"
 }

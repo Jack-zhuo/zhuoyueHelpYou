@@ -1,0 +1,34 @@
+.wrap{
+  background-color: white;
+  border-radius: 20rpx;
+  margin: 20rpx;
+  padding: 20rpx 40rpx;
+}
+.note{
+  color: #1296db;
+  border-bottom: 1rpx solid rgb(236, 236, 236);
+  padding-bottom: 10rpx;
+}
+.wechat{
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-bottom: 1rpx solid gray; */
+}
+.wechat .icon{
+width: 100rpx;
+height: 100rpx; 
+}
+.wechat .text{
+font-size: 60rpx;
+margin-left: 10rpx;
+}
+.wechat .copy{
+border: 1rpx solid #1296db;
+color: #1296db;
+margin-left: 20rpx;
+font-size: 30rpx;
+padding: 10rpx;
+border-radius: 10rpx;
+}

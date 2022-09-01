@@ -1,0 +1,10 @@
+<view class="wrap">
+  <view class="note">
+    <view class="text">{{ note }}</view>
+  </view>
+  <view class="wechat" bindtap="copyWeChat">
+    <image class="icon" src="../../images/wechat.png"></image>
+    <view class="text">zyjava2020</view>
+    <view class="copy">复制</view>
+  </view>
+</view>

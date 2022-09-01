@@ -12,7 +12,8 @@ exports.main = async (event, context) => {
   const res2 = await db_orders.doc(event.id).update({
     data:{
       status:event.status,
-      takeOrderer:event.takeOrderer
+      takeOrderer:event.takeOrderer,
+      takeDate:new Date()
     }
   });
   return res2

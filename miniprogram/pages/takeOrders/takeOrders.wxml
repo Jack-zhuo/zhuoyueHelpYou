@@ -21,11 +21,11 @@
    </view>
    <view class="input">
      <view>姓名：</view>
-     <input bindinput="getName" placeholder="一定要真实姓名，不然会影响提现..." />
+     <input model:value="{{name}}" placeholder="一定要真实姓名，不然会影响提现..." />
    </view>
    <view class="input">
      <view>微信号：</view>
-     <input bindinput="getWechat" placeholder="请输入微信号..." />
+     <input model:value="{{wechat}}" placeholder="请输入微信号..." />
    </view>
    <view>
     <button type="primary" class="withdraw" bindtap="withdraw">提现</button>

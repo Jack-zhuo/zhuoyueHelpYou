@@ -1,88 +1,151 @@
-.logo_wrap{
-
+.container {
+  background-color: white;
+  margin:20rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
+} 
+/* 公共样式 */
+.common {
+  padding: 20rpx;
+  border-bottom: 1rpx solid rgb(212, 212, 212);
+  
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.common .icon{
+  height: 50rpx;
+  width: 50rpx;
+}
+/* 地址 */
+.address-wrap{
+  height: 100rpx;
   justify-content: center;
 }
-.common {
-  background-color: white;
-  padding: 20rpx;
-  border-radius: 30rpx;
-  margin-top: 30rpx;
+.address-wrap button{
+  border-radius: 60rpx;
+  background-color: #1296db;
+  color: white; 
 }
-button{
-  margin: 20rpx 0;
-  width: 100%;
-}
-
-.address {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.address .arrow image {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.address .content .detail_addr {
-  font-size: 40rpx;
-  font-weight: 600;
-}
-
-.address .content .name {
-  margin: 20rpx 0;
-  font-size: 30rpx;
-}
-
-.address .content .name text:nth-child(2) {
-  margin-left: 20rpx;
-}
-
-.take_info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.take_info .info {
-  border: 1rpx solid gray;
-  border-radius: 30rpx;
-  width: 450rpx;
-  height: 100rpx;
-  padding: 10rpx 30rpx;
-}
-
-.picker {
-  display: flex;
-  justify-content: space-between;
+.address-wrap .address{
+  display: flex; 
+  justify-content: center;
   align-items: center;
 }
 
-.picker image {
-  width: 40rpx;
-  height: 40rpx;
+
+/* 快递商家 */
+.merchant{
+ 
 }
+.merchant .merchant-left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.merchant .merchant-left text{
+  margin-left: 10rpx;
+}
+.merchant .merchant-right .picker{
+  display: flex;
+  align-items: center;
+}
+
+/* 快递大小 */
 .size{
+  
+}
+.size .size-left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.size .size-left text{
+  margin-left: 10rpx;
+}
+.size .size-right{
+  display: flex;
+  
+}
+.size .size-right .size-item{
+  border: 1rpx solid gray;
+  color: gray;
+  font-size: 30rpx;
+  padding: 13rpx;
+  margin: 5rpx;
+  border-radius: 30rpx;
+}
+.size .size-right .select{
+  border: 1rpx solid #1296db;
+  color: #1296db;
+}
+/* 取件信息 */
+.take-info .take-info-left{
   display: flex;
   align-items: center;
 }
-.size .tab{
+.take-info .take-info-left text{
+  margin-left: 10rpx;
+}
+.take-info .take-info-right{
+  position: relative;
+}
+.take-info .take-info-right .input-info{
+  width: 370rpx;
+  height: 200rpx;
+  border: 1rpx solid gray;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+.take-info .take-info-right .img-2{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  bottom: 20rpx;
+  right: 20rpx;
+  z-index: 520;
+}
+.take-info .take-info-right .img-1{
+  position:absolute;
+  border: 1rpx solid rgb(185, 185, 185);
+  width: 100rpx;
+  height: 100rpx;
+  bottom: 20rpx;
+  left: 20rpx;
+  z-index: 521;
+}
+/* 备注 */
+.note .note-left{
   display: flex;
+  align-items: center;
 }
-.size .tab .tabs{
-  margin:20rpx;
+.note .note-left text{
+  margin-left: 10rpx;
+}
+.note .note-right .input-note{
+  width: 370rpx;
+  height: 100rpx;
+  border: 1rpx solid gray;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+/* 提交 */
+.submit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.submit .text{
+  font-size: 40rpx; 
+  font-weight: 900;
+}
+.submit .price{
+  color: red;
+  font-weight: 700;
   padding: 10rpx;
-  border-radius: 10%;
-  background-color: rgb(241, 241, 241);
 }
-.select{
-  background-color: #1296db !important;
-  color: white;
-}
-.common button{
+.submit button{
+  border-radius: 60rpx;
   background-color: #1296db;
   color: white;
-  margin-top: 20rpx;
 }

@@ -21,9 +21,32 @@ Page({
   async onLoad() {
     if (!this.data.address.phone) await this.getAddress();
   },
-  bindPickerChange2(e) {
-    console.log(e);
+
+  // 地址
+  async getAddress() {
+    const res = await db.collection('address').where({
+      default: true,
+      _openid: wx.getStorageSync('openid')
+    }).get();
+    if (!res.data[0]) return
+    this.setData({
+      address: res.data[0]
+    })
   },
+  addAddress() {
+    wx.navigateTo({
+      url: '../addAddress/addAddress',
+    })
+  },
+  gotoAddress() {
+    wx.setStorageSync('urlNow', 'print')
+    wx.navigateTo({
+      url: '../address/address',
+    })
+  },
+
+
+
   setCount(e) {
     const count = Number(e.detail.value)
     this.setData({
@@ -185,29 +208,18 @@ Page({
     }
 
   },
-  async getAddress() {
-    const res = await db.collection('address').where({
-      default: true,
-      _openid: wx.getStorageSync('openid')
-    }).get();
 
-    if (!res.data[0]) return
-
-    this.setData({
-      address: res.data[0]
-    })
-  },
-  gotoAddress() {
-    wx.setStorageSync('urlNow', 'print')
-    wx.navigateTo({
-      url: '../address/address',
-    })
-  },
   copyWeChat() {
     wx.setClipboardData({
       data: 'zyjava2020',
+      success:()=>{
+        wx.showToast({
+          title: '微信复制成功',
+        })
+      }
     })
   },
+  
   onShareAppMessage: function (res) {
     return {
       title: '三联学院云打印，0配送费，秒送寝室',

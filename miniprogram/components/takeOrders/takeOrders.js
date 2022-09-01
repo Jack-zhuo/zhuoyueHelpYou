@@ -109,6 +109,12 @@ Component({
         }
       })
    
+    },
+    showTakeImg(){
+      console.log('jjjj')
+      wx.previewImage({
+        urls: [this.properties.item.takeImg],
+      })
     }
   }
 })
