@@ -14,13 +14,15 @@ Page({
     tabNow: 0,
     user: {},
     name:'',
-    wechat:''
+    // wechat:'',
+    QRcode:''
   },
-
  async onLoad() {
     const user = await getUser()
     this.setData({
-      user
+      user,
+      name:user.realName,
+      QRcode:user.QRcode
     })
     this.getOrders_notake();
   },
@@ -37,15 +39,25 @@ Page({
       }
     })
     const orders_notake = res.result.data
-
+    const len = orders_notake.length;
+     console.log('len',len)
+     wx.removeTabBarBadge({index:2})
+     if (len !== 0) {
+      wx.setTabBarBadge({
+        index: 2,
+        text: len+''  
+      })
+     }
     orders_notake.forEach(item => {
       item.date = getDateDiff(item.date);
     });
     this.setData({
       orders_notake
     })
+    console.log('dfdfdf')
     wx.hideLoading();
   },
+
   // 获取正在帮助的数据
   async getOrders_taked(e) {
     wx.showLoading({
@@ -235,10 +247,34 @@ Page({
       wechat
     })
   },
+ async uploadQRcode(){
+   const chooseSrc = await wx.chooseMedia({
+      count:1,
+      mediaType:['image'],
+      sourceType:['album'],
+    })
+    console.log(chooseSrc)
+
+
+    // 获取后缀名
+    const tempFilePath = chooseSrc.tempFiles[0].tempFilePath
+    const index = tempFilePath.lastIndexOf(".")
+    const suffix = tempFilePath.substr(index)
+
+    // 上传到云数据库
+    const res2 = await wx.cloud.uploadFile({
+      cloudPath:'QRcode/'+new Date().getTime()+suffix,
+      filePath:tempFilePath
+    })
+    console.log(res2)
+    this.setData({
+      QRcode:res2.fileID
+    })
+  },
  async withdraw(){
      const {balance} = this.data.user
      const {name} = this.data
-     const {wechat} = this.data
+     const {QRcode} = this.data
 
      if (!balance || balance === 0){
        wx.showToast({
@@ -254,24 +290,46 @@ Page({
       })
       return
      }
-     if(!wechat){
+     if(!QRcode){
       wx.showToast({
-        title: '微信号不可以为空',
+        title: '必须上传收款码',
         icon:'none'
       })
       return
      }
+    const realWithdrawNumber = Math.ceil(balance * 0.8)
+    const content = `扣除20%的平台费，实际提现${realWithdrawNumber/100}`
+    const modalRes = await wx.showModal({
+      title:'说明',
+      content
+    })
+    if (modalRes.cancel) return
+
+     wx.showLoading({
+       title: '加载中',
+     })
+      // 添加或者更新姓名和收款码
+     const addSrc = await wx.cloud.database().collection('user').where({
+       _openid:'就是这么任性！！！！！'
+     }).update({
+        data:{
+          realName:name,
+          QRcode
+        }
+      })
+
      const queryRes = await db.collection('withdraw').where({
       isWithdraw:false
      }).get();
 
     //  判断是否申请过提现
      if (queryRes.data.length !== 0){
+       wx.hideLoading()
         wx.showToast({
           title: '你已经申请提现，后台处理中...',
           icon:'none',
           mask:true,
-          duration:3000
+          duration:2000
         })
         return
      } 
@@ -281,22 +339,24 @@ Page({
        data:{
          user_id:this.data.user._id,
          name,
-         wechat,
+         QRcode,
          balance,
+         realWithdrawNumber,
          isWithdraw:false
        }
      })
+     wx.hideLoading()
      console.log(res)
      if (res.errMsg ==="collection.add:ok"){
-       wx.showModal({
-         title:'你的提现申请已受理，预计2小时内到账',
-         showCancel:false,
-         success:(res)=>{
-              this.setData({
-                name:'',
-                wechat:''
-              })
-         }
+       wx.showToast({
+         title: '你的提现申请已受理，预计2小时内到账',
+         icon:'none',
+         duration:2000
+       })
+     }else{
+       wx.showToast({
+         title: '出错了，稍后再试',
+         icon:'error'
        })
      }
   },
@@ -311,6 +371,10 @@ Page({
     }
     if (tabNow === 1){
       console.log('刷新了‘正在帮助’tab')
+      this.setData({
+        orders_taked:[]
+      })
+     this.getOrders_taked();
     }
     if (tabNow === 2){
       console.log('刷新了‘我帮助的’tab')
@@ -320,11 +384,11 @@ Page({
       this.getOrders_completed();
     }
    
-    //隐藏loading 提示框
-    wx.hideLoading(); 
-    //隐藏导航条加载动画 
-    wx.hideNavigationBarLoading();
-    //停止下拉刷新
+    // //隐藏loading 提示框
+    // wx.hideLoading(); 
+    // //隐藏导航条加载动画 
+    // wx.hideNavigationBarLoading();
+    // //停止下拉刷新
     wx.stopPullDownRefresh();
   },
   onReachBottom() {

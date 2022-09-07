@@ -8,13 +8,55 @@ Page({
       },
       isTakeOrderer: false,
     },
-    isAdmin:false
+    isAdmin: false
   },
   onLoad() {
     this.getInfo()
   },
   onShow() {
     this.onLoad();
+  },
+  async completeAfterFiveDay() {
+    wx.showLoading({
+      title: '处理中',
+    })
+    const res1 = await wx.cloud.callFunction({
+      name: 'getOrders',
+      data: {
+        status: 2
+      }
+    })
+    const orders = res1.result.data
+    for (let i = 0; i < orders.length; i++) {
+      const order = orders[i];
+      const deltaTime = new Date().getTime() - new Date(order.date).getTime()
+      console.log(deltaTime)
+      let minute = 1000 * 60;
+      let hour = minute * 60;
+      if (deltaTime < hour * 48) continue
+
+      const price = order.price
+      const takeOrderer_id = order.takeOrderer._id
+      const id = order._id
+
+      const res1 = await wx.cloud.callFunction({
+        name: 'updateBalance',
+        data: {
+          user_id: takeOrderer_id,
+          balance: price
+        }
+      })
+      if (res1.result.stats.updated === 1) {
+        const res2 = await wx.cloud.callFunction({
+          name: 'updateOrderbyIdToCompleted',
+          data: {
+            id,
+          }
+        })
+      }
+    }
+
+    wx.hideLoading()
   },
   setInfo() {
     wx.navigateTo({
@@ -44,12 +86,12 @@ Page({
 
     // 查询数据库中有没有user
     const res = await wx.cloud.database().collection('user').get();
-   const user = res.data[0]
+    const user = res.data[0]
     if (user) {
       wx.setStorageSync('user', user)
       this.setData({
         user,
-        isAdmin:user._openid === 'o1qHG4sFXxAuC_8V8m40Rq-F5JcQ'
+        isAdmin: user._openid === 'o1qHG4sFXxAuC_8V8m40Rq-F5JcQ'
       })
       wx.hideLoading();
       return
@@ -87,28 +129,28 @@ Page({
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
-  gotoOrderManagement(){
+  gotoOrderManagement() {
     wx.navigateTo({
       url: '../orderManagement/orderManagement',
     })
   },
-  gotoWithdraw(){
+  gotoWithdraw() {
     wx.navigateTo({
       url: '../withdraw/withdraw',
     })
   },
-  gotoCheckOrderer(){
-   wx.navigateTo({
-     url: '../checkOrderer/checkOrderer',
-   })
-  },
-  gotoTakeOrders() {
-    wx.clearStorageSync()
-    this.getInfo()
-    wx.navigateTo({ 
-      url: '../takeOrders/takeOrders',
+  gotoCheckOrderer() {
+    wx.navigateTo({
+      url: '../checkOrderer/checkOrderer',
     })
   },
+  // gotoTakeOrders() {
+  //   wx.clearStorageSync()
+  //   this.getInfo()
+  //   wx.navigateTo({ 
+  //     url: '../takeOrders/takeOrders',
+  //   })
+  // },
   onPullDownRefresh() {
     wx.clearStorage({
       success: (res) => {

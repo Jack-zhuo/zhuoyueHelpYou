@@ -1,6 +1,6 @@
  App({
-   globalData:{
-     address:{}
+   globalData: {
+     address: {}
    },
    onLaunch: function () {
      // 初始化云环境
@@ -9,6 +9,7 @@
      })
      this.getOpenid();
      this.getInfo();
+     this.getOrders_notake();
    },
    getOpenid() {
      wx.cloud.callFunction({
@@ -20,12 +21,12 @@
      })
    },
    async getInfo() {
-      // 查询本地缓存中有没有info
+     // 查询本地缓存中有没有info
      let user = wx.getStorageSync('user');
      if (user) {
        return
      }
-    //  查询数据库中有没有user
+     //  查询数据库中有没有user
      const res = await wx.cloud.database().collection('user').get();
      console.log('app.js初始化', res.data[0]);
      user = res.data[0]
@@ -41,7 +42,7 @@
          phone: ''
        },
        isTakeOrderer: false,
-       balance:0
+       balance: 0
      }
 
      // 将info分别存在，本地缓存，和数据库中
@@ -54,4 +55,29 @@
 
    },
 
+   
+   // 获取正在悬赏的数据
+   async getOrders_notake(e) {
+     wx.showLoading({
+       title: '数据加载中',
+       mask: true
+     })
+     const res = await wx.cloud.callFunction({
+       name: 'getOrders',
+       data: {
+         status: 1
+       }
+     })
+     const orders_notake = res.result.data
+     const len = orders_notake.length;
+     console.log('len',len)
+     if (len !== 0) {
+      wx.setTabBarBadge({
+        index: 2,
+        text: len+''
+      })
+     }
+    
+     wx.hideLoading();
+   },
  });

@@ -2,7 +2,7 @@
   <view class="item" bindtap="changeAvatar">
     <view class="item-left">头像</view>
     <view class="item-right">
-      <image src="{{ user.info.avatar }}"></image>
+      <image src="{{ user.info.avatar }}"></image> 
       <image src="../../images/arrow_gray.png"></image>
     </view>
   </view>

@@ -43,6 +43,20 @@
           "pathName": "pages/helpTp/helpTp",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/takeOrders/takeOrders",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/helpMeSend/helpMeSend",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

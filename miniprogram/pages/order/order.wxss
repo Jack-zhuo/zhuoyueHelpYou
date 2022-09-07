@@ -15,16 +15,21 @@
   color: #1296db;
   border-bottom: 5rpx solid #1296db;
   background-color: #f8fdff;
+  
 }
-/* 内容 */
-/* .item{ 
-  margin:10rpx;
+/* 没有订单哦 */
+.no-order{
+  margin: 200rpx auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
- .bottom-tip{
- text-align: center;   
- color: gray;
+  align-items: center; 
+}
+.no-order image{
+  height: 200rpx;
+  width: 200rpx;
+
+}
+.no-order .text{
+  font-size: 25rpx;
+  color: #808080;
 }

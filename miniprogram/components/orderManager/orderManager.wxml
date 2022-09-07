@@ -6,7 +6,7 @@
     <view class="content">
       <view class="top">
         <view class="left">
-          <view class="service-name">{{item.userinfo.name}}</view>
+          <view class="service-name">{{item.userinfo.name}} {{ item.name }}</view>
           <view class="time">{{ item.date }}</view>
         </view>
         <view class="right">
@@ -30,34 +30,47 @@
             <text>地址：</text>
             <text> {{ item.address.name }}</text>
           </view>
-          <!-- 核销码 -->
-          <view class="item">
-            <text>核销码：</text>
-            <text> {{ item.takeGoodsCode }}</text>
-          </view>
-           <!-- 接单人 -->
+           <!-- 备注 -->
            <view class="item">
-            <text>接单人：</text>
-            <text> {{ item.takeOrderer.name }}</text>
+            <text>备注：</text>
+            <text> {{ item.note }}</text>
+          </view>
+          <!-- 尺寸 -->
+          <view class="item">
+            <text>尺寸：</text>
+            <text> {{ item.size }}</text>
+          </view>
+          <!-- 接单时间 -->
+          <view class="item">
+            <text>接单时间：</text>
+            <text> {{ item.takeDate }}</text>
+          </view>
+          <!-- 取件图片 -->
+          <view class="item">
+            <text>取件图片：</text>
+            <view bindtap="previewImg" data-src="{{item.takeImg}}" >查看图片</view>
+            <!-- <image src="{{item.takeImg}}"></image> -->
           </view>
           <!-- 下单人 -->
           <view class="item">
             <text>下单人：</text>
-            <text> {{ item.userinfo.name }}</text>
+            <text> {{ item.userinfo.name }}-{{item.userinfo.phone}}</text>
+          </view>
+            <!-- 接单人 -->
+            <view class="item">
+            <text>接单人：</text>
+            <text> {{ item.takeOrderer.info.name }}-{{item.takeOrderer.info.phone}}</text>
+          </view>
+          <!-- 取件信息 -->
+          <view class="item">
+            <text>取件信息：</text>
+            <text> {{ item.takeMsg }}</text>
           </view>
           <!-- 快递商家 -->
           <view class="item">
             <text>快递商家：</text>
             <text> {{ item.merchant }}</text>
           </view>
-          <!-- 取件码 -->
-          <view class="item">
-            <text>取件码：</text>
-            <text> {{ item.takeMsg }}</text>
-          </view>
-          
-          <!-- 取货码 -->
-         
           <!-- 公共的 -->
           <view class="item">
             <text>地址： </text>

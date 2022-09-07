@@ -1,8 +1,8 @@
 const db = wx.cloud.database();
 Page({
-  data: {
-    addresses: {} 
-  },
+  data: { 
+    addresses: []
+  }, 
   onLoad() {
     this.getAddress();
   },
@@ -13,6 +13,7 @@ Page({
     const addresses = await db.collection('address').where({
       _openid: wx.getStorageSync('openid')
     }).get();
+    console.log(addresses)
     this.setData({
       addresses: addresses.data
     })

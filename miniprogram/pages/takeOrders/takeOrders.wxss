@@ -1,9 +1,4 @@
-.my-help{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+
 .my-balance{
   display: flex;
   flex-direction: column;
@@ -15,19 +10,25 @@
   margin-top: 20rpx;
   padding: 20rpx;
 }
-.my-balance .input{
-  
+.my-balance .uploadCode{
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 20rpx;
 }
-.my-balance .input input{
+.my-balance .uploadCode view:nth-child(2){
+  border: 1rpx dotted gray;
   background-color: white;
   color: black;
-  padding: 10rpx;
-  font-size: 25rpx;
-  width: 400rpx;
-  border-radius: 30rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx;
+}
+.my-balance .uploadCode .QRcode{
+  width: 100rpx;
+  height: 100rpx;
 }
 .my-balance .balance{
   display: flex;
@@ -36,15 +37,37 @@
 .my-balance .balance view:nth-child(1){
   margin-right: 10rpx;
 }
-.my-balance .withdraw{
-  width: 180rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  font-size: 30rpx;
-  margin: 0;
-  padding: 0;
-  
+.my-balance .input {
+  display: flex;
+  align-items: center;
+  margin: 10rpx;
 }
-.bottom-tip{
-  text-align: center;
+.my-balance .input input{
+  background-color: white;
+  border-radius: 50rpx;
+  font-size: 25rpx;
+  width: 400rpx;
+  padding: 10rpx 30rpx;
+  color: black;
+}
+.my-balance .withdraw{
+  border-radius: 100rpx;
+  background-color: #1296db; 
+  color: white;
+}
+/* 没有订单哦 */
+.no-order{
+  margin: 200rpx auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+.no-order image{
+  height: 200rpx;
+  width: 200rpx;
+
+}
+.no-order .text{
+  font-size: 25rpx;
+  color: #808080;
 }

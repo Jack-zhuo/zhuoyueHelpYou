@@ -14,6 +14,12 @@ Component({
         phone: this.properties.item.address.phone
       });
     },
+    previewImg(e){ 
+      console.log(e)
+       wx.previewImage({
+         urls: [e.currentTarget.dataset.src],
+       })
+    },
     async deleteOrder() {
      const res2 = await wx.showModal({
         title:'确定删除吗？',
@@ -80,15 +86,6 @@ Component({
           }
         })
       }
-    },
-    input(e) {
-      const inputCode = Number(e.detail.value)
-      const originalCode = this.properties.item.takeGoodsCode
-      this.setData({
-        inputCode
-      })
-
-
     },
     async downloadFile() {
       wx.showLoading({

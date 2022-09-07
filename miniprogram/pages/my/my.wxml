@@ -8,95 +8,87 @@
     <image class="arrow" src="../../images/arrow.png"></image>
   </view>
 
-  <!-- 个人信息以下区 -->
-  <!-- 我的地址 -->
-  <view class="cell address" bindtap="gotoAddress">
-    <view class="cell-l">
-      <image src="../../images/spot.png"></image>
-      <text>我的地址</text>
+  <view class="content_wrap">
+    <!-- 我的地址 -->
+    <view class="cell address" bindtap="gotoAddress">
+      <view class="cell-l">
+        <image src="../../images/spot.png"></image>
+        <text>我的地址</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
     </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
+    <!-- 三天内自动完成 -->
+    <view class="cell service" bindtap="completeAfterFiveDay" wx:if="{{isAdmin}}">
+      <view class="cell-l">
+        <image src="../../images/help.jpg"></image>
+        <text>三天内自动完成</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+    <!-- 订单管理 -->
+    <view class="cell" bindtap="gotoOrderManagement" wx:if="{{isAdmin}}">
+      <view class="cell-l">
+        <image src="../../images/help.jpg"></image>
+        <text>订单管理</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+    <!-- 提现管理 -->
+    <view class="cell" bindtap="gotoWithdraw" wx:if="{{isAdmin}}">
+      <view class="cell-l">
+        <image src="../../images/help.jpg"></image>
+        <text>提现管理</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+    <!-- 审核接单员 -->
+    <view class="cell" bindtap="gotoCheckOrderer" wx:if="{{isAdmin}}">
+      <view class="cell-l">
+        <image src="../../images/help.jpg"></image>
+        <text>审核接单员</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+    <!-- 客服微信 -->
+    <view class="cell service" bindtap="openService">
+      <view class="cell-l">
+        <image src="../../images/wechat.png"></image>
+        <text>客服微信</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+    <!-- 关于我们 -->
+    <view class="cell" bindtap="gotoAboutUs">
+      <view class="cell-l">
+        <image src="../../images/aboutus.png"></image>
+        <text>关于我们</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
+    <!-- 当前版本 -->
+    <view class="cell version">
+      <view class="cell-l">
+        <image src="../../images/version.png"></image>
+        <text>当前版本</text>
+      </view>
+      <view class="cell-r">
+        3.5.12
+      </view>
     </view>
   </view>
-  <!-- 订单管理 -->
-  <view class="cell service" bindtap="gotoOrderManagement" wx:if="{{isAdmin}}">
-    <view class="cell-l">
-      <image src="../../images/help.jpg"></image>
-      <text>订单管理</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </view>
-  <!-- 提现管理 -->
-  <view class="cell service" bindtap="gotoWithdraw" wx:if="{{isAdmin}}">
-    <view class="cell-l">
-      <image src="../../images/help.jpg"></image>
-      <text>提现管理</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </view>
-  <!-- 审核接单员 -->
-  <view class="cell service" bindtap="gotoCheckOrderer" wx:if="{{isAdmin}}">
-    <view class="cell-l">
-      <image src="../../images/help.jpg"></image>
-      <text>审核接单员</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </view>
-  <!-- 接单 -->
-  <view class="cell service" bindtap="gotoTakeOrders">
-    <view class="cell-l">
-      <image src="../../images/help.jpg"></image>
-      <text>接单</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </view>
-  <!-- 客服微信 -->
-  <view class="cell service" bindtap="openService">
-    <view class="cell-l">
-      <image src="../../images/cs.png"></image>
-      <text>客服微信</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </view>
-  <!-- 关于我们 -->
-  <view class="cell advice2" bindtap="gotoAboutUs">
-    <view class="cell-l">
-      <image src="../../images/aboutus.png"></image>
-      <text>关于我们</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </view>
-  <!-- 官方客服 -->
-  <button class="cell advice" open-type="contact" bindcontact="gotoComplain">
-    <view class="cell-l">
-      <image src="../../images/my.png"></image>
-      <text>官方客服</text>
-    </view>
-    <view class="cell-r">
-      <image src="../../images/arrow_gray.png"></image>
-    </view>
-  </button>
-
-  <view class="version">
-    当前版本：3.5.0
-  </view>
-  <!-- logo区 -->
-  <view class="logo_wrap">
-    <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
-  </view>
-
 
 </view>

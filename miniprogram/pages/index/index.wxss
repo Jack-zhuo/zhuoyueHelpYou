@@ -17,19 +17,22 @@
   margin: 20rpx auto;
   /* border: 1rpx solid red; */
 }
-.container image{
-  width: 440rpx;
-  height: 570rpx;
+.container .buttons{
+  margin: 0 40rpx;
+  /* border: 1rpx solid pink; */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .container .buttons .item{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 250rpx;
+  width: 200rpx;
   height: 100rpx;
   background-color: white;
-  margin: 100rpx 10rpx;
+  margin: 50rpx auto;
   padding: 20rpx;
   border-radius: 20rpx;
   position: relative;
@@ -49,7 +52,7 @@
   border-radius: 50%;
   border: 8rpx solid white;
   /* box-shadow: h-shadow v-shadow blur spread color inset; */
-  box-shadow: 4rpx 4rpx 5rpx 5rpx #d7dde0  ;
+  box-shadow: 4rpx 4rpx 5rpx 5rpx #d7dde0;
 }
 .container .buttons .item .image_wrap image{
   width: 45rpx;
@@ -60,4 +63,18 @@
   bottom: 20rpx;
   font-size: 25rpx;
   color: #1296db;
+}
+.container  .buttons .item .tip{
+  position: absolute;
+  right: -40rpx;
+  top: 20rpx;
+  width: 100rpx;
+  font-size: 20rpx;
+  background-color: #10c7a7;
+  color: white;
+  padding: 10rpx;
+  padding-right: 0;
+  border-radius: 40rpx;
+  border-bottom-left-radius: 0;
+  box-shadow: 2rpx 2rpx 5rpx 3rpx #d7dde0;
 }

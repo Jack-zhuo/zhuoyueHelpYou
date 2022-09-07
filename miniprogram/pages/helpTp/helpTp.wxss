@@ -2,6 +2,7 @@
   background-color: white;
   margin:20rpx;
   border-radius: 40rpx;
+  font-size: 29rpx;
   box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
 } 
 /* 公共样式 */
@@ -14,8 +15,8 @@
   justify-content: space-between;
 }
 .common .icon{
-  height: 50rpx;
-  width: 50rpx;
+  height: 45rpx;
+  width: 45rpx;
 }
 /* 地址 */
 .address-wrap{

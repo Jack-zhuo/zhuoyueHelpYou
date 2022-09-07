@@ -1,78 +1,70 @@
 .container{
-  width: 100%;
-}
-.getAvatar{
-  color: white; 
+  width: 700rpx;
+  margin: 0 auto;
 }
 .info{
   background-color: #1296db;
-  border-radius: 10rpx;
-  width: 80%;
-  margin: 0 auto;
+  border-radius: 30rpx;
   padding: 50rpx 40rpx;
   display: flex;
   align-items: center;
+  box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
 }
 
 .info .avator{
   width: 90rpx;
   height: 90rpx;
-  padding: 10rpx;
   border-radius: 50%;
-  border:1rpx solid white
+  border:1rpx solid white 
 }
 .info .name{
-  
   color: white;
   margin-left: 30rpx;
 }
 
-.arrow{
+.info .arrow{
   width: 50rpx;
-  height: 50rpx;
+  height: 50rpx; 
   margin-left: auto;
 }
- .cell{
-  background-color: white;
-  border-radius: 10rpx;
-  width: 80%;
-  margin: 20rpx auto;
+.content_wrap{
+  border-radius: 30rpx;
+  margin-top: 30rpx;
   padding: 20rpx 40rpx;
+ 
+  background-color: white;
+  box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
+}
+ .cell{
+  /* background-color: pink; */
+  margin: 0 auto;
+  padding: 20rpx 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.service{
-  margin: 5rpx auto;
-}
-.advice{
-  margin: 5rpx 0;
-  width: 680rpx !important;
-  font-weight: 300;
-}
-.advice2{ 
-  margin: 5rpx auto;
+  border-bottom: 1rpx solid rgb(238, 238, 238);
 }
 .version{
-  text-align: center;
-  color: gray;
- }
- 
-
+  border-bottom: none;
+}
 .cell .cell-l{
+  font-size: 30rpx;
   display: flex;
-
+  align-items: center;
 }
 .cell .cell-l image{
-  width: 50rpx;
-  height: 50rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 .cell .cell-l text{
   margin-left: 20rpx;
 }
+.cell .cell-r{
+  font-size: 25rpx;
+}
 .cell .cell-r image{
-  width: 50rpx;
-  height: 50rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 .logo_wrap{
 

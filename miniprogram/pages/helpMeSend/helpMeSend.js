@@ -1,32 +1,43 @@
-const db = wx.cloud.database();
+const db = wx.cloud.database()
 Page({
+
   data: {
-    helpMsg: '',
-    price: 200,
     address: {
       name: '',
       phone: '',
       detail: ''
-    }
+    },
+    endAddress: '',
+    price: 200,
+    note: ''
   },
-  async onLoad() {
-    if (!this.data.address.phone) await this.getAddress();
+  onLoad(){
+    if (!this.data.address.phone) this.getAddress();
   },
-  setHelpMsg(e){
-     console.log(e)
-     const helpMsg = e.detail.value
-     this.setData({
-       helpMsg
-     })
+  gotoAddress() {
+    wx.navigateTo({
+      url: '../address/address',
+    })
+  },
+  async getAddress() {
+    const res = await db.collection('address').where({
+      default: true,
+      _openid: wx.getStorageSync('openid')
+    }).get();
+    const address = res.data[0]
+    if (!address) return
+    this.setData({
+      address
+    })
+  },
+  getInputValue(e) {
+    const price = e.detail.value
+    this.setData({
+      price:price*100
+    })
   },
   async submit() {
-    if (this.data.helpMsg === '') {
-      wx.showToast({
-        title: '帮助内容不能为空',
-        icon: 'none'
-      })
-      return
-    }
+
     if (this.data.address.phone === '') {
       wx.showToast({
         title: '地址不能为空',
@@ -34,6 +45,14 @@ Page({
       })
       return
     }
+    if (this.data.endAddress === ''){
+      wx.showToast({
+        title: '必须输入终点',
+        icon:'none'
+      })
+      return
+    }
+
     if (Number(this.data.price) < 200) {
       wx.showToast({
         title: '金额不能低于两块钱',
@@ -49,8 +68,8 @@ Page({
     const _id = new Date().getTime() + '' + Math.floor(Math.random() * 10000)
 
     const order = {
-      name: '万能跑腿',
-      helpMsg: this.data.helpMsg,
+      name: '帮我送',
+      endAddress:this.data.endAddress,
       _id,
       // 订单公共部分
       userinfo: wx.getStorageSync('user').info,
@@ -58,7 +77,7 @@ Page({
       price: this.data.price,
       date: new Date(),
       takeOrderer: {},
-      note:'',
+      note:this.data.note,
       takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
       status: 0,
     }
@@ -71,7 +90,7 @@ Page({
     const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
-        goodName: `万能跑腿-${this.data.address.name}`,
+        goodName: `帮我送-${this.data.address.name}`,
         totalFee: this.data.price,
         _id
       }
@@ -89,7 +108,7 @@ Page({
       wx.cloud.callFunction({
         name:'sendSms',
         data:{
-          content:'有新订单（跑腿），赶快去接单啦~~',
+          content:'有新订单（帮我送），赶快去接单啦~~',
           phone:'15922476232'
         },
         success:(res)=>{
@@ -106,41 +125,5 @@ Page({
       })
     }
 
-  },
-  async getAddress() {
-    const res = await db.collection('address').where({
-      default: true,
-      _openid: wx.getStorageSync('openid')
-    }).get();
-    const address = res.data[0]
-    if (!address) return
-    this.setData({
-      address
-    })
-  },
-  gotoAddress() {
-    wx.navigateTo({
-      url: '../address/address',
-    })
-  },
-  getInputValue(e){
-       let price = e.detail.value * 100
-       this.setData({
-         price
-       })
-  },
-  onShareAppMessage: function (res) {
-    return {
-      title: '三联学院万能跑腿，帮买，帮送，帮取，啥都可以帮的小程序~',
-      path: 'pages/errand/errand',
-      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
-    }
-  },
-  /*分享朋友圈 */
-  onShareTimeline: function () {
-    return {
-      title: '三联学院万能跑腿，帮买，帮送，帮取，啥都可以帮的小程序~',
-      imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/shareImg/avatar.png'
-    }
   },
 })

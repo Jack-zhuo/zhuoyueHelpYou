@@ -6,6 +6,7 @@
   padding: 20rpx;
   display: flex;
   /* align-items: center; */
+  box-shadow: 0 0 7rpx 5rpx rgb(207, 207, 207)
 }
 .order .avatar{
   width: 70rpx;

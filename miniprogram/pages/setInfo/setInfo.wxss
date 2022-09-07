@@ -16,7 +16,7 @@
 .item .item-right image:nth-child(1){
   border: 1rpx solid #1296db;
   border-radius: 50%;
-  padding: 10rpx;
+  /* padding: 10rpx; */
   height: 90rpx;
   width: 90rpx;
 }

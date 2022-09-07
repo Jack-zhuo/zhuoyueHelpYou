@@ -16,7 +16,6 @@ Page({
   },
 
   onLoad() {
-
     this.getOrders_notake();
   },
   // 获取正在悬赏的数据
@@ -41,7 +40,7 @@ Page({
     })
     wx.hideLoading();
   },
-  // 获取正在帮助的数据
+  // 获取已接单的数据
   async getOrders_taked(e) {
     wx.showLoading({
       title: '数据加载中',
@@ -53,7 +52,6 @@ Page({
         status: 2,
       }
     })
-    console.log(res.result.data);
     const orders_taked = res.result.data
     orders_taked.forEach(item => {
       item.date = getDateDiff(item.date);
@@ -121,71 +119,6 @@ Page({
       } else if (res.cancel) {
         console.log('点击了取消')
       }
-    }
-
-  },
-  // 点击接单后执行的函数
-  async take(e) {
-    console.log(e);
-    const resTip = await wx.showModal({
-      'title': '确认接单吗？'
-    })
-    if (resTip.cancel) return
-
-    wx.showLoading({
-      title: '接单中...',
-    })
-    //获取user
-    const user = await getUser();
-
-    if (user.isTakeOrderer) {
-      const id = e.detail.item._id
-      // 调用云函数更新此订单的状态为2，并添加接单人
-      const res = await wx.cloud.callFunction({
-        name: 'updateOrderbyId',
-        data: {
-          id,
-          status: 2,
-          takeOrderer: user
-        }
-      });
-      console.log(res)
-      wx.hideLoading();
-      //    判断订单是否被抢
-      try {
-        if (res.result.stats.updated === 1) {
-          this.getOrders_notake();
-          await wx.showToast({
-            title: '接单成功',
-            icon: 'success'
-          })
-        }
-      } catch (error) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '订单被抢了',
-          icon: 'none'
-        })
-      }
-
-
-
-    } else {
-      wx.hideLoading();
-      wx.showModal({
-        title: '你不是接单员，无法接单。',
-        content: '你要申请成为 接单员 吗？',
-        success: (res) => {
-          if (res.confirm) {
-            console.log('点击了确定')
-            wx.navigateTo({
-              url: '../applyTakeOrderer/applyTakeOrderer',
-            })
-          } else if (res.cancel) {
-            console.log('点击了取消')
-          }
-        },
-      })
     }
 
   },

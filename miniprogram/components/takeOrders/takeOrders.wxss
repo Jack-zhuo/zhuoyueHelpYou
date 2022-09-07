@@ -1,46 +1,33 @@
 
 .order{
-  background-color: white;
-  border-radius: 20rpx;
-  margin: 30rpx 40rpx;
+  background-color: rgb(255, 255, 255);
+  margin:20rpx;
   padding: 20rpx;
+  border-radius: 20rpx; 
   display: flex;
-  /* align-items: center; */
+
+  box-shadow: 0 0 7rpx 5rpx rgb(207, 207, 207)
 }
-.order .avatar{
-  width: 70rpx; 
-  height: 70rpx;
-  border-radius: 50%;
-  background-color: rgb(216, 216, 216);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* 头像 */
 .order .avatar image{
-  height: 60rpx;
-  width: 60rpx;
+  height: 70rpx;
+  width: 70rpx;
+  border-radius: 100%;
+  border: 1rpx solid #1296db;
 }
+/* 内容 */
  .order .content{
    margin-left: 30rpx;
-   flex: 1;
+  flex: 1;
 }
+/* 上 */
 .order .content .top{
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  border-bottom: 1rpx solid rgb(245, 245, 245);
 }
-.takeMessage .item .copy {
-  display: flex;
-
-}
-.takeMessage .item .copy .copyId{
-  color: #1296db;
-  margin-left: 5rpx;
-} 
-
 .order .content .top .left .service-name{
   font-size:30rpx;
+  font-weight: 800;
 }
 .order .content .top .left .time{
   font-size: 25rpx;
@@ -67,34 +54,71 @@
   padding: 10rpx;
   border-radius: 20rpx;
 }
+/* 中 */
 .order .content .middle{
   margin: 20rpx auto;
   border-radius: 20rpx;
   padding: 10rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
-.takeMessage{
-  width: 500rpx;
+.order .content .middle .item{
+  display: flex;
+  align-items: center;
+  margin: 5rpx;
   font-size: 25rpx;
 }
-.takeMessage .item{
+/* 起 */
+.order .content .middle .start{
+  margin-bottom: 20rpx;
+}
+.order .content .middle .start .left{
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  padding: 9rpx;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1rpx solid rgb(245, 245, 245);
-  padding: 10rpx 10rpx;
+  justify-content: center;
+  background-color: #30b573;
+  color: white; 
 }
-.takeMessage .item text:nth-child(1){
-  font-weight: 900;
-  width: 300rpx;
+.order .content .middle .start .right{
+  margin-left: 10rpx;
+  color: #30b573 !important; 
 }
-.takeMessage .item input{
-  border: 1rpx solid gray;
-  border-radius: 20rpx;
-  padding: 2rpx 15rpx;
-  width: 160rpx;
+/* 终 */
+.order .content .middle .end .left{
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  padding: 9rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6395ec;
+  color: white; 
+}
+.order .content .middle .end .right{
+  margin-left: 10rpx;
+  color: #6395ec !important; 
+}
+.order .content .middle .item .left{
+  font-weight: 700;
+  /* width: 160rpx; */
+ 
+  flex-shrink: 0; 
+}
+.order .content .middle .item .right{
+  color: gray;
+  display: flex;
+  align-items: center;
+}
+
+.order .content .middle .item .right .copyId{
+  color: #1296db;
+  margin-left: 5rpx;
+  border: 1rpx solid #1296db;
+  padding: 3rpx;
+  border-radius: 10rpx;
 }
 
  .order .content .bottom{
@@ -104,6 +128,7 @@
 }
 .price{
   color: red;
+  font-weight: 800;
 }
 .phone{
   font-size: 30rpx;

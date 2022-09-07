@@ -2,5 +2,6 @@
   "usingComponents": {
     "my-tab":"../../components/myTab/myTab"
 
-  }
+  },
+  "enablePullDownRefresh": false
 }

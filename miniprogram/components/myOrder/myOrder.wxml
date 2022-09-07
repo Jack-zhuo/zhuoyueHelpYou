@@ -2,7 +2,7 @@
   <!-- 上 -->
   <view class="top">
     <view class="left">
-      <view class="service-name">{{item.name}}</view>
+      <view class="service-name">{{item.name}} {{item.merchant}}</view>
       <view class="time">{{ item.date }}</view>
     </view>
     <view class="right">
@@ -23,19 +23,19 @@
     </view>
     <!-- 代取快递 -->
     <block wx:if="{{item.name === '代取快递'}}">
-      <view class="item">
+      <view class="item" wx:if="{{item.takeMsg != ''}}">
         <view class="left">取件信息：</view>
         <view class="right">
           <view>{{item.takeMsg}}</view>
         </view>
       </view>
-      <view class="item">
-        <view class="left">快递商家：</view>
+      <view class="item" wx:if="{{item.takeImg !== ''}}">
+        <view class="left">取件图片：</view>
         <view class="right">
-          <view>{{item.merchant}}</view>
+          <view bindtap="preview" data-takeImg="{{item.takeImg}}">查看图片</view>
         </view>
       </view>
-      <view class="item">
+      <view class="item" wx:if="{{item.note !== ''}}">
         <view class="left">备注信息：</view>
         <view class="right">
           <view>{{item.note}}</view>
@@ -59,19 +59,47 @@
           <view>{{item.fileName}}</view>
         </view>
       </view>
-    </block>
-    <!-- 公共部分 -->
-    <!-- <view class="item">
-      <view class="left">核销码</view>
-      <view class="right">
-        <view>{{item.takeGoodsCode}}</view>
+      <view class="item">
+        <view class="left">我的备注：</view>
+        <view class="right">
+          <view>{{item.note}}</view>
+        </view>
       </view>
-    </view> -->
+    </block>
+    <!-- 帮我送 -->
+    <block wx:if="{{ item.name === '帮我送' }}">
+     
+      <view class="item start">
+        <view class="left">起</view>
+        <view class="right">
+          <view>{{item.address.detail}}</view>
+
+        </view>
+      </view>
+      <view class="item end">
+        <view class="left">终</view>
+        <view class="right">
+          <view>{{item.endAddress}}</view>
+        </view>
+      </view>
+      <view class="item" wx:if="{{ item.note !== '' }}">
+        <view class="left">备注:</view>
+        <view class="right">
+          <view>{{item.note}}</view>
+        </view>
+      </view>
+
+    </block>
 
     <view class="item takeorderer" wx:if="{{ item.status === 2 }}">
-      <view class="left">—接单人：</view>
-      <view class="right">
-        <view>{{item.takeOrderer.info.name}}</view>
+      <view class="orderer-top">
+        <text space="nbsp">—— 接单人 ——</text>
+      </view>
+      <view class="orderer-bottom">
+        <view class="orderer-bottom-left">
+          <image src="{{item.takeOrderer.info.avatar}}"></image>
+          <view class="name">{{item.takeOrderer.info.name}}</view>
+        </view>
         <view class="call" bindtap="call">
           <text>拨打手机</text>
         </view>

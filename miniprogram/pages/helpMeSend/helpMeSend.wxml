@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="content">
+    <view class="item">
+      <view class="left">
+        <!-- <image></image> -->
+        <view>起点</view>
+      </view>
+      <view class="right" bindtap="gotoAddress">
+        <text wx:if="{{address.phone !== ''}}">{{address.name}}-{{address.phone}}-{{address.detail}}</text>
+        <text wx:else>选择地址 ></text>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="left">
+        <!-- <image></image> -->
+        <view>终点</view>
+      </view>
+      <view class="right">
+       <input placeholder="请输入终点" model:value="{{ endAddress }}"/>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="left">
+        <!-- <image></image> -->
+        <view>金额</view>
+      </view>
+      <view class="right">
+        <input type="number" bindinput="getInputValue" placeholder="请输入金额 (默认两元)" /> 
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="left">
+        <!-- <image></image> -->
+        <view>备注</view>
+      </view>
+      <view class="right">
+        <input placeholder="请输入物品/注意事项等" model:value="{{ note }}" />
+      </view>
+    </view>
+  </view>
+
+   <!-- 确认发布 --> 
+   <view class="submit">
+    <view class="text">需支付</view>
+    <view class="price">{{price/100}}元</view>
+    <button bindtap="submit">确认发布</button>
+  </view>
+</view>

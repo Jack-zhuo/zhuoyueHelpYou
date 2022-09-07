@@ -12,6 +12,7 @@
   
   <view class="buttons">
     <navigator  class="item" wx:for="{{item}}" wx:key="index" url="{{item.url}}">
+     <view class="tip" wx:if="{{item.tip}}">{{item.tip}}</view>
      <ivew class="image_wrap">
       <image src="{{ item.img }}"></image>
      </ivew>

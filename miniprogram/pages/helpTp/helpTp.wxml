@@ -12,7 +12,7 @@
           {{address.name}}-{{address.phone}}-{{address.detail}}
         </view>
         <image class="icon" src="../../images/arrow_gray.png"></image>
-      </view>
+      </view> 
     </block>
   </view>
 
@@ -75,10 +75,10 @@
     <view class="note-left">
       <image class="icon" src="../../images/info.png"></image>
       <text>备注</text>
-    </view>
+    </view> 
     <!-- 右 -->
     <view class="note-right">
-      <textarea class="input-note" placeholder="请输入备注信息"></textarea>
+      <textarea class="input-note" placeholder="请输入备注信息" model:value="{{note}}"></textarea> 
     </view>
   </view>
 

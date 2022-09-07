@@ -2,7 +2,7 @@ const db = wx.cloud.database();
 Page({
   data: {
     // 快递商家
-    array: ['请选择','菜鸟驿站', '自提柜', '顺丰'],
+    array: ['请选择','菜鸟驿站', '自提柜', '快递服务大厅'],
     index: 0,
     // 尺寸大小
     size: [{
@@ -84,6 +84,7 @@ Page({
       price: size.price
     })
   },
+  
   // 选择图片
   async selectImg(){
     const res1 = await wx.chooseMedia({
@@ -91,8 +92,6 @@ Page({
        mediaType:['image'],
        sourceType:['album']
      })
-     console.log(res1)
- 
      // 获取后缀名
      const tempFilePath = res1.tempFiles[0].tempFilePath
      const index = tempFilePath.lastIndexOf(".")

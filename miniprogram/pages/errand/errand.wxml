@@ -1,7 +1,7 @@
 <!-- 取件信息 -->
 <view class="take_info common">
   <view class="title">帮助内容：</view>
-  <textarea placeholder="请输入帮助内容..." class="info" bindinput="setHelpMsg"></textarea>
+  <textarea placeholder="请输入帮助内容" class="info" bindinput="setHelpMsg"></textarea>
 </view>
 <!-- 地址信息 -->
 <view class="address common" bindtap="gotoAddress">
@@ -18,7 +18,7 @@
 <view class="money common">
   <view class="title">金额：</view>
   <view class="inputMoney">
-    <input type="number" placeholder="请输入金额..." bindinput="getInputValue" />
+    <input type="number" placeholder="请输入金额 (默认两元)" bindinput="getInputValue" />
   </view>
 </view>
 <view class="note">

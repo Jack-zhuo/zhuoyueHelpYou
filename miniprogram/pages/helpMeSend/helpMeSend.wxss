@@ -1,0 +1,44 @@
+.container {
+  background-color: white;
+  margin:20rpx;
+  border-radius: 40rpx;
+  font-size: 29rpx;
+  box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
+} 
+.content{
+  padding: 20rpx;
+}
+.content .item{
+  display: flex;
+  margin: 20rpx 0;
+  /* background-color: pink; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx;
+  border-bottom: 1rpx solid rgb(221, 221, 221);
+}
+.content .item input{ 
+  /* border: 1rpx solid red; */
+  text-align: right;
+}
+
+/* 提交 */
+.submit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.submit .text{
+  font-size: 40rpx; 
+  font-weight: 900;
+}
+.submit .price{
+  color: red;
+  font-weight: 700;
+  padding: 10rpx;
+}
+.submit button{
+  border-radius: 60rpx;
+  background-color: #1296db;
+  color: white;
+}

@@ -14,11 +14,11 @@
   </view>
 
   <view class="address_item">
-    <switch type="checkbox" model:checked="{{isDefault}}">默认</switch>
+    <switch type="checkbox" model:checked="{{isDefault}}">默认</switch> 
   </view>
 
-  <button type="primary" bindtap="save">保存</button>
+  <button bindtap="save">保存</button>
   <view class="logo_wrap">
-    <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image>
+    <image class="logo" mode="aspectFill" src="../../images/helpyou.png"></image> 
   </view>
 </view>

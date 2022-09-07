@@ -1,12 +1,32 @@
+<my-tab bindtabChange="tabChange" tabList="{{['未处理','全部']}}"></my-tab>
 <view class="container">
-   <view class="withdraw" wx:for="{{withdraws}}" wx:key="index">
-      <view>{{item.name}}</view>
-      <view bindtap="copyWechat" data-wechat="{{item.wechat}}">{{item.wechat}}</view>
+   
 
-      <view>{{item.balance/100}}</view>
+   <view wx:if="{{tabNow === 0}}" class="withdraw" wx:for="{{withdraws}}" wx:key="index">
+      <view>{{item.name}}</view>
+      <!-- <view bindtap="copyWechat" data-wechat="{{item.wechat}}">{{item.wechat}}</view> -->
+      <view class="QRcode">
+        <image mode="widthFix" src="{{ item.QRcode }}"></image>
+      </view>
       
+      <view>{{item.balance/100}}</view>
+      <view style="color: red;">{{item.realWithdrawNumber/100}}</view>
+      <view>{{item.grossMargin/100}}</view>
+
       <view>
         <button bindtap="gotowithdraw" type="primary" data-user="{{item}}">提现</button>
       </view>
+   </view>
+   <view wx:if="{{tabNow === 1}}">
+       <view class="takeOrderers">
+          <view class="takeOrderer"  wx:for="{{takeOrderers}}" wx:key="index">
+            <view class="name" bindtap="call" data-phone="{{item.info.phone}}">
+              {{item.info.name}}
+            </view>
+            <view class="balance">
+              {{item.balance/100}}
+            </view>
+          </view>
+       </view>
    </view>
 </view> 
