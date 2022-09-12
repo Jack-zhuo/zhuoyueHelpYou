@@ -125,6 +125,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
 }
 .price{
   color: red;
@@ -140,10 +141,27 @@
 }
 .take{
   font-size: 25rpx;
-  color: #1296db;
+  color: white;
   border: 1rpx solid #1296db;
+  background-color: #1296db;
   padding: 10rpx 20rpx;
   border-radius: 50rpx;
   margin-left: 20rpx;
+  position: relative;
+}
+.take .tip{
+  position: absolute;
+  /* width: 90rpx; */
+  background-color: #1296db;
+  border: 1rpx solid #3bb7fa;
+  color: white;
+  font-size: 15rpx;
+  padding: 5rpx;
+  border-radius: 15rpx;
+  /* border-bottom-left-radius: 10;
+  border-bottom-right-radius: 0; */
+  top:-27rpx;
+  right:11rpx
+  
 }
 

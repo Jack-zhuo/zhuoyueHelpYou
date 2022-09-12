@@ -28,6 +28,8 @@
 .item input{
   /* border: 1rpx solid rgb(233, 233, 233); */
   text-align: right;
+  font-size: 20rpx;
+  width: 550rpx;
 }
 .phone .item-right button{
   width: 150rpx;

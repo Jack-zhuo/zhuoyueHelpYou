@@ -9,10 +9,11 @@ Component({
     inputCode: ''
   },
   methods: {
-    call() {
-      this.triggerEvent('call', {
-        phone: this.properties.item.address.phone
-      });
+    call(e) {
+      console.log(e)
+      wx.makePhoneCall({
+        phoneNumber:  e.currentTarget.dataset.phonenumber,
+      })
     },
     previewImg(e){ 
       console.log(e)
@@ -57,34 +58,42 @@ Component({
         item: this.properties.item
       })
     },
-    completed() {
-      const inputCode = Number(this.data.inputCode)
-      const originalCode = this.properties.item.takeGoodsCode
-      if (inputCode === originalCode) {
-        wx.showToast({
-          title: '恭喜你，成功完成这一单！',
-          icon: 'none'
-        })
-        wx.cloud.callFunction({
+    async completed(e) {
+      const res0 = await wx.showModal({
+        title: '确定送达了吗？'
+      })
+      if (res0.cancel) return
+      wx.showLoading({
+        title: '处理中...',
+      })
+      const {order} = e.currentTarget.dataset
+      const price = order.price
+      const user_id = order.takeOrderer._id
+      const id = order._id
+
+      const res1 = await wx.cloud.callFunction({
+        name: 'updateBalance',
+        data: {
+          user_id,
+          balance: price
+        }
+      })
+      if (res1.result.stats.updated === 1) {
+        const res2 = await wx.cloud.callFunction({
           name: 'updateOrderbyIdToCompleted',
           data: {
-            id: this.properties.item._id
-          },
-          success: (res) => {
-            const {
-              price
-            } = this.properties.item
-            console.log(price)
-            wx.cloud.database().collection('user').where({
-              _openid: "这是bug吗？"
-            }).update({
-              data: {
-                balance: wx.cloud.database().command.inc(Number(price.toFixed(2)))
-              }
-            })
-            this.triggerEvent('refresh');
+            id,
           }
         })
+        wx.hideLoading();
+        wx.showToast({
+          title: '完成',
+          duration: 2000,
+          mask: true
+        })
+        setTimeout(() => {
+          this.triggerEvent('refresh')
+        }, 2000)
       }
     },
     async downloadFile() {

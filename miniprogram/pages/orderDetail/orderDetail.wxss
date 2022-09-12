@@ -1,0 +1,126 @@
+.avatar {
+  height: 60rpx;
+  width: 60rpx;
+  border-radius: 50%;
+}
+
+.content_wrap {
+  background-color: rgb(255, 255, 255);
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 7rpx 5rpx rgb(207, 207, 207)
+}
+
+
+.content_wrap .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid rgb(235, 235, 235)
+}
+
+.content_wrap .top .top-left {
+  display: flex;
+  align-items: center;
+}
+.content_wrap .top .top-left .top-left-right .name{
+  font-size: 30rpx;
+  font-weight: 900; 
+}
+.content_wrap .top .top-left .top-left-right{
+  margin-left: 10rpx;
+}
+.content_wrap .top .top-left .top-left-right .time{
+  font-size: 25rpx;
+  color:gray
+}
+/* 状态 */
+.content_wrap .top .top-right {
+  font-size: 25rpx;
+}
+
+.content_wrap .top .top-right .paid {
+  padding: 10rpx;
+  border-radius: 10rpx;
+  color: white;
+  background-color: #00a2ff;
+}
+
+.content_wrap .top .top-right .taked {
+  padding: 10rpx;
+  border-radius: 10rpx;
+  color: white;
+  background-color: rgb(5, 193, 96);
+}
+
+/* 中 */
+.middle{
+  margin: 20rpx ;
+  border-radius: 20rpx;
+  padding: 10rpx;
+}
+.middle .item{
+  display: flex;
+  align-items: center;
+  margin: 5rpx;
+  font-size: 25rpx;
+}
+/* 起 */
+.middle .start{
+  margin-bottom: 20rpx;
+}
+.middle .start .left{
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  padding: 9rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #30b573;
+  color: white; 
+}
+.middle .start .right{
+  margin-left: 10rpx;
+  color: #30b573 !important; 
+}
+/* 终 */
+.middle .end .left{
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  padding: 9rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6395ec;
+  color: white; 
+}
+.middle .end .right{
+  margin-left: 10rpx;
+  color: #6395ec !important; 
+}
+.middle .item .left{
+  font-weight: 700;
+  /* width: 160rpx; */
+ 
+  flex-shrink: 0; 
+}
+.middle .item .right{
+  color: gray;
+  display: flex;
+  align-items: center;
+}
+.middle .item .right .copyId{
+  color: #1296db;
+  margin-left: 5rpx;
+  border: 1rpx solid #1296db;
+  padding: 3rpx;
+  border-radius: 10rpx;
+}

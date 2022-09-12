@@ -20,7 +20,7 @@ Page({
         img:'../../images/printer.png',
         name:'打印服务',
         url:'../print/print',
-        tip:'0跑腿费 . 秒送寝室'
+        tip:'0跑腿费'
       },{
         img:'../../images/bang.png',
         name:'万能帮',

@@ -1,6 +1,7 @@
 .container {
   background-color: white;
   margin:20rpx;
+  padding-bottom: 10rpx;
   border-radius: 40rpx;
   font-size: 29rpx;
   box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);

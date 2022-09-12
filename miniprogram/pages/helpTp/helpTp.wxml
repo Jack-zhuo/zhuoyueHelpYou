@@ -35,6 +35,25 @@
       </picker>
     </view>
   </view>
+    <!-- 性别限制 -->
+    <view class='limitGender common'>
+    <!-- 左 -->
+    <view class="limitGender-left">
+      <image class="icon" src="../../images/limit.png"></image>
+      <text>性别限制</text>
+    </view>
+    <!-- 右 -->
+    <view class="limitGender-right">
+      <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+        <view class="picker">
+          <view>{{array2[index2]}}</view>
+          <view>
+            <image class="icon" src="../../images/arrow_gray.png"></image>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
 
   <!-- 快递大小 -->
   <view class="size common">

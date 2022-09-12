@@ -21,7 +21,8 @@
     "pages/orderManagement/orderManagement",
     "components/orderManager/orderManager",
     "components/wechat/wechat",
-    "pages/helpMeSend/helpMeSend"
+    "pages/helpMeSend/helpMeSend",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

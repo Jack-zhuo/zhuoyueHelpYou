@@ -66,15 +66,13 @@
 }
 .container  .buttons .item .tip{
   position: absolute;
-  right: -40rpx;
-  top: 20rpx;
-  width: 100rpx;
-  font-size: 20rpx;
+  right: -35rpx;
+  top: 45rpx;
+  font-size: 25rpx;
   background-color: #10c7a7;
   color: white;
-  padding: 10rpx;
-  padding-right: 0;
-  border-radius: 40rpx;
-  border-bottom-left-radius: 0;
-  box-shadow: 2rpx 2rpx 5rpx 3rpx #d7dde0;
+  padding: 7rpx;
+  border-radius: 15rpx;
+  border-bottom-left-radius: 5rpx;
+  /* box-shadow: 2rpx 2rpx 5rpx 3rpx #d7dde0; */
 }

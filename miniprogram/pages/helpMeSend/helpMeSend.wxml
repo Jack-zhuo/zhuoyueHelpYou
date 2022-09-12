@@ -42,10 +42,11 @@
     </view>
   </view>
 
-   <!-- 确认发布 --> 
-   <view class="submit">
+    
+</view>
+<!-- 确认发布 --> 
+<view class="submit">
     <view class="text">需支付</view>
     <view class="price">{{price/100}}元</view>
     <button bindtap="submit">确认发布</button>
   </view>
-</view>

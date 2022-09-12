@@ -4,6 +4,9 @@ Page({
     // 快递商家
     array: ['请选择','菜鸟驿站', '自提柜', '快递服务大厅'],
     index: 0,
+    // 限制性别
+    array2:['不限性别','仅限男生','仅限女生'],
+    index2:0,
     // 尺寸大小
     size: [{
       name: '小件',
@@ -70,6 +73,12 @@ Page({
     console.log(e.detail.value);
     this.setData({
       index: e.detail.value
+    })
+  },
+  bindPickerChange2(e) {
+    console.log(e.detail.value);
+    this.setData({
+      index2: e.detail.value
     })
   },
   selectTab(e) {
@@ -149,6 +158,7 @@ Page({
       userinfo: wx.getStorageSync('user').info,
       address: this.data.address,
       merchant: this.data.array[this.data.index],
+      limitGender:this.data.array2[this.data.index2],
       size: this.data.isName,
       price: this.data.price,
       date: new Date(),

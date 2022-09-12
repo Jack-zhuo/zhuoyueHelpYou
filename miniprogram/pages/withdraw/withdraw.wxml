@@ -8,11 +8,7 @@
       <view class="QRcode">
         <image mode="widthFix" src="{{ item.QRcode }}"></image>
       </view>
-      
       <view>{{item.balance/100}}</view>
-      <view style="color: red;">{{item.realWithdrawNumber/100}}</view>
-      <view>{{item.grossMargin/100}}</view>
-
       <view>
         <button bindtap="gotowithdraw" type="primary" data-user="{{item}}">提现</button>
       </view>

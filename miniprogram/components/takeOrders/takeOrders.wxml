@@ -6,7 +6,8 @@
     <view class="top">
       <view class="left">
         <view class="service-name">{{item.userinfo.name}} | {{item.name}}</view>
-        <view class="time">{{ item.date }}</view>
+        <view wx:if="{{item.status === 1}}" class="time">{{ item.date }}</view> 
+        <view wx:if="{{item.status === 2 || item.status === 3}}" class="time">{{item.takeDate}}</view>
       </view>
       <view class="right">
         <text class="paid" wx:if="{{item.status === 1}}">已付款</text>
@@ -32,6 +33,14 @@
           </view>
           <view class="right">
             <text>{{ item.takeMsg }}</text>
+          </view>
+        </view>
+        <view class="item" wx:if="{{item.limitGender !== ''}}">
+          <view class="left">
+            <text>性别限制：</text>
+          </view>
+          <view class="right">
+            <text>{{ item.limitGender }}</text>
           </view>
         </view>
         <view class="item" wx:if="{{ item.note !== '' }}">
@@ -86,7 +95,7 @@
             <text> {{ item.pageNum }}</text>
           </view>
         </view>
-        <view class="item">
+        <view class="item" wx:if="{{item.note !== ''}}">
           <view class="left">
             <text>备注信息： </text>
           </view>
@@ -124,10 +133,10 @@
           </view>
         </view>
       </block>
-      <!-- 万能跑腿 -->
+      <!-- 帮我送 -->
       <block wx:if="{{ item.name === '帮我送' }}">
        
-        <view class="item" bindtap="call">
+        <view class="item">
           <view class="left">
             <text>备注信息：</text>
           </view>
@@ -165,7 +174,10 @@
     <view class="bottom">
       <view class="price">{{item.price/100}}元</view>
       <!-- <view bindtap="call" class="take">手机号</view> -->
-      <view wx:if="{{item.status === 1}}" bindtap="take" class="take">接单 </view>
+      <view wx:if="{{item.status === 1}}" bindtap="take" class="take">
+      <text>接单</text>
+      <!-- <text class="tip">{{item.limitGender}}</text> -->
+      </view> 
       <view wx:if="{{item.status === 2 && item.name === '打印服务'}}" bindtap="downloadFile" class="take">下载</view>
       <view wx:if="{{item.status === 2 && item.name === '代取快递' && item.takeImg !== ''}}" bindtap="showTakeImg" class="take">取件图片</view>
       <!-- <view wx:if="{{item.status === 2}}" bindtap="completed" class="take">完成</view> -->

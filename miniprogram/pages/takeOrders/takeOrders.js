@@ -50,6 +50,7 @@ Page({
      }
     orders_notake.forEach(item => {
       item.date = getDateDiff(item.date);
+      item.price = Math.round(item.price*0.8)
     });
     this.setData({
       orders_notake
@@ -75,7 +76,8 @@ Page({
     console.log(res.result.data);
     const orders_taked = res.result.data
     orders_taked.forEach(item => {
-      item.date = getDateDiff(item.date);
+      item.takeDate = getDateDiff(item.takeDate);
+      item.price = Math.round(item.price*0.8)
     });
     this.setData({
       user,
@@ -114,7 +116,8 @@ Page({
 
     // 格式化时间
     orders_completed.forEach(item => {
-      item.date = getDateDiff(item.date);
+      item.takeDate = getDateDiff(item.takeDate);
+      item.price = Math.round(item.price*0.8)
     });
 
     this.setData({
@@ -297,8 +300,7 @@ Page({
       })
       return
      }
-    const realWithdrawNumber = Math.ceil(balance * 0.8)
-    const content = `扣除20%的平台费，实际提现${realWithdrawNumber/100}`
+    const content = `确认提现吗？`
     const modalRes = await wx.showModal({
       title:'说明',
       content
@@ -341,7 +343,6 @@ Page({
          name,
          QRcode,
          balance,
-         realWithdrawNumber,
          isWithdraw:false
        }
      })
@@ -388,7 +389,7 @@ Page({
     // wx.hideLoading(); 
     // //隐藏导航条加载动画 
     // wx.hideNavigationBarLoading();
-    // //停止下拉刷新
+    // //停止下拉刷新 
     wx.stopPullDownRefresh();
   },
   onReachBottom() {

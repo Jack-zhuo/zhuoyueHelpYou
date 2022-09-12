@@ -18,7 +18,7 @@
       <view class="left">订单编号：</view>
       <view class="right">
         <view>{{item._id}}</view>
-        <view class="copy-id" bindtap="copyId" data-id="{{item._id}}">复制</view>
+        <view class="copy-id" catchtap="copyId" data-id="{{item._id}}">复制</view>
       </view>
     </view>
     <!-- 代取快递 -->
@@ -32,7 +32,7 @@
       <view class="item" wx:if="{{item.takeImg !== ''}}">
         <view class="left">取件图片：</view>
         <view class="right">
-          <view bindtap="preview" data-takeImg="{{item.takeImg}}">查看图片</view>
+          <view catchtap="preview" data-takeImg="{{item.takeImg}}">查看图片</view>
         </view>
       </view>
       <view class="item" wx:if="{{item.note !== ''}}">
@@ -100,7 +100,7 @@
           <image src="{{item.takeOrderer.info.avatar}}"></image>
           <view class="name">{{item.takeOrderer.info.name}}</view>
         </view>
-        <view class="call" bindtap="call">
+        <view class="call" catchtap="call">
           <text>拨打手机</text>
         </view>
       </view>
@@ -109,9 +109,9 @@
   </view>
   <view class="bottom">
     <view class="price">{{item.price/100}}元</view>
-    <view class="refund" wx:if="{{ item.status === 1}}" bindtap="refund">退款</view>
-    <view class="complete" wx:if="{{ item.status === 2}}" bindtap="complete">已送达</view>
-    <view class="getWeChat" bindtap="getWeChat">客服微信</view>
+    <view class="refund" wx:if="{{ item.status === 1}}" catchtap="refund">退款</view>
+    <view class="complete" wx:if="{{ item.status === 2}}" catchtap="complete">已送达</view>
+    <view class="getWeChat" catchtap="getWeChat">客服微信</view>
   </view>
 
-</view>
+</view> 

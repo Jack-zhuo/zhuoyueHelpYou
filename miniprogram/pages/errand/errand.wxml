@@ -1,7 +1,7 @@
 <!-- 取件信息 -->
 <view class="take_info common">
   <view class="title">帮助内容：</view>
-  <textarea placeholder="请输入帮助内容" class="info" bindinput="setHelpMsg"></textarea>
+  <textarea placeholder="请输入帮助信息。例如：陪聊、陪打篮球、陪散步等等" class="info" bindinput="setHelpMsg"></textarea>
 </view>
 <!-- 地址信息 -->
 <view class="address common" bindtap="gotoAddress">

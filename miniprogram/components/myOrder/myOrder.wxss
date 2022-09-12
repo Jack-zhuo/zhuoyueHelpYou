@@ -18,9 +18,7 @@
    padding-bottom: 20rpx; 
    border-bottom:1rpx solid rgb(235, 235, 235)
  }
- .content .top .left{
 
- }
  .content .top .left .service-name{
    font-size: 35rpx;
    font-weight: 900; 

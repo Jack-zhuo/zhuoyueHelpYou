@@ -1,0 +1,173 @@
+<view class="container">
+  <view class="content_wrap">
+    <!-- 发起人 -->
+    <view class="top">
+      <view class="top-left">
+        <image class="avatar" src="{{order.userinfo.avatar}}"></image>
+        <view class="top-left-right">
+          <view class="name">{{order.name}}</view>
+          <view class="time">{{order.date}}</view>
+        </view>
+      </view>
+
+      <view class="top-right">
+        <view class="paid" wx:if="{{order.status === 1}}">待帮助</view>
+        <view class="taked" wx:if="{{order.status === 2}}">已接单</view>
+        <view class="completed" wx:if="{{order.status === 3}}">已完成</view>
+      </view>
+    </view>
+    <!-- 内容 -->
+   <view class="middle">
+
+      <view class="item">
+        <view class="left">订单编号：</view>
+        <view class="right">
+          <view>{{order._id}}</view>
+          <view class="copyId" bindtap="copyId" data-id="{{order._id}}">复制</view>
+        </view>
+      </view>
+
+      <!-- 代取快递 -->
+      <block wx:if="{{ order.name === '代取快递'}}">
+        <view class="item" wx:if="{{order.status === 2 && order.takeMsg !== ''}}">
+          <view class="left">
+            <text>取件信息：</text>
+          </view>
+          <view class="right">
+            <text>{{ order.takeMsg }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>性别限制：</text>
+          </view>
+          <view class="right">
+            <text>{{ order.limitGender }}</text>
+          </view>
+        </view>
+        <view class="item" wx:if="{{ order.note !== '' }}">
+          <view class="left">
+            <text>备注信息： </text>
+          </view>
+          <view class="right">
+            <text> {{ order.note }}</text>
+          </view>
+        </view>
+        <view class="item start">
+          <view class="left">
+            <text>起</text>
+          </view>
+          <view class="right">
+            <text> {{ order.merchant }}</text>
+          </view>
+        </view>
+        <view class="item end" bindtap="call">
+          <view class="left">
+            <text>终</text>
+          </view>
+          <view class="right">
+            <text>{{order.address.name}}-{{order.address.phone}}-{{ order.address.detail }}</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 打印服务 -->
+      <block wx:if="{{ order.name === '打印服务' }}">
+        <view class="item">
+          <view class="left">
+            <text>文件名：</text>
+          </view>
+          <view class="right">
+            <text> {{ order.fileName }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>份数： </text>
+          </view>
+          <view class="right">
+            <text> {{ order.count }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>页数： </text>
+          </view>
+          <view class="right">
+            <text> {{ order.pageNum }}</text>
+          </view>
+        </view>
+        <view class="item" wx:if="{{order.note !== ''}}">
+          <view class="left">
+            <text>备注信息： </text>
+          </view>
+          <view class="right">
+            <text> {{ order.note }}</text>
+          </view>
+        </view>
+        <view class="item end" bindtap="call">
+          <view class="left">
+            <text>址</text>
+          </view>
+          <view class="right">
+            <text>{{order.address.name}}-{{order.address.phone}}-{{ order.address.detail }}</text>
+          </view>
+        </view>
+      </block>
+
+
+      <!-- 万能跑腿 -->
+      <block wx:if="{{ order.name === '万能跑腿' }}">
+        <view class="item">
+          <view class="left">
+            <text>帮助内容： </text>
+          </view>
+          <view class="right">
+            <text> {{ order.helpMsg }}</text>
+          </view>
+        </view>
+        <view class="item end" bindtap="call">
+          <view class="left">
+            <text>址</text>
+          </view>
+          <view class="right">
+            <text>{{order.address.name}}-{{order.address.phone}}-{{ order.address.detail }}</text>
+          </view>
+        </view>
+      </block>
+      <!-- 帮我送 -->
+      <block wx:if="{{ order.name === '帮我送' }}">
+       
+        <view class="item">
+          <view class="left">
+            <text>备注信息：</text>
+          </view>
+          <view class="right">
+            <text>{{order.note}}</text>
+          </view>
+        </view>
+
+        <view class="item start" bindtap="call">
+          <view class="left">
+            <text>起</text>
+          </view>
+          <view class="right">
+            <text>{{order.address.name}}-{{ order.address.detail }}</text>
+          </view>
+        </view>
+        <view class="item end" bindtap="call">
+          <view class="left">
+            <text>起</text>
+          </view>
+          <view class="right">
+            <text>{{order.endAddress}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 底部 -->
+    <view class="footer">
+
+    </view>
+  </view>
+</view>

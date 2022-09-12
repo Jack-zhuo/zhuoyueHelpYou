@@ -1,10 +1,13 @@
 <my-tab tabList="{{tabList}}" bindtabChange="tabChange" class="tab"></my-tab>
+<!-- 正在悬赏 -->
 <view wx:if="{{ tabNow === 0 }}" >
   <orderManager wx:for="{{ orders_notake }}" item="{{ item }}" wx:key="index"></orderManager>
 </view>
+<!-- 已接单 -->
 <view wx:if="{{ tabNow === 1 }}" >
-  <orderManager wx:for="{{ orders_taked }}" item="{{ item }}" wx:key="index"></orderManager>
+  <orderManager bindrefresh="refresh" wx:for="{{ orders_taked }}" item="{{ item }}" wx:key="index"></orderManager>
 </view>
+<!-- 查询单个 -->
 <view class="query" wx:if="{{ tabNow === 2 }}" >
     <input bindinput="getOrderId" placeholder="请输入订单号"/>
     <button bindtap="query" type="primary">查询</button>

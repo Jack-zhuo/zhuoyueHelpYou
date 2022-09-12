@@ -20,7 +20,7 @@
       </view>
     </view>
     <!-- 三天内自动完成 -->
-    <view class="cell service" bindtap="completeAfterFiveDay" wx:if="{{isAdmin}}">
+    <!-- <view class="cell service" bindtap="completeAfterFiveDay" wx:if="{{isAdmin}}">
       <view class="cell-l">
         <image src="../../images/help.jpg"></image>
         <text>三天内自动完成</text>
@@ -28,7 +28,7 @@
       <view class="cell-r">
         <image src="../../images/arrow_gray.png"></image>
       </view>
-    </view>
+    </view> -->
     <!-- 订单管理 -->
     <view class="cell" bindtap="gotoOrderManagement" wx:if="{{isAdmin}}">
       <view class="cell-l">

@@ -51,6 +51,20 @@
   display: flex;
   align-items: center;
 }
+/* 性别限制 */
+.limitGender .limitGender-left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.limitGender .limitGender-left text{
+  margin-left: 10rpx;
+}
+.limitGender .limitGender-right .picker{
+  display: flex;
+  align-items: center;
+}
+
 
 /* 快递大小 */
 .size{

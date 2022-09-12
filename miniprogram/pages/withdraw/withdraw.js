@@ -3,8 +3,8 @@ Page({
 
   data: {
     withdraws: [],
-    tabNow:0,
-    takeOrderers:[]
+    tabNow: 0,
+    takeOrderers: []
   },
   onLoad(options) {
     this.getWithdraws();
@@ -18,24 +18,20 @@ Page({
     const res = await wx.cloud.callFunction({
       name: 'getWithdraws',
     })
-    console.log(res);
     const withdraws = res.result.data
-    for (let i = 0; i < withdraws.length; i++) {
-      const item= withdraws[i];
-      
-      item.grossMargin = Math.ceil(item.balance * 0.2) 
-    }
     this.setData({
       withdraws
     })
     wx.hideLoading()
   },
 
-  call(e){
-   const {phone} = e.currentTarget.dataset
-   wx.makePhoneCall({
-     phoneNumber: phone,
-   })
+  call(e) {
+    const {
+      phone
+    } = e.currentTarget.dataset
+    wx.makePhoneCall({
+      phoneNumber: phone,
+    })
   },
   // 复制微信号
   copyWechat(e) {
@@ -46,21 +42,22 @@ Page({
   // 确认提现
   async gotowithdraw(e) {
     const res2 = await wx.showModal({
-      title:'提示',
-      content:'确认提现吗？',
-      cancelColor: 'cancelColor',
+      content: '确认提现吗？',
     })
-    console.log(res2) 
     if (res2.cancel) return
+    
+    wx.showLoading({
+      title: '处理中',
+    })
     const withdraw_user = e.currentTarget.dataset.user
     const resBalance = await wx.cloud.callFunction({
-        name:'updateBalance',
-        data:{
-          user_id:withdraw_user.user_id,
-          balance:withdraw_user.balance * (-1)
-        }
+      name: 'updateBalance',
+      data: {
+        user_id: withdraw_user.user_id,
+        balance: withdraw_user.balance * (-1)
+      }
     })
-     console.log(resBalance)
+    console.log(resBalance)
 
     const res = await wx.cloud.callFunction({
       name: 'updateWithdraw',
@@ -68,25 +65,20 @@ Page({
         _id: withdraw_user._id,
       }
     })
-    wx.cloud.database().collection('user').doc('16db756f62f26d201091de9b7c5321f9').update({
-      data:{
-        grossMargin: wx.cloud.database().command.inc(withdraw_user.grossMargin)
-      }
-    })
+    wx.hideLoading()
     wx.showToast({
       title: '提现成功',
-      success:()=>{
+      success: () => {
         this.getWithdraws()
       }
     })
-    
   },
-  async getTakeOrderers(){
+  async getTakeOrderers() {
     wx.showLoading({
       title: '加载中',
     })
     const res = await wx.cloud.callFunction({
-      name:'getUser',
+      name: 'getUser',
     })
     const takeOrderers = res.result.data
     this.setData({
@@ -95,37 +87,37 @@ Page({
     wx.hideLoading()
   },
   // tab切换
-  tabChange(e){
-     console.log(e.detail)
-     const tabNow = e.detail
-     this.setData({
-       tabNow
-     })
-     if (tabNow === 0){
-       this.getWithdraws();
-     }
-     if (tabNow === 1){
-       this.getTakeOrderers()
-     }
+  tabChange(e) {
+    console.log(e.detail)
+    const tabNow = e.detail
+    this.setData({
+      tabNow
+    })
+    if (tabNow === 0) {
+      this.getWithdraws();
+    }
+    if (tabNow === 1) {
+      this.getTakeOrderers()
+    }
   },
   onPullDownRefresh() {
     const tabNow = this.data.tabNow
-    if (tabNow === 0){
+    if (tabNow === 0) {
       console.log('刷新了‘未处理’tab')
       this.setData({
-        withdraws:[]
+        withdraws: []
       })
-     this.getWithdraws();
+      this.getWithdraws();
     }
-    if (tabNow === 1){
+    if (tabNow === 1) {
       console.log('刷新了‘全部’tab')
       this.setData({
-        takeOrderers:[]
+        takeOrderers: []
       })
-     this.getTakeOrderers();
+      this.getTakeOrderers();
     }
     //隐藏loading 提示框
-    wx.hideLoading(); 
+    wx.hideLoading();
     //隐藏导航条加载动画 
     wx.hideNavigationBarLoading();
     //停止下拉刷新

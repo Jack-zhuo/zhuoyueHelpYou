@@ -7,8 +7,8 @@
       <view class="row-right">{{item.name}}</view>
     </view>
     <view class="row">
-      <view class="row-left">班级</view>
-      <view class="row-right">{{item.class}}</view>
+      <view class="row-left">个性签名</view>
+      <view class="row-right">{{item.motto}}</view>
     </view>
     <view class="row">
       <view class="row-left">手机号</view>

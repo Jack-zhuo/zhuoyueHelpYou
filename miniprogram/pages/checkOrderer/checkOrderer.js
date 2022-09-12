@@ -19,8 +19,12 @@ Page({
 
   // 通过
   async approve(e) {
+    const resTip = await wx.showModal({
+      'title':'确认通过吗？'
+    })
+    if(resTip.cancel) return
     console.log(e.currentTarget.dataset.applicant)
-    const {_openid,name,phone} = e.currentTarget.dataset.applicant;
+    const {_openid,name,motto,phone} = e.currentTarget.dataset.applicant;
   
     // 更新用户表
     const res = await wx.cloud.callFunction({
@@ -28,7 +32,8 @@ Page({
       data: {
         _openid,
         name,
-        phone
+        phone,
+        motto
       }
     })
 
@@ -50,6 +55,10 @@ Page({
 
   // 不通过
   async delete(e) {
+    const resTip = await wx.showModal({
+      'title':'确认不通过吗？'
+    })
+    if(resTip.cancel) return
     console.log(e);
     const openid = e.currentTarget.dataset.openid;
     const res = await wx.cloud.callFunction({

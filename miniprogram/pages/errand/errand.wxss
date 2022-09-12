@@ -20,7 +20,8 @@
   border-radius: 10rpx;
   width: 450rpx;
   height: 100rpx;
-  padding: 5rpx;
+  padding: 15rpx;
+  font-size: 20rpx;
 }
 
 input{
