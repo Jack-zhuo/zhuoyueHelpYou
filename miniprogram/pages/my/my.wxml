@@ -9,6 +9,16 @@
   </view>
 
   <view class="content_wrap">
+  <!-- 申请接单员 -->
+  <view class="cell address" bindtap="gotoApplyOrderer">
+      <view class="cell-l">
+        <image src="../../images/apply.png"></image>
+        <text style="color: red;">申请接单员</text>
+      </view>
+      <view class="cell-r">
+        <image src="../../images/arrow_gray.png"></image>
+      </view>
+    </view>
     <!-- 我的地址 -->
     <view class="cell address" bindtap="gotoAddress">
       <view class="cell-l">

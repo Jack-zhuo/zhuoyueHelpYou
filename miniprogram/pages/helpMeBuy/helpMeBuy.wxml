@@ -1,0 +1,92 @@
+<view class="container">
+
+<!-- 地址 -->
+<view class="address-wrap common">
+  <block wx:if="{{!address.phone}}">
+    <button bindtap="addAddress">添加地址</button>
+  </block>
+  <block wx:else>
+    <view class="address" bindtap="gotoAddress">
+      <image class="icon" src="../../images/spot.png"></image>
+      <view class="address-detail">
+        {{address.name}}-{{address.phone}}-{{address.detail}}
+      </view>
+      <image class="icon" src="../../images/arrow_gray.png"></image>
+    </view> 
+  </block>
+</view>
+
+  <!-- 性别限制 -->
+  <view class='limitGender common'>
+  <!-- 左 -->
+  <view class="limitGender-left">
+    <image class="icon" src="../../images/limit.png"></image>
+    <text>性别限制</text>
+  </view>
+  <!-- 右 -->
+  <view class="limitGender-right">
+    <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array}}">
+      <view class="picker">
+        <view>{{array[index]}}</view>
+        <view>
+          <image class="icon" src="../../images/arrow_gray.png"></image>
+        </view>
+      </view>
+    </picker>
+  </view>
+</view>
+
+
+
+
+<!-- 取件信息 -->
+<view class="take-info common">
+  <!-- 左 -->
+  <view class="take-info-left">
+    <image class="icon" src="../../images/info.png"></image>
+    <text>请写明要购买的商品</text>
+  </view>
+  <!-- 右 -->
+  <view class="take-info-right">
+
+    <textarea class="input-info" placeholder="想吃什么买什么~~" model:value="{{takeMsg}}"></textarea>
+ 
+  </view>
+</view>
+<!-- 预估商品费用 -->
+<view class="forecast common">
+  <!-- 左 -->
+  <view class="forecast-left">
+    <image class="icon" src="../../images/info.png"></image>
+    <text>预估商品费用</text>
+  </view> 
+  <!-- 右 -->
+  <view class="forescast-right"> 
+    <input type="number" placeholder="仅供接单员购买参考，以实际为准" model:value="{{note}}" /> 
+  </view>
+</view>
+
+<!-- 备注 -->
+<view class="note common">
+  <!-- 左 -->
+  <view class="note-left">
+    <image class="icon" src="../../images/info.png"></image>
+    <text>备注</text>
+  </view> 
+  <!-- 右 -->
+  <view class="note-right">
+    <textarea class="input-note" placeholder="请输入备注信息" model:value="{{note}}"></textarea> 
+  </view>
+</view>
+
+</view>
+
+
+<!-- 确认发布 --> 
+<view class="submit">
+  <view class="text">需支付</view>
+  <view class="price">{{totalPrice/100}}元</view>
+  <button bindtap="goPay">确认发布</button>
+</view>
+
+<wechat></wechat>

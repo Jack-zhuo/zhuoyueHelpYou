@@ -58,10 +58,7 @@
    
    // 获取正在悬赏的数据
    async getOrders_notake(e) {
-     wx.showLoading({
-       title: '数据加载中',
-       mask: true
-     })
+   
      const res = await wx.cloud.callFunction({
        name: 'getOrders',
        data: {
@@ -77,7 +74,6 @@
         text: len+''
       })
      }
-    
-     wx.hideLoading();
+
    },
  });

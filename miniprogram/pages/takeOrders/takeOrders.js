@@ -5,6 +5,7 @@ import {
 import {
   getDateDiff
 } from '../../utils/getDateDiff'
+let startX, endX;
 Page({
   data: {
     orders_notake: [],
@@ -25,6 +26,41 @@ Page({
       QRcode:user.QRcode
     })
     this.getOrders_notake();
+  },
+  // 页面滑动
+  touchStart(e) {
+    startX = e.touches[0].pageX
+    console.log(startX)
+  },
+  touchEnd(e) {
+    endX = e.changedTouches[0].pageX
+    console.log(endX)
+    this.slide()
+  },
+  slide() {
+    let tabNow = this.data.tabNow
+    if (startX - endX > 50) {
+      console.log('你右滑了')
+      if (tabNow === 2) return
+      tabNow = tabNow + 1
+      this.setData({
+        tabNow
+      })
+      if (tabNow === 0) this.getOrders_notake();
+      if (tabNow === 1) this.getOrders_taked();
+      if (tabNow === 2) this.getOrders_completed();
+    }
+    if (endX - startX > 50) {
+      console.log('你左滑了')
+      if (tabNow === 0) return
+      tabNow = tabNow - 1
+      this.setData({
+        tabNow
+      })
+      if (tabNow === 0) this.getOrders_notake();
+      if (tabNow === 1) this.getOrders_taked();
+      if (tabNow === 2) this.getOrders_completed();
+    }
   },
   // 获取正在悬赏的数据
   async getOrders_notake(e) {
@@ -50,7 +86,7 @@ Page({
      }
     orders_notake.forEach(item => {
       item.date = getDateDiff(item.date);
-      item.price = Math.round(item.price*0.8)
+      item.price = Math.round(item.price*0.8) 
     });
     this.setData({
       orders_notake
@@ -354,6 +390,16 @@ Page({
          icon:'none',
          duration:2000
        })
+       wx.cloud.callFunction({
+        name:'sendSms',
+        data:{
+          content:'有人提现啦',
+          phone:'15922476232'
+        },
+        success:(res)=>{
+            console.log(res)
+        }
+      })
      }else{
        wx.showToast({
          title: '出错了，稍后再试',

@@ -1,6 +1,8 @@
-<view class="container">
+<view class="container"
+bindtouchstart="touchStart"  bindtouchend="touchEnd"
+>
   <view>
-  <!-- tab栏 -->
+    <!-- tab栏 -->
     <scroll-view scroll-x class="scroll-view">
       <view class="tab">
         <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{tabList}}" wx:key="index" bindtap="selectTab" data-index="{{ index }}">
@@ -8,34 +10,36 @@
         </view>
       </view>
     </scroll-view>
-    <!-- 已付款 -->
-    <view wx:if="{{ tabNow === 0 }}" class="body">
-      <view class="no-order" wx:if="{{orders_paid.length === 0}}">
-        <image src="../../images/none.png"></image>
-        <view class="text">没有订单哦</view>
+    <view class="body">
+      <!-- 已付款 -->
+      <view wx:if="{{ tabNow === 0 }}" >
+        <view class="no-order" wx:if="{{orders_paid.length === 0}}">
+          <image src="../../images/none.png"></image>
+          <view class="text">没有订单哦</view>
+        </view>
+        <view wx:for="{{ orders_paid }}" class="item">
+          <my-order bindgetOrdersPaid="getorders_paid" item="{{ item }}"></my-order>
+        </view>
       </view>
-      <view wx:for="{{ orders_paid }}" class="item">
-        <my-order bindgetOrdersPaid="getorders_paid" item="{{ item }}"></my-order>
+      <!-- 已接单 -->
+      <view wx:if="{{ tabNow === 1 }}">
+        <view class="no-order" wx:if="{{orders_taked.length === 0}}">
+          <image src="../../images/none.png"></image>
+          <view class="text">没有订单哦</view>
+        </view>
+        <view wx:for="{{ orders_taked }}" wx:key="index">
+          <my-order bindrefresh="onPullDownRefresh" item="{{ item }}"></my-order>
+        </view>
       </view>
-    </view>
-    <!-- 已接单 -->
-    <view wx:if="{{ tabNow === 1 }}" class="body">
-      <view class="no-order" wx:if="{{orders_taked.length === 0}}">
-        <image src="../../images/none.png"></image>
-        <view class="text">没有订单哦</view>
-      </view>
-      <view wx:for="{{ orders_taked }}" wx:key="index">
-        <my-order bindrefresh="onPullDownRefresh" item="{{ item }}" ></my-order>
-      </view>
-    </view>
-    <!-- 已完成 -->
-    <view wx:if="{{ tabNow === 2 }}" class="body">
-      <view class="no-order" wx:if="{{orders_completed.length === 0}}">
-        <image src="../../images/none.png"></image>
-        <view class="text">没有订单哦</view>
-      </view>
-      <view wx:for="{{ orders_completed }}" wx:key="index">
-        <my-order item="{{ item }}"></my-order>
+      <!-- 已完成 -->
+      <view wx:if="{{ tabNow === 2 }}">
+        <view class="no-order" wx:if="{{orders_completed.length === 0}}">
+          <image src="../../images/none.png"></image>
+          <view class="text">没有订单哦</view>
+        </view>
+        <view wx:for="{{ orders_completed }}" wx:key="index">
+          <my-order item="{{ item }}"></my-order>
+        </view>
       </view>
     </view>
   </view>

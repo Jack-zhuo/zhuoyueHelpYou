@@ -70,6 +70,19 @@
     </view>
   </view>
 
+  <!-- 快递数量 -->
+  <view class="num common">
+    <!-- 左 -->
+    <view class="num-left">
+      <image class="icon" src="../../images/size.png"></image>
+      <text>快递数量</text>
+    </view>
+    <!-- 右 -->
+    <view class="num-right">
+      <input type="number" placeholder="请输入快递数量 默认一个" bindinput="setNum" />
+    </view>
+  </view>
+
   <!-- 取件信息 -->
   <view class="take-info common">
     <!-- 左 -->
@@ -107,7 +120,7 @@
   <!-- 确认发布 --> 
   <view class="submit">
     <view class="text">需支付</view>
-    <view class="price">{{price/100}}元</view>
+    <view class="price">{{totalPrice/100}}元</view>
     <button bindtap="goPay">确认发布</button>
   </view>
 

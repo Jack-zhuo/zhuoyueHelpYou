@@ -60,14 +60,14 @@ Component({
     },
     async completed(e) {
       const res0 = await wx.showModal({
-        title: '确定送达了吗？'
+        title: '时间超过两天了吗'
       })
       if (res0.cancel) return
       wx.showLoading({
         title: '处理中...',
       })
       const {order} = e.currentTarget.dataset
-      const price = order.price
+      const price = Math.round(order.price * 0.8)
       const user_id = order.takeOrderer._id
       const id = order._id
 

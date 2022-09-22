@@ -63,10 +63,14 @@
   margin: 5rpx; 
  
 }
+.middle .item .left{
+  flex-shrink: 0
+}
 .middle .item .right{ 
   display: flex;
   align-items: center;
   color: rgb(97, 97, 97);
+  
 
 }
 .middle .item .right view:nth-child(2){

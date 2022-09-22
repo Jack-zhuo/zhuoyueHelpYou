@@ -22,7 +22,9 @@
     "components/orderManager/orderManager",
     "components/wechat/wechat",
     "pages/helpMeSend/helpMeSend",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "pages/helpMeBuy/helpMeBuy",
+    "pages/helpSendExpress/helpSendExpress"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

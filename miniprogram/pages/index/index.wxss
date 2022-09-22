@@ -61,7 +61,7 @@
 .container  .buttons .item .text{
   position: absolute;
   bottom: 20rpx;
-  font-size: 25rpx;
+  font-size: 30rpx;
   color: #1296db;
 }
 .container  .buttons .item .tip{

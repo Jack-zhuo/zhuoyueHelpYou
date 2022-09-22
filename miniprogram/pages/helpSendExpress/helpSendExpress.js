@@ -1,35 +1,64 @@
 const db = wx.cloud.database();
 Page({
   data: {
-    helpMsg: '',
-    price: 200,
+    deliverAddress: '',
+    price: 800,
     address: {
       name: '',
       phone: '',
       detail: ''
-    }
+    },
+    provinces:['江浙沪皖','其他地区','西藏，新疆'],
+    index:0
   },
   async onLoad() {
     if (!this.data.address.phone) await this.getAddress();
   },
-  setHelpMsg(e){
+  setDeliverAddress(e){
      console.log(e)
-     const helpMsg = e.detail.value
+     const deliverAddress = e.detail.value
      this.setData({
-       helpMsg
+      deliverAddress
      })
+  },
+  bindPickerChange(e){
+     const index = e.detail.value*1
+     console.log(index)
+     this.setData({
+       index
+     })
+     console.log(1)
+     if (index === 0) {
+       this.setData({ 
+         price:800
+       })
+      return
+     }
+     if (index === 1) {
+      this.setData({
+        price:1000
+      })
+      return
+     }
+     if (index === 2) {
+      this.setData({
+        price:1500
+      })
+      return
+     }
+
   },
   async submit() {
     if (this.data.helpMsg === '') {
       wx.showToast({
-        title: '帮助内容不能为空',
+        title: '收货地址不能为空',
         icon: 'none'
       })
       return
     }
     if (this.data.address.phone === '') {
       wx.showToast({
-        title: '地址不能为空',
+        title: '取件地址不能为空',
         icon: 'none'
       })
       return
@@ -49,8 +78,8 @@ Page({
     const _id = new Date().getTime() + '' + Math.floor(Math.random() * 10000)
 
     const order = {
-      name: '万能帮',
-      helpMsg: this.data.helpMsg,
+      name: '快递代寄',
+      deliverAddress: this.data.deliverAddress,
       _id,
       // 订单公共部分
       userinfo: wx.getStorageSync('user').info,
@@ -59,7 +88,7 @@ Page({
       date: new Date(),
       takeOrderer: {},
       note:'',
-      takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
+      // takeGoodsCode: Math.floor(Math.random() * (900)) + 100,
       status: 0,
     }
     // 添加订单到数据库
@@ -71,7 +100,7 @@ Page({
     const res = await wx.cloud.callFunction({
       name: 'toPay',
       data: {
-        goodName: `万能跑腿-${this.data.address.name}`,
+        goodName: `快递代寄-${this.data.address.name}`,
         totalFee: this.data.price,
         _id
       }
@@ -89,7 +118,7 @@ Page({
       wx.cloud.callFunction({
         name:'sendSms',
         data:{
-          content:'有新订单（跑腿），赶快去接单啦~~',
+          content:'快递代寄',
           phone:'15922476232'
         },
         success:(res)=>{
@@ -123,12 +152,12 @@ Page({
       url: '../address/address',
     })
   },
-  getInputValue(e){
-       let price = e.detail.value * 100
-       this.setData({
-         price
-       })
-  },
+  // getInputValue(e){
+  //      let price = e.detail.value * 100
+  //      this.setData({
+  //        price
+  //      })
+  // },
   onShareAppMessage: function (res) {
     return {
       title: '三联学院万能跑腿，帮买，帮送，帮取，啥都可以帮的小程序~',

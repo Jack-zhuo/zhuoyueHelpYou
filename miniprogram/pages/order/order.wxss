@@ -1,3 +1,7 @@
+.container{
+  /* border: 1rpx solid red; */
+  height: 1200rpx;
+}
 .scroll-view{
   background-color: white;
 }
@@ -17,6 +21,7 @@
   background-color: #f8fdff;
   
 }
+
 /* 没有订单哦 */
 .no-order{
   margin: 200rpx auto;

@@ -1,53 +1,56 @@
-<my-tab tabList="{{tabList}}" bindtabChange="tabChange" class="tab"></my-tab>
-<!-- 正在悬赏 -->
-<view wx:if="{{tabNow === 0}}">
-  <view class="no-order" wx:if="{{orders_notake.length === 0}}">
-    <image src="../../images/none.png"></image>
-    <view class="text">没有订单哦</view> 
+<view class="container" bindtouchstart="touchStart"  bindtouchend="touchEnd">
+  <my-tab tabList="{{tabList}}" tabNow="{{tabNow}}"bindtabChange="tabChange" class="tab"></my-tab>
+  <!-- 正在悬赏 -->
+  <view wx:if="{{tabNow === 0}}">
+    <view class="no-order" wx:if="{{orders_notake.length === 0}}">
+      <image src="../../images/none.png"></image>
+      <view class="text">没有订单哦</view>
+    </view>
+    <view wx:for="{{ orders_notake }}" wx:key="index">
+      <take-order bindtake="take" bindcall="call" wx:if="{{ item.status === 1 }}" item="{{ item }}"></take-order>
+    </view>
   </view>
-  <view wx:for="{{ orders_notake }}" wx:key="index">
-    <take-order bindtake="take" bindcall="call" wx:if="{{ item.status === 1 }}" item="{{ item }}"></take-order>
+  <!-- 正在帮助 -->
+  <view wx:if="{{tabNow === 1}}">
+    <view class="no-order" wx:if="{{orders_taked.length === 0}}">
+      <image src="../../images/none.png"></image>
+      <view class="text">没有订单哦</view>
+    </view>
+    <view wx:for="{{ orders_taked }}" wx:key="_id">
+      <take-order bindrefresh="refresh" bindcall="call" item="{{ item }}"></take-order>
+    </view>
   </view>
-</view>
-<!-- 正在帮助 --> 
-<view wx:if="{{tabNow === 1}}">
-  <view class="no-order" wx:if="{{orders_taked.length === 0}}">
-    <image src="../../images/none.png"></image>
-    <view class="text">没有订单哦</view>
-  </view>
-  <view wx:for="{{ orders_taked }}" wx:key="_id">
-    <take-order bindrefresh="refresh" bindcall="call" item="{{ item }}"></take-order>
-  </view>
-</view>
-<!-- 我帮助的 -->
-<view wx:if="{{tabNow === 2}}" class="my-help">
+  <!-- 我帮助的 -->
+  <view wx:if="{{tabNow === 2}}" class="my-help">
 
-  <view class="my-balance">
-    <view class="balance">
-      <view>收益:</view>
-      <view>{{user.balance/100}} 元</view>
-    </view>
-    <view class="input">
-      <view>姓名：</view>
-      <input model:value="{{name}}" placeholder="一定要真实姓名，不然会影响提现" />
-    </view>
-    <view class="uploadCode" bindtap="uploadQRcode">
-      <view>请上传收款码</view>
-      <view wx:if="{{ QRcode === '' }}">+</view>
-      <view wx:else>
-        <image class="QRcode" src="{{ QRcode }}"></image>
+    <view class="my-balance">
+      <view class="balance">
+        <view>收益:</view>
+        <view>{{user.balance/100}} 元</view>
+      </view>
+      <view class="input">
+        <view>姓名：</view>
+        <input model:value="{{name}}" placeholder="一定要真实姓名，不然会影响提现" />
+      </view>
+      <view class="uploadCode" bindtap="uploadQRcode">
+        <view>请上传收款码</view>
+        <view wx:if="{{ QRcode === '' }}">+</view>
+        <view wx:else>
+          <image class="QRcode" src="{{ QRcode }}"></image>
+        </view>
+      </view>
+      <view>
+        <button class="withdraw" bindtap="withdraw">提交</button>
       </view>
     </view>
-    <view>
-      <button class="withdraw" bindtap="withdraw">提交</button>
+    <view class="no-order" wx:if="{{orders_completed.length === 0}}">
+      <image src="../../images/none.png"></image>
+      <view class="text">没有订单哦</view>
+    </view>
+
+    <view wx:for="{{ orders_completed }}" wx:key="index">
+      <take-order bindcall="call" item="{{ item }}"></take-order>
     </view>
   </view>
-  <view class="no-order" wx:if="{{orders_completed.length === 0}}">
-    <image src="../../images/none.png"></image>
-    <view class="text">没有订单哦</view>
-  </view>
 
-  <view wx:for="{{ orders_completed }}" wx:key="index">
-    <take-order bindcall="call" item="{{ item }}"></take-order>
-  </view>
 </view>

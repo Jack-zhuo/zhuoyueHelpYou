@@ -2,7 +2,7 @@ const db = wx.cloud.database();
 Page({
   data: {
     // 快递商家
-    array: ['请选择','菜鸟驿站', '自提柜', '快递服务大厅'],
+    array: ['菜鸟驿站', '自提柜', '快递服务大厅'],
     index: 0,
     // 限制性别
     array2:['不限性别','仅限男生','仅限女生'],
@@ -10,22 +10,19 @@ Page({
     // 尺寸大小
     size: [{
       name: '小件',
-      tips: '小于书本，1.98元',
+      tips: '小于鞋盒，1.98元',
       price: 198
     }, {
       name: '中件',
-      tips: '小于鞋盒，3.98元',
+      tips: '小于泡面箱，3.98元',
       price: 398
     }, {
       name: '大件',
-      tips: '小于泡面箱，6.98元',
-      price: 698
-    }, {
-      name: '超大件',
-      tips: '大于泡面箱，18.98元',
-      price: 1898
-    }, ],
+      tips: '大于泡面箱，7.98元',
+      price: 798
+    }],
     isName: '小件',
+    num:1,
     // 取件码
     placeholderCon: '请输入取件码...',
     // 价格
@@ -42,7 +39,8 @@ Page({
     takeImg:'',
     // 备注
     note: '',
-    
+    // 总价格
+    totalPrice:198
   },
   onLoad() {
     this.getAddress();
@@ -90,7 +88,17 @@ Page({
     })
     this.setData({
       isName: size.name,
-      price: size.price
+      price: size.price,
+      totalPrice:this.data.num * size.price
+    })
+  },
+  // 输入数量
+  setNum(e){
+    let {value:num} = e.detail
+    num = num * 1
+    this.setData({
+      num,
+      totalPrice:this.data.price * num
     })
   },
   
@@ -130,14 +138,13 @@ Page({
       return
     }
 
-    if (this.data.index === 0) {
-      wx.showToast({
-        title: '请先选择快递商家',
-        icon: 'none'
-      })
-      return
-    }
-  
+    // if (this.data.index === 0) {
+    //   wx.showToast({
+    //     title: '请先选择快递商家',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
     if (!this.data.takeMsg && !this.data.takeImg) {
       wx.showToast({
         title: '请输入取件码或上传截图',
@@ -160,7 +167,8 @@ Page({
       merchant: this.data.array[this.data.index],
       limitGender:this.data.array2[this.data.index2],
       size: this.data.isName,
-      price: this.data.price,
+      num:this.data.num,
+      price: this.data.totalPrice,
       date: new Date(),
       takeMsg: this.data.takeMsg,
       note: this.data.note,
@@ -178,7 +186,7 @@ Page({
       name: 'toPay',
       data: {
         goodName: `代取快递-${this.data.address.name}-${this.data.address.detail}`,
-        totalFee: this.data.price,
+        totalFee: this.data.totalPrice,
         _id
       }
     })
@@ -194,7 +202,7 @@ Page({
         wx.cloud.callFunction({
           name:'sendSms',
           data:{
-            content:'有新订单（代取快递），赶快去接单啦~~',
+            content:'代取快递',
             phone:'15922476232'
           },
           success:(res)=>{

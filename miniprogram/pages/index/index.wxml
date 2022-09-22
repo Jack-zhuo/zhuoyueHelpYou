@@ -3,8 +3,8 @@
   autoplay  
   circular="true" 
   class="swiper">
-   <swiper-item bindtap="gotoAnother" data-index="{{index}}" wx:for="{{swiperItem}}" wx:key="index" class="swiper-item">
-      <image mode="aspectFit" src="{{ item }}"></image>
+   <swiper-item wx:for="{{swiperItem}}" wx:key="index" class="swiper-item">
+      <image show-menu-by-longpress data-index="{{index}}"  mode="aspectFit" src="{{ item }}"></image>
    </swiper-item>
   </swiper> 
 </view>

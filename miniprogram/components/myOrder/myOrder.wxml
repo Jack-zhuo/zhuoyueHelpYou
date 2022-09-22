@@ -42,12 +42,21 @@
         </view>
       </view>
     </block>
-    <!-- 万能跑腿 -->
-    <block wx:if="{{ item.name === '万能跑腿' }}">
+    <!-- 万能帮 -->
+    <block wx:if="{{ item.name === '万能帮' }}">
       <view class="item">
         <view class="left">帮助内容：</view>
         <view class="right">
           <view>{{item.helpMsg}}</view>
+        </view>
+      </view>
+    </block>
+    <!-- 快递代寄 -->
+    <block wx:if="{{ item.name === '快递代寄' }}">
+      <view class="item"> 
+        <view class="left">收货地址：</view>
+        <view class="right">
+          <view>{{item.deliverAddress}}</view>
         </view>
       </view>
     </block>

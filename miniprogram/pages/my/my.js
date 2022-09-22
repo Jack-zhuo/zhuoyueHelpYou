@@ -16,6 +16,7 @@ Page({
   onShow() {
     this.onLoad();
   },
+
   // async completeAfterFiveDay() {
   //   wx.showLoading({
   //     title: '处理中',
@@ -61,6 +62,11 @@ Page({
   setInfo() {
     wx.navigateTo({
       url: '../setInfo/setInfo',
+    })
+  },
+  gotoApplyOrderer(){
+    wx.navigateTo({
+      url: '../applyTakeOrderer/applyTakeOrderer',
     })
   },
   gotoAddress() {

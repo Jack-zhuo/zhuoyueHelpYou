@@ -114,6 +114,11 @@
 }
 
 /* 取件信息 */
+.take-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .take-info .take-info-left{
   display: flex;
   align-items: center;
@@ -122,32 +127,28 @@
   margin-left: 10rpx;
 }
 .take-info .take-info-right{
-  position: relative;
+
 }
 .take-info .take-info-right .input-info{
-  width: 370rpx;
   height: 200rpx;
-  border: 1rpx solid gray;
   border-radius: 20rpx;
   padding: 20rpx;
 }
-.take-info .take-info-right .img-2{
-  position:absolute;
-  width: 60rpx;
-  height: 60rpx;
-  bottom: 20rpx;
-  right: 20rpx;
-  z-index: 520;
+/* 备注 */
+.forecast .forecast-left{
+  display: flex;
+  align-items: center;
 }
-.take-info .take-info-right .img-1{
-  position:absolute;
-  border: 1rpx solid rgb(185, 185, 185);
-  width: 100rpx;
-  height: 100rpx;
-  bottom: 20rpx;
-  left: 20rpx;
-  z-index: 521;
+.forecast .forecast-left text{
+  margin-left: 10rpx;
 }
+.forecast .forescast-right input{
+  font-size: 20rpx;
+  width: 400rpx;
+  text-align: right;
+  /* padding: 20rpx; */
+}
+
 /* 备注 */
 .note .note-left{
   display: flex;
@@ -159,7 +160,7 @@
 .note .note-right .input-note{
   width: 370rpx;
   height: 100rpx;
-  border: 1rpx solid gray;
+  border: 1rpx solid rgb(221, 221, 221);
   border-radius: 20rpx;
   padding: 20rpx;
 }

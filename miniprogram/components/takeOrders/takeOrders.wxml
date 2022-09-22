@@ -5,7 +5,7 @@
   <view class="content">
     <view class="top">
       <view class="left">
-        <view class="service-name">{{item.userinfo.name}} | {{item.name}}</view>
+        <view class="service-name">{{item.name}}</view>
         <view wx:if="{{item.status === 1}}" class="time">{{ item.date }}</view> 
         <view wx:if="{{item.status === 2 || item.status === 3}}" class="time">{{item.takeDate}}</view>
       </view>
@@ -68,6 +68,15 @@
           </view>
         </view>
       </block>
+       <!-- 快递代寄 -->
+    <block wx:if="{{ item.name === '快递代寄' }}">
+      <view class="item"> 
+        <view class="left">收货地址：</view>
+        <view class="right">
+          <view>{{item.deliverAddress}}</view>
+        </view>
+      </view>
+    </block>
 
       <!-- 打印服务 -->
       <block wx:if="{{ item.name === '打印服务' }}">
@@ -114,8 +123,8 @@
       </block>
 
 
-      <!-- 万能跑腿 -->
-      <block wx:if="{{ item.name === '万能跑腿' }}">
+      <!-- 万能帮 -->
+      <block wx:if="{{ item.name === '万能帮' }}">
         <view class="item">
           <view class="left">
             <text>帮助内容： </text>

@@ -1,4 +1,7 @@
-
+.container{
+  /* border: 1rpx solid red; */
+  height: 1200rpx;
+}
 .my-balance{
   display: flex;
   flex-direction: column;

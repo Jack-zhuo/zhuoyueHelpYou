@@ -27,7 +27,7 @@ Component({
         title: '处理中...',
       })
       const order = this.properties.item
-      const price = order.price
+      const price = Math.round(order.price * 0.8)
       const user_id = order.takeOrderer._id
       const id = order._id
 
@@ -56,7 +56,7 @@ Component({
         }, 2000)
       }
     },
-    preview(e){
+    preview(e) {
       wx.previewImage({
         urls: [e.currentTarget.dataset.takeimg],
       })
