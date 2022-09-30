@@ -79,7 +79,10 @@ Page({
       })
       const filePath = res.tempFiles[0].path
       const fileName = res.tempFiles[0].name
-      const cloudPath = `print/${new Date().getTime()}_${fileName}`
+
+      let fileNameSuffix = fileName.substring(fileName.lastIndexOf(".")); //.txt
+      
+      const cloudPath = `print/${new Date().getTime()}_${fileNameSuffix}`
       const res2 = await wx.cloud.uploadFile({
         cloudPath,
         filePath
@@ -93,6 +96,7 @@ Page({
 
     } catch (error) {
       wx.hideLoading();
+      console.log(error)
       wx.showToast({
         title: 'error',
         icon: 'none'
@@ -212,14 +216,14 @@ Page({
   copyWeChat() {
     wx.setClipboardData({
       data: 'zyjava2020',
-      success:()=>{
+      success: () => {
         wx.showToast({
           title: '微信复制成功',
         })
       }
     })
   },
-  
+
   onShareAppMessage: function (res) {
     return {
       title: '三联学院云打印，0配送费，秒送寝室',

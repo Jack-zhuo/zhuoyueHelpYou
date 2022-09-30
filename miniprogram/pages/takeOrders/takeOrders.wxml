@@ -12,6 +12,7 @@
   </view>
   <!-- 正在帮助 -->
   <view wx:if="{{tabNow === 1}}">
+    <view class="tips">订单完成后，提醒用户点击已完成，可立刻完成。如果没有点击，两天后自动完成订单</view>
     <view class="no-order" wx:if="{{orders_taked.length === 0}}">
       <image src="../../images/none.png"></image>
       <view class="text">没有订单哦</view>

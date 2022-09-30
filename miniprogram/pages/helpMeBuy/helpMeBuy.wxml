@@ -4,7 +4,7 @@
 <view class="address-wrap common">
   <block wx:if="{{!address.phone}}">
     <button bindtap="addAddress">添加地址</button>
-  </block>
+  </block> 
   <block wx:else>
     <view class="address" bindtap="gotoAddress">
       <image class="icon" src="../../images/spot.png"></image>

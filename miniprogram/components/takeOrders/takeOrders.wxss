@@ -140,7 +140,7 @@
   margin-left: 20rpx;
 }
 .take{
-  font-size: 25rpx;
+  font-size: 25rpx; 
   color: white;
   border: 1rpx solid #1296db;
   background-color: #1296db;
@@ -149,6 +149,7 @@
   margin-left: 20rpx;
   position: relative;
 }
+
 .take .tip{
   position: absolute;
   /* width: 90rpx; */
@@ -164,4 +165,10 @@
   right:11rpx
   
 }
-
+.call{
+  color: green;
+  border: 1rpx solid green; 
+  margin-left: 10rpx;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}

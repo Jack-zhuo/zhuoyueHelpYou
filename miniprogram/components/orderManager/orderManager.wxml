@@ -7,7 +7,7 @@
       <view class="left">
         <view class="service-name">{{item.userinfo.name}} | {{item.name}}</view>
         <view wx:if="{{item.status === 1}}" class="time">{{ item.date }}</view>
-        <view wx:if="{{item.status === 2 || item.status === 3}}" class="time">{{item.takeDate}}</view>
+        <view wx:if="{{item.status === 2 || item.status === 3}}" class="time">{{item.date}}</view>
       </view>
       <view class="right">
         <text class="paid" wx:if="{{item.status === 1}}">已付款</text>
@@ -22,6 +22,12 @@
         <view class="right">
           <view>{{item._id}}</view>
           <view class="copyId" bindtap="copyId" data-id="{{item._id}}">复制</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="left">接单时间：</view>
+        <view class="right">
+          <view>{{item.takeDate}}</view>
         </view>
       </view>
 

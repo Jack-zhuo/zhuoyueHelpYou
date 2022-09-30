@@ -23,12 +23,12 @@
         <text>打印原件</text>
       </view>
       <!-- 右 -->
-      <view class="right">
+      <view class="right" bindtap="upFile">
         <view>
           <view class="item-right" wx:if="{{!fileName}}">
             <view>点击添加文件</view>
             <image src="../../images/pointing.png "></image>
-            <view class="select" bindtap="upFile">+</view>
+            <view class="select">+</view>
           </view>
           <text wx:else>{{fileName}}</text>
         </view>

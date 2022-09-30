@@ -33,7 +33,8 @@ Page({
     const orders_notake = res.result.data
 
     orders_notake.forEach(item => {
-      item.date = getDateDiff(item.date);
+      item.date = getDateDiff(item.date); 
+      item.takeDate = getDateDiff(item.takeDate);
     });
     this.setData({
       orders_notake
@@ -55,6 +56,7 @@ Page({
     const orders_taked = res.result.data
     orders_taked.forEach(item => {
       item.date = getDateDiff(item.date);
+      item.takeDate = getDateDiff(item.takeDate);
     });
     this.setData({
       orders_taked

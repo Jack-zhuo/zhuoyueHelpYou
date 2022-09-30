@@ -23,11 +23,15 @@ Page({
         name:'快递代寄',
         url:'../helpSendExpress/helpSendExpress'
       }
-      // ,{
-      //   img:'../../images/run.png',
-      //   name:'帮我送',
-      //   url:'../helpMeSend/helpMeSend'
-      // }
+      ,{
+        img:'../../images/run.png',
+        name:'帮我送',
+        url:'../helpMeSend/helpMeSend'
+      },{
+        img:'../../images/run.png',
+        name:'帮我买',
+        url:'../helpMeBuy/helpMeBuy'
+      }
       ,{ 
         img:'../../images/bang.png',
         name:'万能帮',

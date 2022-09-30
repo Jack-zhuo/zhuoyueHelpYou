@@ -64,7 +64,7 @@
             <text>终</text>
           </view>
           <view class="right">
-            <text>{{item.address.name}}-{{item.address.phone}}-{{ item.address.detail }}</text>
+            <text>{{item.address.name}}-{{ item.address.detail }}</text><text class="call">拨打手机</text>
           </view>
         </view>
       </block>
@@ -73,7 +73,7 @@
       <view class="item"> 
         <view class="left">收货地址：</view>
         <view class="right">
-          <view>{{item.deliverAddress}}</view>
+          <view bindtap="copyDeliverAddress" data-deliverAddress="{{item.deliverAddress}}">{{item.deliverAddress}}<text class="copyId">复制</text></view>
         </view>
       </view>
     </block>
@@ -117,7 +117,7 @@
             <text>址</text>
           </view>
           <view class="right">
-            <text>{{item.address.name}}-{{item.address.phone}}-{{ item.address.detail }}</text>
+            <text>{{item.address.name}}-{{ item.address.detail }}</text><text class="call">拨打手机</text> 
           </view>
         </view>
       </block>
@@ -138,7 +138,7 @@
             <text>址</text>
           </view>
           <view class="right">
-            <text>{{item.address.name}}-{{item.address.phone}}-{{ item.address.detail }}</text>
+            <text>{{item.address.name}}-{{ item.address.detail }}</text><text class="call">拨打手机</text>
           </view>
         </view>
       </block>
@@ -171,16 +171,9 @@
           </view>
         </view>
       </block>
-
-      <!-- 公共的 -->
-
-      <!-- <view wx:if="{{item.status === 2}}" class="item" style="color: red;">
-            <text>请输入核销码： </text>
-            <input type="number" bindinput="input" />
-          </view> -->
-
     </view>
     <view class="bottom">
+      
       <view class="price">{{item.price/100}}元</view>
       <!-- <view bindtap="call" class="take">手机号</view> -->
       <view wx:if="{{item.status === 1}}" bindtap="take" class="take">

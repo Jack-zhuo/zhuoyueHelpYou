@@ -74,3 +74,11 @@
   font-size: 25rpx;
   color: #808080;
 }
+.tips{
+  margin: 20rpx;
+  background-color: #1296db;
+  color: white;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  font-size: 25rpx;
+}

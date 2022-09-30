@@ -3,7 +3,7 @@
   <view class="info" bindtap="setInfo">
     <image class="avator" src="{{ user.info.avatar }}"></image>
     <view class="name">
-      <text>{{ user.info.name }}</text>
+      <text>{{ user.info.name }}</text><text wx:if="{{user.isTakeOrderer}}">( 我是接单员 )</text>
     </view>
     <image class="arrow" src="../../images/arrow.png"></image>
   </view>

@@ -111,6 +111,7 @@ Component({
 
       wx.showLoading({
         title: '退款中',
+        mask:true
       })
       const refundOrder = "tk" + new Date().getTime()
       const price = Math.round(this.properties.item.price)
