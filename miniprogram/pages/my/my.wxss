@@ -3,7 +3,7 @@
   margin: 0 auto;
 }
 .info{
-  background-color: #1296db;
+  background-color: #6395ec;
   border-radius: 30rpx;
   padding: 50rpx 40rpx;
   display: flex;

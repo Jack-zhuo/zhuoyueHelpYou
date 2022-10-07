@@ -4,24 +4,31 @@
   border-radius: 40rpx;
   font-size: 29rpx;
   box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
+  padding-bottom: 30rpx;
 } 
 /* 公共样式 */
 .common {
   padding: 20rpx;
   border-bottom: 1rpx solid rgb(212, 212, 212);
-  
+}
+.common view:first-child{
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .common .icon{
   height: 45rpx;
   width: 45rpx;
+  margin-right: 10rpx;
+}
+.common input{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
 }
 /* 地址 */
 .address-wrap{
   height: 100rpx;
-  justify-content: center;
+  line-height: 100rpx;
 }
 .address-wrap button{
   border-radius: 60rpx;
@@ -33,137 +40,16 @@
   justify-content: center;
   align-items: center;
 }
-
-
-/* 快递商家 */
-.merchant{
- 
-}
-.merchant .merchant-left{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.merchant .merchant-left text{
-  margin-left: 10rpx;
-}
-.merchant .merchant-right .picker{
-  display: flex;
-  align-items: center;
-}
 /* 性别限制 */
-.limitGender .limitGender-left{
+.limitGender{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
-.limitGender .limitGender-left text{
-  margin-left: 10rpx;
-}
-.limitGender .limitGender-right .picker{
-  display: flex;
-  align-items: center;
-}
-
-
-/* 快递大小 */
-.size{
-  
-}
-.size .size-left{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.size .size-left text{
-  margin-left: 10rpx;
-}
-.size .size-right{
-  display: flex;
-  
-}
-.size .size-right .size-item{
-  border: 1rpx solid rgb(228, 228, 228);
+.limitGender .limitGender-right{
   color: gray;
-  font-size: 30rpx;
-  padding: 13rpx;
-}
-.size .size-right .size-item:first-child{
-  border-top-left-radius: 30rpx;
-}
-.size .size-right .size-item:last-child{
-  border-top-right-radius: 30rpx;
-}
-.size .size-right .select{
-  border: 1rpx solid #1296db;
-  color: #1296db;
-}
-/* 快递数量 */
-
-.num .num-left{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.num .num-left text{
-  margin-left: 10rpx;
-}
-.num .num-right input{
-  text-align: right;
-  width: 400rpx;
 }
 
-/* 取件信息 */
-.take-info{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.take-info .take-info-left{
-  display: flex;
-  align-items: center;
-}
-.take-info .take-info-left text{
-  margin-left: 10rpx;
-}
-.take-info .take-info-right{
 
-}
-.take-info .take-info-right .input-info{
-  height: 200rpx;
-  border-radius: 20rpx;
-  padding: 20rpx;
-}
-/* 备注 */
-.forecast .forecast-left{
-  display: flex;
-  align-items: center;
-}
-.forecast .forecast-left text{
-  margin-left: 10rpx;
-}
-.forecast .forescast-right input{
-  font-size: 20rpx;
-  width: 400rpx;
-  text-align: right;
-  /* padding: 20rpx; */
-}
-
-/* 备注 */
-.note .note-left{
-  display: flex;
-  align-items: center;
-}
-.note .note-left text{
-  margin-left: 10rpx;
-}
-.note .note-right .input-note{
-  width: 370rpx;
-  height: 100rpx;
-  border: 1rpx solid rgb(221, 221, 221);
-  border-radius: 20rpx;
-  padding: 20rpx;
-}
 /* 提交 */
 .submit{
   display: flex;

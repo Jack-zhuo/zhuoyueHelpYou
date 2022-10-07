@@ -162,10 +162,8 @@
           </view>
         </view>
       </block>
-
-
-      <!-- 万能跑腿 -->
-      <block wx:if="{{ item.name === '万能跑腿' }}">
+      <!-- 万能帮 -->
+      <block wx:if="{{ item.name === '万能帮' }}">
         <view class="item">
           <view class="left">
             <text>帮助内容： </text>

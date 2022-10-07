@@ -53,7 +53,7 @@
     </block>
     <!-- 快递代寄 -->
     <block wx:if="{{ item.name === '快递代寄' }}">
-      <view class="item"> 
+      <view class="item">
         <view class="left">收货地址：</view>
         <view class="right">
           <view>{{item.deliverAddress}}</view>
@@ -77,7 +77,7 @@
     </block>
     <!-- 帮我送 -->
     <block wx:if="{{ item.name === '帮我送' }}">
-     
+
       <view class="item start">
         <view class="left">起</view>
         <view class="right">
@@ -98,6 +98,21 @@
         </view>
       </view>
 
+    </block>
+    <!-- 帮我买东西 -->
+    <block wx:if="{{ item.name === '帮我买' }}">
+      <view class="item">
+        <view class="left">购买商品：</view>
+        <view class="right">
+          <view>{{item.buyWhat}}</view>
+        </view>
+      </view>
+      <view class="item end">
+        <view class="left">址</view>
+        <view class="right">
+          <view>{{item.address.detail}}</view>
+        </view>
+      </view>
     </block>
 
     <view class="item takeorderer" wx:if="{{ item.status === 2 }}">
@@ -123,4 +138,4 @@
     <view class="getWeChat" catchtap="getWeChat">客服微信</view>
   </view>
 
-</view> 
+</view>

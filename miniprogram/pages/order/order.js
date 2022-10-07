@@ -2,7 +2,7 @@ const db = wx.cloud.database();
 import {
   getDateDiff
 } from '../../utils/getDateDiff';
-let startX, endX;
+let startX,startY, endX,endY;
 Page({
   data: {
     tabList: ['待接单', '已接单', '已完成'],
@@ -18,11 +18,13 @@ Page({
   // 页面滑动
   touchStart(e) {
     startX = e.touches[0].pageX
-    console.log(startX)
+    startY = e.touches[0].pageY
+    console.log(startX,startY)
   },
   touchEnd(e) {
     endX = e.changedTouches[0].pageX
-    console.log(endX)
+    endY = e.changedTouches[0].pageY
+    console.log(endX,endY)
     this.slide()
   },
   slide() {

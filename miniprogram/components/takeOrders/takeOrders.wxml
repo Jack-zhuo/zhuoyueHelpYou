@@ -6,7 +6,7 @@
     <view class="top">
       <view class="left">
         <view class="service-name">{{item.name}}</view>
-        <view wx:if="{{item.status === 1}}" class="time">{{ item.date }}</view> 
+        <view wx:if="{{item.status === 1}}" class="time">{{ item.date }}</view>
         <view wx:if="{{item.status === 2 || item.status === 3}}" class="time">{{item.takeDate}}</view>
       </view>
       <view class="right">
@@ -68,15 +68,15 @@
           </view>
         </view>
       </block>
-       <!-- 快递代寄 -->
-    <block wx:if="{{ item.name === '快递代寄' }}">
-      <view class="item"> 
-        <view class="left">收货地址：</view>
-        <view class="right">
-          <view bindtap="copyDeliverAddress" data-deliverAddress="{{item.deliverAddress}}">{{item.deliverAddress}}<text class="copyId">复制</text></view>
+      <!-- 快递代寄 -->
+      <block wx:if="{{ item.name === '快递代寄' }}">
+        <view class="item">
+          <view class="left">收货地址：</view>
+          <view class="right">
+            <view bindtap="copyDeliverAddress" data-deliverAddress="{{item.deliverAddress}}">{{item.deliverAddress}}<text class="copyId">复制</text></view>
+          </view>
         </view>
-      </view>
-    </block>
+      </block>
 
       <!-- 打印服务 -->
       <block wx:if="{{ item.name === '打印服务' }}">
@@ -117,11 +117,10 @@
             <text>址</text>
           </view>
           <view class="right">
-            <text>{{item.address.name}}-{{ item.address.detail }}</text><text class="call">拨打手机</text> 
+            <text>{{item.address.name}}-{{ item.address.detail }}</text><text class="call">拨打手机</text>
           </view>
         </view>
       </block>
-
 
       <!-- 万能帮 -->
       <block wx:if="{{ item.name === '万能帮' }}">
@@ -144,7 +143,7 @@
       </block>
       <!-- 帮我送 -->
       <block wx:if="{{ item.name === '帮我送' }}">
-       
+
         <view class="item">
           <view class="left">
             <text>备注信息：</text>
@@ -160,26 +159,55 @@
           </view>
           <view class="right">
             <text>{{item.address.name}}-{{ item.address.detail }}</text>
+            <text class="call">拨打手机</text>
           </view>
         </view>
         <view class="item end" bindtap="call">
           <view class="left">
-            <text>起</text>
+            <text>终</text>
           </view>
           <view class="right">
             <text>{{item.endAddress}}</text>
           </view>
         </view>
       </block>
+      <!-- 帮我买 -->
+      <block wx:if="{{ item.name === '帮我买' }}">
+        <view class="item">
+          <view class="left">
+            <text>性别限制：</text>
+          </view>
+          <view class="right">
+            <text>{{item.limitGender }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>购买商品：</text>
+          </view>
+          <view class="right">
+            <text>{{item.buyWhat }}</text>
+          </view>
+        </view>
+        <view class="item start" bindtap="call">
+          <view class="left">
+            <text>址</text>
+          </view>
+          <view class="right">
+            <text>{{item.address.name}}-{{ item.address.detail }}</text>
+            <text class="call">拨打手机</text>
+          </view>
+        </view>
+      </block>
     </view>
+
     <view class="bottom">
-      
       <view class="price">{{item.price/100}}元</view>
       <!-- <view bindtap="call" class="take">手机号</view> -->
       <view wx:if="{{item.status === 1}}" bindtap="take" class="take">
-      <text>接单</text>
-      <!-- <text class="tip">{{item.limitGender}}</text> -->
-      </view> 
+        <text>接单</text>
+        <!-- <text class="tip">{{item.limitGender}}</text> -->
+      </view>
       <view wx:if="{{item.status === 2 && item.name === '打印服务'}}" bindtap="downloadFile" class="take">下载</view>
       <view wx:if="{{item.status === 2 && item.name === '代取快递' && item.takeImg !== ''}}" bindtap="showTakeImg" class="take">取件图片</view>
       <!-- <view wx:if="{{item.status === 2}}" bindtap="completed" class="take">完成</view> -->
