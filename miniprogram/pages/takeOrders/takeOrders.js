@@ -5,7 +5,7 @@ import {
 import {
   getDateDiff
 } from '../../utils/getDateDiff'
-let startX, endX;
+let startX, endX,startY,endY;
 Page({
   data: {
     orders_notake: [],
@@ -30,15 +30,16 @@ Page({
   // 页面滑动
   touchStart(e) {
     startX = e.touches[0].pageX
-    console.log(startX)
+    startY = e.touches[0].pageY
   },
   touchEnd(e) {
     endX = e.changedTouches[0].pageX
-    console.log(endX)
+    endY = e.changedTouches[0].pageY
     this.slide()
   },
   slide() {
     let tabNow = this.data.tabNow
+    if(startY - endY > 50 || startY - endY < -50 ) return 
     if (startX - endX > 50) {
       console.log('你右滑了')
       if (tabNow === 2) return
@@ -450,5 +451,12 @@ Page({
       this.getOrders_completed();
     }
     
-  }
+  },
+  onShareAppMessage: function (res) {
+    console.log(res)
+    return {
+      title: '小伙伴们~有新订单啦~接单去喽~~',
+      path: 'pages/takeOrders/takeOrders',
+    }
+  },
 })

@@ -16,7 +16,7 @@ Page({
         img:'../../images/printer.png',
         name:'打印服务',
         url:'../print/print',
-        tip:'0跑腿费'
+        tip:''
       }
       ,{
         img:'../../images/express.png',
@@ -31,6 +31,10 @@ Page({
         img:'../../images/run.png',
         name:'帮我买',
         url:'../helpMeBuy/helpMeBuy'
+      },{ 
+        img:'../../images/replace.png',
+        name:'代替服务',
+        url:'../replace/replace'
       }
       ,{ 
         img:'../../images/bang.png',

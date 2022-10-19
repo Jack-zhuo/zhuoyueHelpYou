@@ -1,0 +1,13 @@
+<button bindtap="getIncome" type="primary">收入</button>
+
+<button bindtap="getUsers" type="primary">获取消费排名</button>
+
+<button bindtap="Test" type="primary">触发测试</button>
+
+<canvas type="2d" id="myCanvas"></canvas> 
+
+
+<view wx:for="{{users}}" > 
+ {{item.info.name}}--{{item.totalConsume/100}}
+</view>
+

@@ -53,7 +53,7 @@ Page({
       helpMsg: this.data.helpMsg,
       _id,
       // 订单公共部分
-      userinfo: wx.getStorageSync('user').info,
+      userinfo: wx.getStorageSync('user'),
       address: this.data.address,
       price: this.data.price,
       date: new Date(),

@@ -39,6 +39,8 @@ Page({
     takeImg:'',
     // 备注
     note: '',
+    // 友情打赏
+    friendlyPaid:0,
     // 总价格
     totalPrice:198
   },
@@ -89,7 +91,7 @@ Page({
     this.setData({
       isName: size.name,
       price: size.price,
-      totalPrice:this.data.num * size.price
+      totalPrice:this.data.num * size.price + this.data.friendlyPaid
     })
   },
   // 输入数量
@@ -98,7 +100,16 @@ Page({
     num = num * 1
     this.setData({
       num,
-      totalPrice:this.data.price * num
+      totalPrice:this.data.price * num + this.data.friendlyPaid
+    })
+  },
+  // 输入友情打赏金额
+  setFriendlyPaid(e){
+    let {value:friendlyPaid} = e.detail
+    friendlyPaid = friendlyPaid * 100
+    this.setData({
+      friendlyPaid,
+      totalPrice:this.data.price + friendlyPaid
     })
   },
   
@@ -162,7 +173,7 @@ Page({
     const order = {
       name: '代取快递',
       _id,
-      userinfo: wx.getStorageSync('user').info,
+      userinfo: wx.getStorageSync('user'), 
       address: this.data.address,
       merchant: this.data.array[this.data.index],
       limitGender:this.data.array2[this.data.index2],
@@ -248,10 +259,5 @@ Page({
       imageUrl: 'cloud://zhuoyuebang-1gx979jw039db365.7a68-zhuoyuebang-1gx979jw039db365-1313189613/avatar/1660277626031.png'
     }
   },
-  tabChange(e){
-    console.log(e.detail)
-    this.setData({
-      
-    })
-  }
+ 
 })

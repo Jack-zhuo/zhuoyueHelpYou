@@ -30,12 +30,20 @@ Component({
       const price = Math.round(order.price * 0.8)
       const user_id = order.takeOrderer._id
       const id = order._id
+      const _openid = wx.getStorageSync('openid')
 
       const res1 = await wx.cloud.callFunction({
         name: 'updateBalance',
         data: {
           user_id,
           balance: price
+        }
+      })
+      const res = await wx.cloud.callFunction({
+        name: 'updateTotalConsume',
+        data: {
+          _openid,
+          price:order.price
         }
       })
       if (res1.result.stats.updated === 1) {
@@ -111,7 +119,7 @@ Component({
 
       wx.showLoading({
         title: '退款中',
-        mask:true
+        mask: true
       })
       const refundOrder = "tk" + new Date().getTime()
       const price = Math.round(this.properties.item.price)

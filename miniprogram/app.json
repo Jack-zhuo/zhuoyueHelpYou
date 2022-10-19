@@ -24,7 +24,10 @@
     "pages/helpMeSend/helpMeSend",
     "pages/orderDetail/orderDetail",
     "pages/helpMeBuy/helpMeBuy",
-    "pages/helpSendExpress/helpSendExpress"
+    "pages/helpSendExpress/helpSendExpress",
+    "pages/replace/replace",
+    "pages/userDetail/userDetail",
+    "pages/test/test"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

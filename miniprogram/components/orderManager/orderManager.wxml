@@ -1,11 +1,11 @@
 <view class="order">
   <view class="avatar">
-    <image src="{{ item.userinfo.avatar }}"></image>
+    <image src="{{ item.userinfo.info.avatar }}"></image>
   </view>
   <view class="content">
     <view class="top">
       <view class="left">
-        <view class="service-name">{{item.userinfo.name}} | {{item.name}}</view>
+        <view class="service-name">{{item.userinfo.info.name}} | {{item.name}}</view>
         <view wx:if="{{item.status === 1}}" class="time">{{ item.date }}</view>
         <view wx:if="{{item.status === 2 || item.status === 3}}" class="time">{{item.date}}</view>
       </view>
@@ -84,23 +84,7 @@
             <text bindtap="previewImg" data-src="{{item.takeImg}}">查看图片</text>
           </view>
         </view>
-        <view class="item" wx:if="{{item.takeMsg !== ''}}">
-          <view class="left">
-            <text>取件信息：</text>
-          </view>
-          <view class="right">
-            <text>{{item.takeMsg}}</text>
-          </view>
-        </view>
-
-        <view class="item" wx:if="{{ item.note !== '' }}">
-          <view class="left">
-            <text>备注信息： </text>
-          </view>
-          <view class="right">
-            <text> {{ item.note }}</text>
-          </view>
-        </view>
+      
         <view class="item start">
           <view class="left">
             <text>起</text>
@@ -207,6 +191,42 @@
           </view>
           <view class="right">
             <text>{{item.endAddress}}</text>
+          </view>
+        </view>
+      </block>
+       <!-- 帮我买 -->
+       <block wx:if="{{ item.name === '帮我买' }}">
+        <view class="item">
+          <view class="left">
+            <text>性别限制：</text>
+          </view>
+          <view class="right">
+            <text>{{item.limitGender }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>购买商品：</text>
+          </view>
+          <view class="right">
+            <text>{{item.buyWhat }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>预估费用：</text>
+          </view>
+          <view class="right">
+            <text>{{item.estimatedCost }}元</text>
+          </view>
+        </view>
+        <view class="item start" bindtap="call" data-phoneNumber="{{item.address.phone}}">
+          <view class="left">
+            <text>址</text>
+          </view>
+          <view class="right">
+            <text>{{item.address.name}}-{{ item.address.detail }}</text>
+            <text class="call">拨打手机</text>
           </view>
         </view>
       </block>

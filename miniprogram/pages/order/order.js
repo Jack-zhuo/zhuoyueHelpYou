@@ -19,16 +19,17 @@ Page({
   touchStart(e) {
     startX = e.touches[0].pageX
     startY = e.touches[0].pageY
-    console.log(startX,startY)
+    // console.log(startX,startY)
   },
   touchEnd(e) {
     endX = e.changedTouches[0].pageX
     endY = e.changedTouches[0].pageY
-    console.log(endX,endY)
+    // console.log(endX,endY)
     this.slide()
   },
   slide() {
     let tabNow = this.data.tabNow
+    if(startY - endY > 50 || startY - endY < -50 ) return 
     if (startX - endX > 50) {
       console.log('你右滑了')
       if (tabNow === 2) return

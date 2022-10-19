@@ -1,0 +1,29 @@
+.container{
+  width: 700rpx;
+  margin: 0 auto;
+}
+.info{
+  background-color: #6395ec;
+  border-radius: 30rpx;
+  padding: 50rpx 40rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10rpx 5rpx rgb(207, 207, 207);
+}
+.info .left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.info .avator{
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  border:1rpx solid white 
+}
+.info .name{
+  color: white;
+  margin-top: 10rpx;
+}
+

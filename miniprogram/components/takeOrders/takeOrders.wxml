@@ -1,6 +1,6 @@
 <view class="order">
-  <view class="avatar">
-    <image src="{{ item.userinfo.avatar }}"></image>
+  <view class="avatar" bindtap="gotoUserDetail">
+    <image src="{{ item.userinfo.info.avatar }}"></image>
   </view>
   <view class="content">
     <view class="top">
@@ -49,6 +49,17 @@
           </view>
           <view class="right">
             <text> {{ item.note }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>快递大小： </text>
+          </view>
+          <view class="right">
+            <text wx:if="{{item.size === '小件'}}">小于鞋盒</text>
+            <text wx:if="{{item.size === '中件'}}">小于泡面箱</text>
+            <text wx:if="{{item.size === '大件'}}">大于泡面箱</text>
+            
           </view>
         </view>
         <view class="item start">
@@ -141,6 +152,26 @@
           </view>
         </view>
       </block>
+
+      <!-- 代替服务 -->
+      <block wx:if="{{ item.name === '代替服务' }}">
+        <view class="item">
+          <view class="left">
+            <text>代替内容： </text>
+          </view>
+          <view class="right">
+            <text> {{ item.helpMsg }}</text>
+          </view>
+        </view>
+        <view class="item end" bindtap="call">
+          <view class="left">
+            <text>址</text>
+          </view>
+          <view class="right">
+            <text>{{item.address.name}}-{{ item.address.detail }}</text><text class="call">拨打手机</text>
+          </view>
+        </view>
+      </block>
       <!-- 帮我送 -->
       <block wx:if="{{ item.name === '帮我送' }}">
 
@@ -187,6 +218,14 @@
           </view>
           <view class="right">
             <text>{{item.buyWhat }}</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="left">
+            <text>预估费用：</text>
+          </view>
+          <view class="right">
+            <text>{{item.estimatedCost }}元</text>
           </view>
         </view>
         <view class="item start" bindtap="call">

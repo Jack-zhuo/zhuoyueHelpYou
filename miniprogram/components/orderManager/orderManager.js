@@ -70,6 +70,7 @@ Component({
       const price = Math.round(order.price * 0.8)
       const user_id = order.takeOrderer._id
       const id = order._id
+      const _openid = order._openid
 
       const res1 = await wx.cloud.callFunction({
         name: 'updateBalance',
@@ -78,6 +79,15 @@ Component({
           balance: price
         }
       })
+
+      const res = await wx.cloud.callFunction({
+        name: 'updateTotalConsume',
+        data: {
+          _openid,
+          price:order.price
+        }
+      })
+
       if (res1.result.stats.updated === 1) {
         const res2 = await wx.cloud.callFunction({
           name: 'updateOrderbyIdToCompleted',

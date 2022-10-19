@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wechat":"../../components/wechat/wechat"
+  },
+  "navigationBarTitleText": "申请接单员"
 }

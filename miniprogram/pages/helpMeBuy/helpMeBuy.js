@@ -71,6 +71,13 @@ Page({
       })
       return
     }
+    if (that.errandCost < 200) {
+      wx.showToast({
+        title: '跑腿费不能低于两块钱',
+        icon: 'none'
+      })
+      return
+    }
     wx.showLoading({
       title: '准备付款中',
     })
@@ -83,7 +90,7 @@ Page({
       name: '帮我买',
       _id,
       price: that.errandCost,
-      userinfo: wx.getStorageSync('user').info,
+      userinfo: wx.getStorageSync('user'),
       date: new Date(),
       address: that.address,
       takeOrderer: {},

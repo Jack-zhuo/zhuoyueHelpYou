@@ -43,53 +43,54 @@
          item: this.properties.item
        })
      },
-     completed() {
-       const inputCode = Number(this.data.inputCode)
-       const originalCode = this.properties.item.takeGoodsCode
-       if (inputCode === originalCode) {
-         wx.showToast({
-           title: '恭喜你，成功完成这一单！',
-           icon: 'none'
-         })
-         wx.cloud.callFunction({
-           name: 'updateOrderbyIdToCompleted',
-           data: {
-             id: this.properties.item._id
-           },
-           success: (res) => {
-             const {
-               price
-             } = this.properties.item
-             console.log(price)
-             wx.cloud.database().collection('user').where({
-               _openid: "这是bug吗？"
-             }).update({
-               data: {
-                 balance: wx.cloud.database().command.inc(price)
-               }
-             })
-             this.triggerEvent('refresh');
-           }
-         })
-       } else {
-         wx.showToast({
-           title: '核销码错误',
-           icon: 'error',
-           duration: 2000,
-           mask: true
-         })
-       }
-     },
-     input(e) {
-       const inputCode = Number(e.detail.value)
-       const originalCode = this.properties.item.takeGoodsCode
-       this.setData({
-         inputCode
-       })
+    //  completed() {
+    //    const inputCode = Number(this.data.inputCode)
+    //    const originalCode = this.properties.item.takeGoodsCode
+    //    if (inputCode === originalCode) {
+    //      wx.showToast({
+    //        title: '恭喜你，成功完成这一单！',
+    //        icon: 'none'
+    //      })
+    //      wx.cloud.callFunction({
+    //        name: 'updateOrderbyIdToCompleted',
+    //        data: {
+    //          id: this.properties.item._id
+    //        },
+    //        success: (res) => {
+    //          const {
+    //            price
+    //          } = this.properties.item
+    //          console.log(price)
+    //          wx.cloud.database().collection('user').where({
+    //            _openid: "这是bug吗？"
+    //          }).update({
+    //            data: {
+    //              balance: wx.cloud.database().command.inc(price)
+    //            }
+    //          })
+    //          this.triggerEvent('refresh');
+    //        }
+    //      })
+    //    } else {
+    //      wx.showToast({
+    //        title: '核销码错误',
+    //        icon: 'error',
+    //        duration: 2000,
+    //        mask: true
+    //      })
+    //    }
+    //  },
+    //  input(e) {
+    //    const inputCode = Number(e.detail.value)
+    //    const originalCode = this.properties.item.takeGoodsCode
+    //    this.setData({
+    //      inputCode
+    //    })
 
 
-     },
-     async downloadFile() {
+    //  },
+    
+    async downloadFile() {
        wx.showLoading({
          title: '正在下载中',
        })
@@ -129,6 +130,13 @@
        wx.previewImage({
          urls: [this.properties.item.takeImg],
        })
-     }
+     },
+    //  去个人详情页
+    gotoUserDetail(){
+      console.log('dd')
+      wx.navigateTo({
+        url: '../userDetail/userDetail?_openid='+this.properties.item.userinfo._openid,
+      }) 
+    }
    }
  })

@@ -1,0 +1,29 @@
+<!-- 取件信息 -->
+<view class="take_info common">
+  <view class="title">代替内容：</view>
+  <textarea placeholder="请输入代替内容，代排队,代跑步等" class="info" bindinput="setHelpMsg"></textarea>
+</view>
+<!-- 地址信息 -->
+<view class="address common" bindtap="gotoAddress">
+  <view class="title">地址：</view>
+  <view class="address_detail">
+  <text wx:if="{{!address.phone}}">选择地址</text>
+   <text wx:else>{{address.name}} {{address.phone}} {{address.detail}}</text>
+   <image src="../../images/arrow_gray.png"></image> 
+  </view>
+  
+</view>
+
+<!-- 金额 --> 
+<view class="money common">
+  <view class="title">金额：</view>
+  <view class="inputMoney">
+    <input type="number" placeholder="请输入金额" bindinput="getInputValue" /> 
+  </view>
+</view>
+<view class="note">
+  <view>1. 小于2元无法下单，金额越高接单越快哦~~</view>
+
+</view>
+<!-- 提交 -->
+<button bindtap="submit">提交（￥{{ price/100 }}）</button>

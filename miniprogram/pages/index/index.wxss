@@ -6,7 +6,7 @@
   width: 750rpx;
   height: 350rpx;
 }
-/* 服务分类 */
+/* 服务分类 */ 
 .container{
   display: flex;
   justify-content:center; 
@@ -18,7 +18,7 @@
   /* border: 1rpx solid red; */
 }
 .container .buttons{
-  margin: 0 40rpx;
+  margin: 0 10rpx;
   /* border: 1rpx solid pink; */
   display: flex;
   justify-content: space-between;
@@ -29,7 +29,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200rpx;
+  width: 150rpx;
   height: 100rpx;
   background-color: white;
   margin: 50rpx auto;

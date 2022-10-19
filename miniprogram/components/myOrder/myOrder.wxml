@@ -51,6 +51,15 @@
         </view>
       </view>
     </block>
+    <!-- 万能帮 -->
+    <block wx:if="{{ item.name === '代替服务' }}">
+      <view class="item">
+        <view class="left">代替内容：</view>
+        <view class="right">
+          <view>{{item.helpMsg}}</view>
+        </view>
+      </view>
+    </block>
     <!-- 快递代寄 -->
     <block wx:if="{{ item.name === '快递代寄' }}">
       <view class="item">

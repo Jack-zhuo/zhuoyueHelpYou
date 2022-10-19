@@ -1,0 +1,13 @@
+<view class="container">
+  <!-- 个人信息区 -->
+  <view class="info" bindtap="setInfo">
+    <view class="left">
+      <image class="avator" src="{{ user.info. avatar }}"></image>
+      <view class="name">
+        <text>{{ user.info.name }}</text>
+      </view>
+    </view>
+
+  </view>
+  
+</view>

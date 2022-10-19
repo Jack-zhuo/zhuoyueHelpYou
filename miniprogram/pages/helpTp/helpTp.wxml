@@ -5,7 +5,7 @@
     <block wx:if="{{!address.phone}}">
       <button bindtap="addAddress">添加地址</button>
     </block>
-    <block wx:else>
+    <block wx:else> 
       <view class="address" bindtap="gotoAddress">
         <image class="icon" src="../../images/spot.png"></image>
         <view class="address-detail">
@@ -65,7 +65,9 @@
     <!-- 右 -->
     <view class="size-right">
       <view class="size-item {{isName === item.name ? 'select' : ''}}" wx:for="{{ size }}" wx:key="index" bindtap="selectTab" data-size="{{item}}">
-        {{item.name}}
+        <text wx:if="{{item.name === '小件'}}">小于鞋盒</text>
+        <text wx:if="{{item.name === '中件'}}">小于泡面箱</text>
+        <text wx:if="{{item.name === '大件'}}">大于泡面箱</text>
       </view>
     </view>
   </view>
@@ -80,6 +82,19 @@
     <!-- 右 -->
     <view class="num-right">
       <input type="number" placeholder="请输入快递数量 默认一个" bindinput="setNum" />
+    </view>
+  </view>
+
+    <!-- 友情打赏 -->
+    <view class="num common">
+    <!-- 左 -->
+    <view class="num-left">
+      <image class="icon" src="../../images/loveheart.png"></image>
+      <text>友情打赏</text>
+    </view>
+    <!-- 右 -->
+    <view class="num-right">
+      <input type="number" placeholder="输入金额" bindinput="setFriendlyPaid" />
     </view>
   </view>
 

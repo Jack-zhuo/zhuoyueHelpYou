@@ -100,5 +100,12 @@
         })
       }, 2000)
      }
-   }
+   },
+   onShareAppMessage: function (res) {
+    console.log(res)
+    return {
+      title: '申请卓越帮你忙接单员',
+      path: 'pages/applyTakeOrderer/applyTakeOrderer',
+    }
+  },
  })

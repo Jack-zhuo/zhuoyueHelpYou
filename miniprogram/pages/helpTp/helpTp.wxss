@@ -80,19 +80,21 @@
 }
 .size .size-right{
   display: flex;
-  
+  flex-direction: column;
 }
 .size .size-right .size-item{
   border: 1rpx solid rgb(228, 228, 228);
+  
   color: gray;
   font-size: 30rpx;
   padding: 13rpx;
 }
 .size .size-right .size-item:first-child{
   border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
 }
 .size .size-right .size-item:last-child{
-  border-top-right-radius: 30rpx;
+  /* border-bottom-right-radius: 30rpx; */
 }
 .size .size-right .select{
   border: 1rpx solid #1296db;

@@ -22,5 +22,7 @@
     </view>
   </view>
 
-  <button bindtap="submit">提交申请</button>
+  <button bindtap="submit">提交申请</button> 
+
 </view>
+<wechat note="同学们，申请接单员后，要加管理员微信哦~~"></wechat>

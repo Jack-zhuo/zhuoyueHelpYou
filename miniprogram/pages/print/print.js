@@ -155,7 +155,7 @@ Page({
       fileName: this.data.fileName,
 
       // 订单公共部分
-      userinfo: wx.getStorageSync('user').info,
+      userinfo: wx.getStorageSync('user'),
       address: this.data.address,
       price: this.data.totalPrice,
       date: new Date(),
